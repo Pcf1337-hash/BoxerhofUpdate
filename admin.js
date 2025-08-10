@@ -204,17 +204,6 @@ function loadStoredData() {
                 status: 'available',
                 description: 'Max ist ein freundlicher Boxer, der gerne spielt und kuschelt.',
                 image: 'https://via.placeholder.com/300x200?text=Max+der+Boxer'
-            },
-            {
-                id: 2,
-                name: 'Luna',
-                type: 'cat',
-                breed: 'Hauskatze',
-                age: '2 Jahre',
-                gender: 'female',
-                status: 'available',
-                description: 'Luna ist eine ruhige und verschmuste Katze.',
-                image: 'https://via.placeholder.com/300x200?text=Luna+die+Katze'
             }
         ];
         saveAnimals();
@@ -228,13 +217,13 @@ function loadStoredData() {
         // Initialize with current website content
         adminState.content = {
             hero: {
-                title: 'Willkommen auf dem Boxerhof',
-                subtitle: 'Ein Ort der Tierliebe, wo Träume wahr werden',
-                description: 'Hier auf dem Boxerhof leben wir unseren Traum, täglich mit Tieren zu arbeiten und ihnen ein liebevolles Zuhause zu geben. Jeder Tag bringt neue Freude und die Möglichkeit, Tieren in Not zu helfen.'
+                title: 'Willkommen bei der Boxer Nothilfe e.V.',
+                subtitle: 'Ein sicherer Hafen für Hunde in Not',
+                description: 'Hier auf unserem Hof kümmern wir uns liebevoll um Hunde aus schlechten Verhältnissen. Wir päppeln sie wieder auf, geben ihnen medizinische Versorgung und vermitteln sie an liebevolle Familien weiter. Jeder Hund verdient eine zweite Chance auf ein glückliches Leben.'
             },
             about: {
-                text1: 'Der Boxerhof ist mehr als nur ein Zuhause für Tiere – es ist ein Ort, an dem Liebe, Fürsorge und Hingabe im Mittelpunkt stehen. Hier verwirklichen wir täglich den Traum, gemeinsam mit Tieren zu leben und zu arbeiten.',
-                text2: 'Unsere Mission ist es, Tieren in Not ein sicheres und liebevolles Zuhause zu bieten. Besonders Boxer liegen uns am Herzen, aber wir öffnen unsere Türen für alle Tiere, die unsere Hilfe brauchen.'
+                text1: 'Die Boxer Nothilfe e.V. ist mehr als nur ein Zuhause für Hunde in Not – es ist ein Ort, an dem Liebe, Fürsorge und Hingabe im Mittelpunkt stehen. Hier verwirklichen wir täglich den Traum, Hunden aus schlechten Verhältnissen zu helfen und sie wieder aufzupäppeln.',
+                text2: 'Unsere Mission ist es, Hunden in Not ein sicheres und liebevolles Zuhause zu bieten, sie wieder gesund zu pflegen und an liebevolle Familien zu vermitteln. Als Teil der Boxer Nothilfe e.V. arbeiten wir täglich daran, das Leben von Boxern und anderen Hunden zu verbessern.'
             },
             contact: {
                 email: 'info@boxerhof.de',
@@ -350,7 +339,6 @@ function createAnimalCard(animal) {
     
     const typeText = {
         dog: 'Hund',
-        cat: 'Katze',
         other: 'Andere'
     }[animal.type];
     
@@ -378,7 +366,6 @@ function createAnimalCard(animal) {
     // Compatibility indicators
     const goodWithItems = [];
     if (animal.goodWith?.dogs) goodWithItems.push('🐕 Hunde');
-    if (animal.goodWith?.cats) goodWithItems.push('🐱 Katzen');
     if (animal.goodWith?.children) goodWithItems.push('👶 Kinder');
     
     const compatibilityText = goodWithItems.length > 0 ? goodWithItems.join(', ') : 'Keine Angaben';
@@ -499,11 +486,11 @@ function openAnimalModal(animalId = null) {
     if (animalId) {
         const animal = adminState.animals.find(a => a.id === animalId);
         if (animal) {
-            title.textContent = 'Tier bearbeiten';
+            title.textContent = 'Hund bearbeiten';
             fillAnimalForm(animal);
         }
     } else {
-        title.textContent = 'Tier hinzufügen';
+        title.textContent = 'Hund hinzufügen';
         form.reset();
         document.getElementById('animalId').value = '';
     }
@@ -536,11 +523,9 @@ function fillAnimalForm(animal) {
     
     // Characteristics & needs
     const goodWithDogs = document.querySelector('input[name="goodWithDogs"]');
-    const goodWithCats = document.querySelector('input[name="goodWithCats"]');
     const goodWithChildren = document.querySelector('input[name="goodWithChildren"]');
     
     if (goodWithDogs) goodWithDogs.checked = animal.goodWith?.dogs || false;
-    if (goodWithCats) goodWithCats.checked = animal.goodWith?.cats || false;
     if (goodWithChildren) goodWithChildren.checked = animal.goodWith?.children || false;
     
     document.getElementById('animalEnergy').value = animal.energyLevel || '';
@@ -592,7 +577,6 @@ function handleAnimalSave(e) {
         // Characteristics & needs
         goodWith: {
             dogs: goodWithDogs,
-            cats: goodWithCats,
             children: goodWithChildren
         },
         energyLevel: formData.get('energyLevel'),
