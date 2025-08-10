@@ -356,20 +356,103 @@ function createAnimalCard(animal) {
     
     const genderText = animal.gender === 'male' ? 'Männlich' : 'Weiblich';
     
+    // Enhanced details
+    const sizeText = {
+        small: 'Klein',
+        medium: 'Mittel',
+        large: 'Groß'
+    }[animal.size] || '';
+    
+    const energyText = {
+        low: 'Ruhig',
+        medium: 'Ausgeglichen',
+        high: 'Sehr aktiv'
+    }[animal.energyLevel] || '';
+    
+    const trainingText = {
+        none: 'Nicht trainiert',
+        basic: 'Grundkommandos',
+        advanced: 'Gut trainiert'
+    }[animal.trainingLevel] || '';
+    
+    // Compatibility indicators
+    const goodWithItems = [];
+    if (animal.goodWith?.dogs) goodWithItems.push('🐕 Hunde');
+    if (animal.goodWith?.cats) goodWithItems.push('🐱 Katzen');
+    if (animal.goodWith?.children) goodWithItems.push('👶 Kinder');
+    
+    const compatibilityText = goodWithItems.length > 0 ? goodWithItems.join(', ') : 'Keine Angaben';
+    
+    // Health status
+    const healthItems = [];
+    if (animal.vaccinated === 'yes') healthItems.push('💉 Geimpft');
+    if (animal.neutered === 'yes') healthItems.push('🏥 Kastriert');
+    
+    const healthText = healthItems.length > 0 ? healthItems.join(', ') : '';
+    
+    // Arrival date formatting
+    const arrivalText = animal.arrivalDate ? 
+        `📅 Ankunft: ${new Date(animal.arrivalDate).toLocaleDateString('de-DE')}` : '';
+    
+    // Adoption fee
+    const feeText = animal.adoptionFee ? `💰 Schutzgebühr: ${animal.adoptionFee}€` : '';
+    
     return `
-        <div class="animal-card" data-id="${animal.id}">
+        <div class="animal-card enhanced" data-id="${animal.id}">
             <div class="animal-header">
                 <div class="animal-info">
                     <h4>${animal.name}</h4>
                     <div class="animal-meta">
                         ${typeText} • ${animal.breed} • ${genderText} • ${animal.age}
                     </div>
+                    ${sizeText || animal.weight ? 
+                        `<div class="animal-size">${sizeText}${sizeText && animal.weight ? ' • ' : ''}${animal.weight || ''}</div>` 
+                        : ''}
                 </div>
                 <span class="status-badge ${statusClass}">${statusText}</span>
             </div>
+            
+            ${animal.color || animal.chipNumber ? `
+                <div class="animal-details">
+                    ${animal.color ? `<span class="detail-tag">🎨 ${animal.color}</span>` : ''}
+                    ${animal.chipNumber ? `<span class="detail-tag">🔖 Chip: ${animal.chipNumber}</span>` : ''}
+                </div>
+            ` : ''}
+            
             <div class="animal-description">
                 ${animal.description}
             </div>
+            
+            ${energyText || trainingText ? `
+                <div class="animal-characteristics">
+                    ${energyText ? `<span class="char-tag energy">⚡ ${energyText}</span>` : ''}
+                    ${trainingText ? `<span class="char-tag training">🎓 ${trainingText}</span>` : ''}
+                </div>
+            ` : ''}
+            
+            <div class="animal-compatibility">
+                <strong>Verträglich mit:</strong> ${compatibilityText}
+            </div>
+            
+            ${healthText ? `
+                <div class="animal-health">
+                    ${healthText}
+                </div>
+            ` : ''}
+            
+            ${animal.specialNeeds ? `
+                <div class="animal-special-needs">
+                    <strong>🏠 Besondere Bedürfnisse:</strong> ${animal.specialNeeds}
+                </div>
+            ` : ''}
+            
+            ${arrivalText || feeText ? `
+                <div class="animal-adoption-info">
+                    ${arrivalText ? `<span>${arrivalText}</span>` : ''}
+                    ${feeText ? `<span>${feeText}</span>` : ''}
+                </div>
+            ` : ''}
+            
             <div class="animal-actions">
                 <button class="btn btn-primary btn-small" onclick="editAnimal(${animal.id})">
                     ✏️ Bearbeiten
@@ -429,6 +512,7 @@ function openAnimalModal(animalId = null) {
 }
 
 function fillAnimalForm(animal) {
+    // Basic information
     document.getElementById('animalId').value = animal.id;
     document.getElementById('animalName').value = animal.name;
     document.getElementById('animalType').value = animal.type;
@@ -438,6 +522,34 @@ function fillAnimalForm(animal) {
     document.getElementById('animalDescription').value = animal.description;
     document.getElementById('animalStatus').value = animal.status;
     document.getElementById('animalImage').value = animal.image || '';
+    
+    // Enhanced details
+    document.getElementById('animalSize').value = animal.size || '';
+    document.getElementById('animalWeight').value = animal.weight || '';
+    document.getElementById('animalColor').value = animal.color || '';
+    document.getElementById('animalChip').value = animal.chipNumber || '';
+    
+    // Health & care
+    document.getElementById('animalVaccinated').value = animal.vaccinated || '';
+    document.getElementById('animalNeutered').value = animal.neutered || '';
+    document.getElementById('animalMedicalNotes').value = animal.medicalNotes || '';
+    
+    // Characteristics & needs
+    const goodWithDogs = document.querySelector('input[name="goodWithDogs"]');
+    const goodWithCats = document.querySelector('input[name="goodWithCats"]');
+    const goodWithChildren = document.querySelector('input[name="goodWithChildren"]');
+    
+    if (goodWithDogs) goodWithDogs.checked = animal.goodWith?.dogs || false;
+    if (goodWithCats) goodWithCats.checked = animal.goodWith?.cats || false;
+    if (goodWithChildren) goodWithChildren.checked = animal.goodWith?.children || false;
+    
+    document.getElementById('animalEnergy').value = animal.energyLevel || '';
+    document.getElementById('animalTraining').value = animal.trainingLevel || '';
+    document.getElementById('animalSpecialNeeds').value = animal.specialNeeds || '';
+    
+    // Dates & adoption
+    document.getElementById('animalArrivalDate').value = animal.arrivalDate || '';
+    document.getElementById('animalAdoptionFee').value = animal.adoptionFee || '';
 }
 
 function closeAnimalModal() {
@@ -448,8 +560,15 @@ function handleAnimalSave(e) {
     e.preventDefault();
     
     const formData = new FormData(e.target);
+    
+    // Collect checkbox values for compatibility
+    const goodWithDogs = formData.get('goodWithDogs') === 'true';
+    const goodWithCats = formData.get('goodWithCats') === 'true';
+    const goodWithChildren = formData.get('goodWithChildren') === 'true';
+    
     const animalData = {
         id: formData.get('id') || Date.now(),
+        // Basic information
         name: formData.get('name'),
         type: formData.get('type'),
         age: formData.get('age'),
@@ -457,16 +576,48 @@ function handleAnimalSave(e) {
         breed: formData.get('breed'),
         description: formData.get('description'),
         status: formData.get('status'),
-        image: formData.get('image')
+        image: formData.get('image'),
+        
+        // Enhanced details
+        size: formData.get('size'),
+        weight: formData.get('weight'),
+        color: formData.get('color'),
+        chipNumber: formData.get('chipNumber'),
+        
+        // Health & care
+        vaccinated: formData.get('vaccinated'),
+        neutered: formData.get('neutered'),
+        medicalNotes: formData.get('medicalNotes'),
+        
+        // Characteristics & needs
+        goodWith: {
+            dogs: goodWithDogs,
+            cats: goodWithCats,
+            children: goodWithChildren
+        },
+        energyLevel: formData.get('energyLevel'),
+        trainingLevel: formData.get('trainingLevel'),
+        specialNeeds: formData.get('specialNeeds'),
+        
+        // Dates & adoption
+        arrivalDate: formData.get('arrivalDate'),
+        adoptionFee: parseFloat(formData.get('adoptionFee')) || 0,
+        
+        // Metadata
+        createdAt: formData.get('id') ? undefined : new Date().toISOString(),
+        updatedAt: new Date().toISOString()
     };
     
     const existingIndex = adminState.animals.findIndex(a => a.id == animalData.id);
     
     if (existingIndex !== -1) {
+        // Keep original creation date when updating
+        animalData.createdAt = adminState.animals[existingIndex].createdAt;
         adminState.animals[existingIndex] = animalData;
         showMessage('Tier erfolgreich aktualisiert!', 'success');
     } else {
         animalData.id = Date.now();
+        animalData.createdAt = new Date().toISOString();
         adminState.animals.push(animalData);
         showMessage('Tier erfolgreich hinzugefügt!', 'success');
     }

@@ -93,21 +93,41 @@
                         <div class="animal-icon">🐕</div>
                         <h3>Boxer</h3>
                         <p>Unsere geliebten Boxer sind das Herz des Hofes. Jeder hat seine eigene Persönlichkeit und Geschichte.</p>
+                        <div class="animal-share">
+                            <button class="share-btn" data-animal="Boxer" data-description="Unsere geliebten Boxer sind das Herz des Hofes">
+                                📤 Teilen
+                            </button>
+                        </div>
                     </div>
                     <div class="animal-card">
                         <div class="animal-icon">🐱</div>
                         <h3>Katzen</h3>
                         <p>Unsere Katzen bringen Ruhe und Gelassenheit in den Alltag. Sie sind wahre Therapeuten auf vier Pfoten.</p>
+                        <div class="animal-share">
+                            <button class="share-btn" data-animal="Katzen" data-description="Unsere Katzen bringen Ruhe und Gelassenheit in den Alltag">
+                                📤 Teilen
+                            </button>
+                        </div>
                     </div>
                     <div class="animal-card">
                         <div class="animal-icon">🐴</div>
                         <h3>Pferde</h3>
                         <p>Majestätische Wesen, die uns täglich lehren, was Stärke und Anmut bedeutet.</p>
+                        <div class="animal-share">
+                            <button class="share-btn" data-animal="Pferde" data-description="Majestätische Wesen, die uns täglich lehren, was Stärke und Anmut bedeutet">
+                                📤 Teilen
+                            </button>
+                        </div>
                     </div>
                     <div class="animal-card">
                         <div class="animal-icon">🐰</div>
                         <h3>Kleintiere</h3>
                         <p>Kaninchen, Meerschweinchen und andere kleine Freunde bereichern unser Leben mit ihrer Fröhlichkeit.</p>
+                        <div class="animal-share">
+                            <button class="share-btn" data-animal="Kleintiere" data-description="Kaninchen, Meerschweinchen und andere kleine Freunde bereichern unser Leben">
+                                📤 Teilen
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -180,6 +200,45 @@
                 </div>
             </div>
         </section>
+
+        <!-- Newsletter Section -->
+        <section id="newsletter" class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2>📧 Bleiben Sie auf dem Laufenden</h2>
+                        <p>Erhalten Sie regelmäßige Updates über neue Tiere, Events und wichtige Neuigkeiten vom Boxerhof.</p>
+                        <ul class="newsletter-benefits">
+                            <li>✓ Informationen über neue Tiere</li>
+                            <li>✓ Eventankündigungen und Hoffeste</li>
+                            <li>✓ Erfolgsgeschichten unserer vermittelten Tiere</li>
+                            <li>✓ Tipps zur Tierpflege</li>
+                        </ul>
+                    </div>
+                    <div class="newsletter-form">
+                        <h3>Newsletter abonnieren</h3>
+                        <form id="newsletterForm">
+                            <div class="form-group">
+                                <label for="newsletter-email">E-Mail-Adresse</label>
+                                <input type="email" id="newsletter-email" name="email" placeholder="ihre@email.de" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newsletter-name">Name (optional)</label>
+                                <input type="text" id="newsletter-name" name="name" placeholder="Ihr Name">
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="newsletter-consent" name="consent" required>
+                                    <span class="checkmark"></span>
+                                    Ich stimme zu, den Newsletter zu erhalten und bin mit der <a href="#privacy" class="privacy-link">Datenschutzerklärung</a> einverstanden.
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Newsletter abonnieren</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -202,6 +261,27 @@
                     <h4>Kontakt</h4>
                     <p>📧 info@boxerhof.de</p>
                     <p>📞 +49 (0) 123 456 789</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Folgen Sie uns</h4>
+                    <div class="social-links">
+                        <a href="https://facebook.com/boxerhof" target="_blank" rel="noopener" class="social-link" data-platform="facebook">
+                            <span class="social-icon">📘</span>
+                            Facebook
+                        </a>
+                        <a href="https://instagram.com/boxerhof" target="_blank" rel="noopener" class="social-link" data-platform="instagram">
+                            <span class="social-icon">📷</span>
+                            Instagram
+                        </a>
+                        <a href="https://youtube.com/@boxerhof" target="_blank" rel="noopener" class="social-link" data-platform="youtube">
+                            <span class="social-icon">📺</span>
+                            YouTube
+                        </a>
+                        <a href="mailto:info@boxerhof.de" class="social-link" data-platform="email">
+                            <span class="social-icon">✉️</span>
+                            E-Mail
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">

@@ -175,12 +175,12 @@ Die Website kann auf jedem Webserver gehostet werden, der statische HTML-Dateien
 - [x] Erweiterte Systemübersicht im Dashboard
 
 #### Kurzfristig (in Entwicklung)
-- [ ] Erweiterte Bildergalerie mit Kategorien
-- [ ] E-Mail-Integration für Kontaktformular
-- [ ] Erweiterte Tierprofile mit mehr Details
+- [x] Erweiterte Bildergalerie mit Kategorien
+- [x] E-Mail-Integration für Kontaktformular
+- [x] Erweiterte Tierprofile mit mehr Details
 - [ ] Multi-Image Upload pro Tier
-- [ ] Newsletter-Anmeldung
-- [ ] Social Media Integration
+- [x] Newsletter-Anmeldung
+- [x] Social Media Integration
 
 #### Mittelfristig
 - [ ] Benutzerrollen und Permissions
