@@ -250,7 +250,116 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="animalDescription">Beschreibung</label>
-                                    <textarea id="animalDescription" name="description" rows="4"></textarea>
+                                    <textarea id="animalDescription" name="description" rows="4" placeholder="Beschreiben Sie das Tier, seine Persönlichkeit und Bedürfnisse..."></textarea>
+                                </div>
+                                
+                                <!-- Enhanced Animal Profile Fields -->
+                                <div class="form-section">
+                                    <h4>📋 Zusätzliche Details</h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="animalSize">Größe</label>
+                                            <select id="animalSize" name="size">
+                                                <option value="">Bitte wählen</option>
+                                                <option value="small">Klein (bis 30cm)</option>
+                                                <option value="medium">Mittel (30-60cm)</option>
+                                                <option value="large">Groß (über 60cm)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="animalWeight">Gewicht</label>
+                                            <input type="text" id="animalWeight" name="weight" placeholder="z.B. 25 kg">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="animalColor">Farbe</label>
+                                            <input type="text" id="animalColor" name="color" placeholder="z.B. Braun-weiß">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="animalChip">Chip-Nummer</label>
+                                            <input type="text" id="animalChip" name="chipNumber" placeholder="15-stellige Chip-Nummer">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>🏥 Gesundheit & Pflege</h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="animalVaccinated">Geimpft</label>
+                                            <select id="animalVaccinated" name="vaccinated">
+                                                <option value="">Bitte wählen</option>
+                                                <option value="yes">Ja, vollständig</option>
+                                                <option value="partial">Teilweise</option>
+                                                <option value="no">Nein</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="animalNeutered">Kastriert</label>
+                                            <select id="animalNeutered" name="neutered">
+                                                <option value="">Bitte wählen</option>
+                                                <option value="yes">Ja</option>
+                                                <option value="no">Nein</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="animalMedicalNotes">Medizinische Besonderheiten</label>
+                                        <textarea id="animalMedicalNotes" name="medicalNotes" rows="3" placeholder="Allergien, chronische Krankheiten, besondere Bedürfnisse..."></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>🏠 Charakteristika & Bedürfnisse</h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="animalGoodWith">Verträglich mit</label>
+                                            <div class="checkbox-group animal-compatibility">
+                                                <label><input type="checkbox" name="goodWithDogs" value="true"><span>🐕 Hunden</span></label>
+                                                <label><input type="checkbox" name="goodWithCats" value="true"><span>🐱 Katzen</span></label>
+                                                <label><input type="checkbox" name="goodWithChildren" value="true"><span>👶 Kindern</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="animalEnergy">Energielevel</label>
+                                            <select id="animalEnergy" name="energyLevel">
+                                                <option value="">Bitte wählen</option>
+                                                <option value="low">Niedrig - Ruhig, entspannt</option>
+                                                <option value="medium">Mittel - Ausgeglichen</option>
+                                                <option value="high">Hoch - Sehr aktiv</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="animalTraining">Trainingsstand</label>
+                                            <select id="animalTraining" name="trainingLevel">
+                                                <option value="">Bitte wählen</option>
+                                                <option value="none">Nicht trainiert</option>
+                                                <option value="basic">Grundkommandos</option>
+                                                <option value="advanced">Gut trainiert</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="animalSpecialNeeds">Besondere Bedürfnisse</label>
+                                        <textarea id="animalSpecialNeeds" name="specialNeeds" rows="3" placeholder="Besondere Anforderungen an das neue Zuhause..."></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>📅 Termine & Adoption</h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="animalArrivalDate">Ankunftsdatum</label>
+                                            <input type="date" id="animalArrivalDate" name="arrivalDate">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="animalAdoptionFee">Schutzgebühr</label>
+                                            <input type="number" id="animalAdoptionFee" name="adoptionFee" placeholder="0" min="0" step="0.01">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="animalStatus">Status</label>

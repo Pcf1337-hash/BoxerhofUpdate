@@ -569,6 +569,97 @@
     gap: 1.5rem;
 }
 
+/* Enhanced form sections */
+.form-section {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.03) 0%, rgba(118, 75, 162, 0.03) 100%);
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+}
+
+.form-section h4 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Checkbox groups */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: normal;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.checkbox-group label:hover {
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    transform: scale(1.2);
+    accent-color: var(--primary-color);
+}
+
+/* Special styling for animal compatibility checkboxes */
+.checkbox-group.animal-compatibility {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.checkbox-group.animal-compatibility label {
+    flex: 1;
+    min-width: 120px;
+    justify-content: center;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-color);
+    transition: var(--transition);
+}
+
+.checkbox-group.animal-compatibility label:hover {
+    border-color: var(--primary-color);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.checkbox-group.animal-compatibility input[type="checkbox"]:checked + span {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Enhanced select and input styling */
+.form-group select[multiple] {
+    min-height: 120px;
+}
+
+.form-group input[type="date"],
+.form-group input[type="number"] {
+    font-variant-numeric: tabular-nums;
+}
+
 .form-actions {
     display: flex;
     gap: 1.5rem;
@@ -891,6 +982,125 @@
     padding: 1rem;
     border-radius: var(--border-radius);
     border-left: 4px solid var(--primary-color);
+}
+
+/* Enhanced Animal Card Styles */
+.animal-card.enhanced {
+    padding: 2rem;
+}
+
+.animal-size {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.animal-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.detail-tag {
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--primary-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.animal-characteristics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.char-tag {
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius);
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid;
+}
+
+.char-tag.energy {
+    background: rgba(241, 196, 15, 0.1);
+    color: #f39c12;
+    border-color: rgba(241, 196, 15, 0.3);
+}
+
+.char-tag.training {
+    background: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+    border-color: rgba(46, 204, 113, 0.3);
+}
+
+.animal-compatibility {
+    background: var(--background-secondary);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.animal-compatibility strong {
+    color: var(--text-primary);
+}
+
+.animal-health {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    padding: 0.75rem;
+    background: rgba(46, 204, 113, 0.05);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+.animal-health span {
+    color: #27ae60;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.animal-special-needs {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.animal-special-needs strong {
+    color: #e67e22;
+}
+
+.animal-adoption-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(116, 185, 255, 0.05);
+    border: 1px solid rgba(116, 185, 255, 0.2);
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.animal-adoption-info span {
+    color: var(--primary-color);
+    font-weight: 500;
 }
 
 /* System Info Styles */
