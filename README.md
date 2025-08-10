@@ -203,6 +203,7 @@ Die Website kann auf jedem Webserver gehostet werden, der statische HTML-Dateien
 - CSS-Styling für responsive Grid-Layout der Bildfelder
 - Integration in bestehende Tier-Speicherfunktionalität
 - Datenformat: `{url: string, caption: string, uploadDate: ISO-String}`
+- **Bildvorschau**: Zusätzliche Bilder werden als Miniaturansichten in der Tierübersicht angezeigt
 
 #### Newsletter-System
 - **Vollständige E-Mail-Abonnement-Funktionalität** mit Formularvalidierung

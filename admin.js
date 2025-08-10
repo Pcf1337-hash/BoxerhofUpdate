@@ -410,6 +410,14 @@ function createAnimalCard(animal) {
                 ${animal.description}
             </div>
             
+            ${animal.additionalImages && animal.additionalImages.length > 0 ? `
+                <div class="animal-images-preview">
+                    ${animal.additionalImages.map(img => 
+                        `<img src="${img.url}" alt="${img.caption || 'Zusätzliches Bild'}" class="additional-image-preview" title="${img.caption || 'Zusätzliches Bild'}">`
+                    ).join('')}
+                </div>
+            ` : ''}
+            
             ${energyText || trainingText ? `
                 <div class="animal-characteristics">
                     ${energyText ? `<span class="char-tag energy">⚡ ${energyText}</span>` : ''}
