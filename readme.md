@@ -1,0 +1,1 @@
+dies ist die seite meiner mutter und dem boxerhof auf dem sie lebt und ihren traum lebt mit tieren zu arbeiten die ganze internet presentz könnte aber mal ein upgrade vertraghen ich bitte dich darum dies für mich in vollem unfang zu erledigen hole dir allle notwenigen infos von ihrer seite https://www.boxernothilfe.de/  baue eine neue schicke hauptseite aus der alten sogesehn 
