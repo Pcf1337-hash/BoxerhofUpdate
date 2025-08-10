@@ -493,6 +493,7 @@ function openAnimalModal(animalId = null) {
         title.textContent = 'Hund hinzufügen';
         form.reset();
         document.getElementById('animalId').value = '';
+        clearAdditionalImages();
     }
     
     modal.style.display = 'flex';
@@ -535,6 +536,9 @@ function fillAnimalForm(animal) {
     // Dates & adoption
     document.getElementById('animalArrivalDate').value = animal.arrivalDate || '';
     document.getElementById('animalAdoptionFee').value = animal.adoptionFee || '';
+    
+    // Load additional images
+    loadAdditionalImages(animal);
 }
 
 function closeAnimalModal() {
@@ -551,6 +555,21 @@ function handleAnimalSave(e) {
     const goodWithCats = formData.get('goodWithCats') === 'true';
     const goodWithChildren = formData.get('goodWithChildren') === 'true';
     
+    // Collect additional images
+    const additionalImageUrls = formData.getAll('additionalImages');
+    const imageCaptions = formData.getAll('imageCaptions');
+    const additionalImages = [];
+    
+    additionalImageUrls.forEach((url, index) => {
+        if (url.trim()) {
+            additionalImages.push({
+                url: url.trim(),
+                caption: imageCaptions[index] ? imageCaptions[index].trim() : '',
+                uploadDate: new Date().toISOString()
+            });
+        }
+    });
+    
     const animalData = {
         id: formData.get('id') || Date.now(),
         // Basic information
@@ -562,6 +581,7 @@ function handleAnimalSave(e) {
         description: formData.get('description'),
         status: formData.get('status'),
         image: formData.get('image'),
+        additionalImages: additionalImages,
         
         // Enhanced details
         size: formData.get('size'),
@@ -754,6 +774,64 @@ function showMessage(message, type = 'info') {
 
 function viewWebsite() {
     window.open('index.html', '_blank');
+}
+
+// Multi-image functionality for animals
+let imageFieldCounter = 0;
+
+function addImageField() {
+    const container = document.getElementById('additionalImages');
+    const fieldId = `additionalImage_${imageFieldCounter++}`;
+    
+    const imageField = document.createElement('div');
+    imageField.className = 'image-field';
+    imageField.innerHTML = `
+        <div class="image-input-group">
+            <input type="url" name="additionalImages" placeholder="Bild URL..." class="image-url-input">
+            <input type="text" name="imageCaptions" placeholder="Bildunterschrift (optional)" class="image-caption-input">
+            <button type="button" class="btn btn-danger btn-small" onclick="removeImageField(this)">
+                🗑️
+            </button>
+        </div>
+    `;
+    
+    container.appendChild(imageField);
+}
+
+function removeImageField(button) {
+    button.closest('.image-field').remove();
+}
+
+function clearAdditionalImages() {
+    const container = document.getElementById('additionalImages');
+    container.innerHTML = '';
+    imageFieldCounter = 0;
+}
+
+function loadAdditionalImages(animal) {
+    const container = document.getElementById('additionalImages');
+    container.innerHTML = '';
+    imageFieldCounter = 0;
+    
+    if (animal.additionalImages && animal.additionalImages.length > 0) {
+        animal.additionalImages.forEach((imageData, index) => {
+            const fieldId = `additionalImage_${imageFieldCounter++}`;
+            
+            const imageField = document.createElement('div');
+            imageField.className = 'image-field';
+            imageField.innerHTML = `
+                <div class="image-input-group">
+                    <input type="url" name="additionalImages" value="${imageData.url || ''}" placeholder="Bild URL..." class="image-url-input">
+                    <input type="text" name="imageCaptions" value="${imageData.caption || ''}" placeholder="Bildunterschrift (optional)" class="image-caption-input">
+                    <button type="button" class="btn btn-danger btn-small" onclick="removeImageField(this)">
+                        🗑️
+                    </button>
+                </div>
+            `;
+            
+            container.appendChild(imageField);
+        });
+    }
 }
 
 function updateMainWebsite() {

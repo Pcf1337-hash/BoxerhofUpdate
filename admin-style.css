@@ -1594,3 +1594,79 @@
         font-size: 1.3rem;
     }
 }
+
+/* Multi-Image Upload Styles */
+.additional-images {
+    margin-bottom: 1rem;
+}
+
+.image-field {
+    margin-bottom: 0.75rem;
+    padding: 1rem;
+    background: var(--background-secondary);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+
+.image-input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.image-url-input, .image-caption-input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: var(--transition);
+    background: var(--surface-color);
+}
+
+.image-url-input:focus, .image-caption-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.image-url-input {
+    grid-column: 1;
+}
+
+.image-caption-input {
+    grid-column: 2;
+}
+
+@media (max-width: 768px) {
+    .image-input-group {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .image-url-input, .image-caption-input {
+        grid-column: 1;
+    }
+}
+
+/* Enhanced Animal Card Display */
+.animal-images-preview {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.additional-image-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.additional-image-preview:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}

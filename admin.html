@@ -366,9 +366,21 @@
                                         <option value="adopted">Vermittelt</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="animalImage">Bild URL</label>
-                                    <input type="url" id="animalImage" name="image" placeholder="https://...">
+                                <div class="form-section">
+                                    <h4>🖼️ Bilder</h4>
+                                    <div class="form-group">
+                                        <label for="animalImage">Hauptbild URL</label>
+                                        <input type="url" id="animalImage" name="image" placeholder="https://...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Zusätzliche Bilder</label>
+                                        <div id="additionalImages" class="additional-images">
+                                            <!-- Additional images will be loaded here -->
+                                        </div>
+                                        <button type="button" class="btn btn-secondary btn-small" onclick="addImageField()">
+                                            📸 Weiteres Bild hinzufügen
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-primary">Speichern</button>

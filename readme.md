@@ -18,6 +18,7 @@ Diese Website wurde komplett neu gestaltet, um die Internet-Präsenz des Boxerho
 - **Sichere Anmeldung**: Login-System für Administratoren (admin/boxerhof123)
 - **Content Management**: Bearbeitung aller Seiteninhalte über intuitive Formulare
 - **Tierverwaltung**: Vollständiges CRUD-System für Tiere und Vermittlungsdaten
+- **Multi-Image Upload**: Mehrere Bilder pro Tier mit Bildunterschriften ✅ **NEU**
 - **Bildergalerie**: Drag & Drop Upload für Bilder mit Verwaltungsfunktionen
 - **Dashboard**: Übersicht über alle wichtigen Statistiken
 
@@ -78,13 +79,13 @@ Die Website kann auf jedem Webserver gehostet werden, der statische HTML-Dateien
 
 ```
 ├── index.html       # Hauptseite mit Newsletter und Social Features
-├── admin.html       # Admin Panel Interface
+├── admin.html       # Admin Panel Interface (erweitert mit Multi-Image Upload)
 ├── style.css        # CSS-Stylesheet für Hauptseite
-├── admin-style.css  # CSS-Stylesheet für Admin Panel
+├── admin-style.css  # CSS-Stylesheet für Admin Panel (erweitert)
 ├── script.js        # JavaScript mit Social Sharing und Newsletter
-├── admin.js         # JavaScript für Admin Panel
-├── README.md        # Ausführliche Dokumentation
-└── readme.md        # Diese Kurzübersicht
+├── admin.js         # JavaScript für Admin Panel (erweitert mit Multi-Image Features)
+├── README.md        # Ausführliche Dokumentation (aktualisiert)
+└── readme.md        # Diese Kurzübersicht (aktualisiert)
 ```
 
 ## 🎨 Design-Prinzipien
