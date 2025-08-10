@@ -31,6 +31,19 @@ Diese Website wurde komplett neu gestaltet und modernisiert. Sie bietet eine pro
 - **Emotionale Verbindung**: Betonung der liebevollen Betreuung jedes Tieres
 - **Authentizität**: Echte Geschichten über die Rettung und Pflege der Tiere
 
+## 📸 Visuelle Dokumentation
+
+Die Website ist vollständig dokumentiert mit Screenshots:
+
+![Homepage](docs/screenshots/boxerhof-homepage.png)
+*Moderne, responsive Hauptseite mit allen Funktionen*
+
+![Admin Dashboard](docs/screenshots/boxerhof-admin-dashboard.png) 
+*Professionelles Content Management System*
+
+![Tierverwaltung](docs/screenshots/boxerhof-admin-dogs.png)
+*Umfassendes CRUD-System für Tierverwaltung*
+
 ## 🚀 Schnellstart
 
 ### Lokaler Webserver
@@ -54,7 +67,9 @@ npx serve .
 ├── admin-style.css  # CSS für Admin Panel
 ├── script.js        # JavaScript mit Social Features
 ├── admin.js         # JavaScript für Admin Panel
-├── README.md        # Ausführliche Dokumentation
+├── docs/           # Dokumentation & Screenshots
+│   └── screenshots/ # Visuelle Dokumentation
+├── README.md        # Ausführliche Dokumentation (🆕 Erweitert)
 └── readme.md        # Diese Kurzübersicht
 ```
 
@@ -66,10 +81,46 @@ npx serve .
 - **Accessibility**: ARIA-Labels und semantische Struktur
 - **Performance**: CSS-basierte Grafiken für schnelle Ladezeiten
 
+## 🔧 Neue Dokumentation (Version 2.0.0)
+
+### Was ist neu?
+- **📸 Screenshots**: Vollständige visuelle Dokumentation
+- **🔧 API-Dokumentation**: Detaillierte JavaScript-Referenz
+- **🛠️ Entwickler-Guides**: Setup und Contribution-Anleitungen
+- **🚀 Deployment-Guides**: Multi-Platform Deployment-Anleitungen
+- **🚨 Troubleshooting**: Lösungen für häufige Probleme
+- **🔒 Sicherheit**: Best Practices und Security Guidelines
+- **📊 Performance**: Optimierungstipps und Monitoring
+- **🎓 Erweiterte Techniken**: Professionelle Code-Patterns
+
+### Für wen ist was?
+
+#### 🧑‍💻 Entwickler
+- **API-Dokumentation**: JavaScript-Funktionen und Module
+- **Code-Patterns**: Moderne Architektur-Ansätze
+- **Testing**: Unit Tests und E2E Testing-Setup
+- **Performance**: Optimierungsstrategien
+
+#### 👥 Content-Manager
+- **Admin Panel Guide**: Schritt-für-Schritt Anleitungen
+- **SEO-Optimierung**: Meta-Tags und Structured Data
+- **Content Best Practices**: Accessibility und Performance
+
+#### 🛠️ Administratoren
+- **Deployment**: GitHub Pages, Netlify, Vercel Guides
+- **Security**: Sicherheitsrichtlinien und DSGVO-Compliance
+- **Monitoring**: Performance-Überwachung und Analytics
+
 ## 🐕 Über den Boxerhof
 
 Der Boxerhof ist ein besonderer Ort, an dem täglich mit Tieren gearbeitet wird. Die Hofleitung kümmert sich mit unermüdlicher Hingabe um jeden einzelnen Hund und sorgt dafür, dass alle Tiere die Liebe und Pflege bekommen, die sie verdienen.
 
+## 📞 Unterstützung
+
+- **📖 Vollständige Dokumentation**: Siehe [README.md](README.md) für alle Details
+- **🐛 Issues**: GitHub Issues für Bug Reports und Feature Requests
+- **💡 Fragen**: Kontakt über die Website oder GitHub Discussions
+
 ---
 
-*Mit Liebe für Tiere entwickelt 🐾*
+*Mit Liebe für Tiere entwickelt 🐾 - Version 2.0.0 (August 2024)*
