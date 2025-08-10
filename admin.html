@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Boxerhof Admin Panel - Content Management System">
-    <title>Boxerhof - Admin Panel</title>
+    <meta name="description" content="Boxer Nothilfe e.V. Admin Panel - Content Management System">
+    <title>Boxer Nothilfe e.V. - Admin Panel</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="admin-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,11 +35,11 @@
     <div id="adminPanel" class="admin-panel" style="display: none;">
         <header class="admin-header">
             <div class="admin-nav">
-                <h1>🐕 Boxerhof Admin</h1>
+                <h1>🐕 Boxer Nothilfe e.V. Admin</h1>
                 <nav class="admin-tabs">
                     <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
                     <button class="tab-btn" data-tab="content">Inhalte</button>
-                    <button class="tab-btn" data-tab="animals">Tiere</button>
+                    <button class="tab-btn" data-tab="animals">Hunde</button>
                     <button class="tab-btn" data-tab="gallery">Galerie</button>
                 </nav>
                 <button id="logoutBtn" class="btn btn-secondary">Abmelden</button>
@@ -53,7 +53,7 @@
                     <h2>📊 Dashboard</h2>
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <h3>🐕 Tiere</h3>
+                            <h3>🐕 Hunde</h3>
                             <div class="stat-number" id="animalsCount">2</div>
                             <p>Insgesamt registriert</p>
                             <div class="stat-trend">↗️ +1 diese Woche</div>
@@ -81,7 +81,7 @@
                     <div class="quick-actions">
                         <h3>⚡ Schnellaktionen</h3>
                         <div class="action-buttons">
-                            <button class="btn btn-primary" onclick="switchTab('animals')">🐕 Neues Tier hinzufügen</button>
+                            <button class="btn btn-primary" onclick="switchTab('animals')">🐕 Neuen Hund hinzufügen</button>
                             <button class="btn btn-primary" onclick="switchTab('gallery')">📸 Bilder hochladen</button>
                             <button class="btn btn-secondary" onclick="switchTab('content')">📝 Inhalte bearbeiten</button>
                             <button class="btn btn-secondary" onclick="viewWebsite()">🌐 Website ansehen</button>
@@ -176,17 +176,17 @@
             <!-- Animals Management Tab -->
             <div id="animals" class="tab-content">
                 <div class="admin-container">
-                    <h2>🐕 Tiere verwalten</h2>
+                    <h2>🐕 Hunde verwalten</h2>
                     
                     <div class="animals-header">
                         <div class="animals-header-left">
                             <button id="addAnimalBtn" class="btn btn-primary">
-                                <span>🐕</span> Neues Tier hinzufügen
+                                <span>🐕</span> Neuen Hund hinzufügen
                             </button>
                         </div>
                         <div class="animals-header-right">
                             <div class="search-box">
-                                <input type="text" id="animalSearch" placeholder="Tiere suchen..." class="search-input">
+                                <input type="text" id="animalSearch" placeholder="Hunde suchen..." class="search-input">
                                 <span class="search-icon">🔍</span>
                             </div>
                             <div class="filter-options">
@@ -199,7 +199,6 @@
                                 <select id="typeFilter" class="filter-select">
                                     <option value="all">Alle Tierarten</option>
                                     <option value="dog">Hunde</option>
-                                    <option value="cat">Katzen</option>
                                     <option value="other">Andere</option>
                                 </select>
                             </div>
@@ -214,7 +213,7 @@
                     <div id="animalModal" class="modal">
                         <div class="modal-content">
                             <span class="close">&times;</span>
-                            <h3 id="animalModalTitle">Tier hinzufügen</h3>
+                            <h3 id="animalModalTitle">Hund hinzufügen</h3>
                             <form id="animalForm">
                                 <input type="hidden" id="animalId" name="id">
                                 <div class="form-row">
@@ -226,7 +225,6 @@
                                         <label for="animalType">Tierart</label>
                                         <select id="animalType" name="type" required>
                                             <option value="dog">Hund</option>
-                                            <option value="cat">Katze</option>
                                             <option value="other">Andere</option>
                                         </select>
                                     </div>
@@ -317,7 +315,6 @@
                                             <label for="animalGoodWith">Verträglich mit</label>
                                             <div class="checkbox-group animal-compatibility">
                                                 <label><input type="checkbox" name="goodWithDogs" value="true"><span>🐕 Hunden</span></label>
-                                                <label><input type="checkbox" name="goodWithCats" value="true"><span>🐱 Katzen</span></label>
                                                 <label><input type="checkbox" name="goodWithChildren" value="true"><span>👶 Kindern</span></label>
                                             </div>
                                         </div>
