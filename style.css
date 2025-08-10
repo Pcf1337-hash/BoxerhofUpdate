@@ -426,7 +426,22 @@ p {
     color: #bdc3c7;
 }
 
-/* Responsive Design */
+/* Admin Link Styling */
+.admin-link {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.admin-link:hover {
+    background: linear-gradient(135deg, #d35400, #a0390d);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(211, 84, 0, 0.3);
+}
 @media (max-width: 768px) {
     .nav-menu {
         display: none;
