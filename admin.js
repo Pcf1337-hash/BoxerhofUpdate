@@ -83,8 +83,11 @@ function setupEventListeners() {
     // Animal filters
     const statusFilter = document.getElementById('statusFilter');
     const typeFilter = document.getElementById('typeFilter');
+    const animalSearch = document.getElementById('animalSearch');
+    
     statusFilter.addEventListener('change', filterAnimals);
     typeFilter.addEventListener('change', filterAnimals);
+    animalSearch.addEventListener('input', filterAnimals);
     
     // Gallery management
     const uploadBtn = document.getElementById('uploadBtn');
@@ -369,10 +372,10 @@ function createAnimalCard(animal) {
             </div>
             <div class="animal-actions">
                 <button class="btn btn-primary btn-small" onclick="editAnimal(${animal.id})">
-                    Bearbeiten
+                    ✏️ Bearbeiten
                 </button>
                 <button class="btn btn-danger btn-small" onclick="deleteAnimal(${animal.id})">
-                    Löschen
+                    🗑️ Löschen
                 </button>
             </div>
         </div>
@@ -382,6 +385,7 @@ function createAnimalCard(animal) {
 function filterAnimals() {
     const statusFilter = document.getElementById('statusFilter').value;
     const typeFilter = document.getElementById('typeFilter').value;
+    const searchTerm = document.getElementById('animalSearch').value.toLowerCase();
     
     let filteredAnimals = adminState.animals;
     
@@ -391,6 +395,14 @@ function filterAnimals() {
     
     if (typeFilter !== 'all') {
         filteredAnimals = filteredAnimals.filter(animal => animal.type === typeFilter);
+    }
+    
+    if (searchTerm) {
+        filteredAnimals = filteredAnimals.filter(animal => 
+            animal.name.toLowerCase().includes(searchTerm) ||
+            animal.breed.toLowerCase().includes(searchTerm) ||
+            animal.description.toLowerCase().includes(searchTerm)
+        );
     }
     
     displayAnimals(filteredAnimals);

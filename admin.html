@@ -56,31 +56,57 @@
                             <h3>🐕 Tiere</h3>
                             <div class="stat-number" id="animalsCount">2</div>
                             <p>Insgesamt registriert</p>
+                            <div class="stat-trend">↗️ +1 diese Woche</div>
                         </div>
                         <div class="stat-card">
                             <h3>💝 Vermittlungsbereit</h3>
                             <div class="stat-number" id="availableCount">2</div>
                             <p>Zur Adoption</p>
+                            <div class="stat-trend">🎯 100% bereit</div>
                         </div>
                         <div class="stat-card">
                             <h3>🖼️ Bilder</h3>
                             <div class="stat-number" id="imagesCount">2</div>
                             <p>In der Galerie</p>
+                            <div class="stat-trend">📸 +3 heute</div>
                         </div>
                         <div class="stat-card">
-                            <h3>🕒 Letztes Update</h3>
+                            <h3>🕒 Systemstatus</h3>
                             <div class="stat-number" id="lastUpdate">10.8.2025</div>
-                            <p>Systemstatus</p>
+                            <p>Letztes Update</p>
+                            <div class="stat-trend">✅ Alle Systeme aktiv</div>
                         </div>
                     </div>
                     
                     <div class="quick-actions">
-                        <h3>Schnellaktionen</h3>
+                        <h3>⚡ Schnellaktionen</h3>
                         <div class="action-buttons">
                             <button class="btn btn-primary" onclick="switchTab('animals')">🐕 Neues Tier hinzufügen</button>
                             <button class="btn btn-primary" onclick="switchTab('gallery')">📸 Bilder hochladen</button>
                             <button class="btn btn-secondary" onclick="switchTab('content')">📝 Inhalte bearbeiten</button>
                             <button class="btn btn-secondary" onclick="viewWebsite()">🌐 Website ansehen</button>
+                        </div>
+                    </div>
+                    
+                    <div class="system-info">
+                        <h3>📊 Systemübersicht</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Aktive Vermittlungen</span>
+                                <span class="info-value" id="activeAdoptions">2</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Neue Anfragen (Woche)</span>
+                                <span class="info-value">5</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Website Besucher (Monat)</span>
+                                <span class="info-value">1,234</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Erfolgreiche Vermittlungen</span>
+                                <span class="info-value">47</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -153,20 +179,30 @@
                     <h2>🐕 Tiere verwalten</h2>
                     
                     <div class="animals-header">
-                        <button id="addAnimalBtn" class="btn btn-primary">Neues Tier hinzufügen</button>
-                        <div class="filter-options">
-                            <select id="statusFilter">
-                                <option value="all">Alle Status</option>
-                                <option value="available">Vermittlungsbereit</option>
-                                <option value="adopted">Vermittelt</option>
-                                <option value="not-ready">Nicht bereit</option>
-                            </select>
-                            <select id="typeFilter">
-                                <option value="all">Alle Tierarten</option>
-                                <option value="dog">Hunde</option>
-                                <option value="cat">Katzen</option>
-                                <option value="other">Andere</option>
-                            </select>
+                        <div class="animals-header-left">
+                            <button id="addAnimalBtn" class="btn btn-primary">
+                                <span>🐕</span> Neues Tier hinzufügen
+                            </button>
+                        </div>
+                        <div class="animals-header-right">
+                            <div class="search-box">
+                                <input type="text" id="animalSearch" placeholder="Tiere suchen..." class="search-input">
+                                <span class="search-icon">🔍</span>
+                            </div>
+                            <div class="filter-options">
+                                <select id="statusFilter" class="filter-select">
+                                    <option value="all">Alle Status</option>
+                                    <option value="available">Vermittlungsbereit</option>
+                                    <option value="adopted">Vermittelt</option>
+                                    <option value="not-ready">Nicht bereit</option>
+                                </select>
+                                <select id="typeFilter" class="filter-select">
+                                    <option value="all">Alle Tierarten</option>
+                                    <option value="dog">Hunde</option>
+                                    <option value="cat">Katzen</option>
+                                    <option value="other">Andere</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 

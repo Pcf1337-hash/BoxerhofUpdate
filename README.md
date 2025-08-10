@@ -163,29 +163,44 @@ Die Website kann auf jedem Webserver gehostet werden, der statische HTML-Dateien
 
 ## 🚧 Geplante Erweiterungen
 
-### Kurzfristig (nächste Updates)
+### Geplante Erweiterungen 🚧
+
+#### Kurzfristig (nächste Updates) ✅
+- [x] Modernisierte Admin Panel UI mit verbessertem Design
+- [x] Erweiterte Dashboard-Statistiken mit Trends
+- [x] Verbessertes Tier-Management mit Suchfunktion
+- [x] Optimierte Filter- und Sortierfunktionen
+- [x] Responsive Design-Verbesserungen
+- [x] Animationen und Übergänge für bessere UX
+- [x] Erweiterte Systemübersicht im Dashboard
+
+#### Kurzfristig (in Entwicklung)
 - [ ] Erweiterte Bildergalerie mit Kategorien
 - [ ] E-Mail-Integration für Kontaktformular
 - [ ] Erweiterte Tierprofile mit mehr Details
-- [ ] Suchfunktion für Tiere
+- [ ] Multi-Image Upload pro Tier
 - [ ] Newsletter-Anmeldung
 - [ ] Social Media Integration
 
-### Mittelfristig
+#### Mittelfristig
 - [ ] Benutzerrollen und Permissions
 - [ ] Datenbank-Integration (MySQL/PostgreSQL)
 - [ ] API für mobile App
 - [ ] Terminbuchung für Besuche
 - [ ] Online-Spendensystem
 - [ ] Blog-System für News und Updates
+- [ ] Medizinische Aufzeichnungen für Tiere
+- [ ] Adoption-Tracking und Follow-up
 
-### Langfristig
+#### Langfristig
 - [ ] Multi-Language Support
 - [ ] Advanced Analytics Dashboard
 - [ ] Automatische Backup-Systeme
 - [ ] Integration mit Tierschutz-Datenbanken
 - [ ] Mobile App für iOS/Android
 - [ ] Video-Upload und -verwaltung
+- [ ] KI-basierte Tier-Matching für Adoptiveltern
+- [ ] Progressive Web App (PWA) Features
 
 ## 💡 Innovative Features
 
