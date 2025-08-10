@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Boxerhof Admin Panel - Content Management System">
+    <title>Boxerhof - Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>🔐 Admin Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Benutzername</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Passwort</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Anmelden</button>
+            </form>
+            <p class="login-hint">Demo: admin / boxerhof123</p>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+        <header class="admin-header">
+            <div class="admin-nav">
+                <h1>🐕 Boxerhof Admin</h1>
+                <nav class="admin-tabs">
+                    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+                    <button class="tab-btn" data-tab="content">Inhalte</button>
+                    <button class="tab-btn" data-tab="animals">Tiere</button>
+                    <button class="tab-btn" data-tab="gallery">Galerie</button>
+                </nav>
+                <button id="logoutBtn" class="btn btn-secondary">Abmelden</button>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="admin-container">
+                    <h2>📊 Dashboard</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Tiere</h3>
+                            <div class="stat-number" id="animalsCount">0</div>
+                            <p>Insgesamt registriert</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Vermittlungsbereit</h3>
+                            <div class="stat-number" id="availableCount">0</div>
+                            <p>Zur Adoption</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Bilder</h3>
+                            <div class="stat-number" id="imagesCount">0</div>
+                            <p>In der Galerie</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Letztes Update</h3>
+                            <div class="stat-number" id="lastUpdate">Heute</div>
+                            <p>Systemstatus</p>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <h3>Schnellaktionen</h3>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="switchTab('animals')">Neues Tier hinzufügen</button>
+                            <button class="btn btn-primary" onclick="switchTab('gallery')">Bilder hochladen</button>
+                            <button class="btn btn-secondary" onclick="switchTab('content')">Inhalte bearbeiten</button>
+                            <button class="btn btn-secondary" onclick="viewWebsite()">Website ansehen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Management Tab -->
+            <div id="content" class="tab-content">
+                <div class="admin-container">
+                    <h2>📝 Inhalte verwalten</h2>
+                    <div class="content-sections">
+                        <div class="content-section">
+                            <h3>Hero-Bereich</h3>
+                            <form class="content-form" data-section="hero">
+                                <div class="form-group">
+                                    <label for="heroTitle">Haupttitel</label>
+                                    <input type="text" id="heroTitle" name="title" placeholder="Willkommen auf dem Boxerhof">
+                                </div>
+                                <div class="form-group">
+                                    <label for="heroSubtitle">Untertitel</label>
+                                    <input type="text" id="heroSubtitle" name="subtitle" placeholder="Ein Ort der Tierliebe...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="heroDescription">Beschreibung</label>
+                                    <textarea id="heroDescription" name="description" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Speichern</button>
+                            </form>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>Über uns</h3>
+                            <form class="content-form" data-section="about">
+                                <div class="form-group">
+                                    <label for="aboutText1">Erster Absatz</label>
+                                    <textarea id="aboutText1" name="text1" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="aboutText2">Zweiter Absatz</label>
+                                    <textarea id="aboutText2" name="text2" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Speichern</button>
+                            </form>
+                        </div>
+
+                        <div class="content-section">
+                            <h3>Kontaktdaten</h3>
+                            <form class="content-form" data-section="contact">
+                                <div class="form-group">
+                                    <label for="contactEmail">E-Mail</label>
+                                    <input type="email" id="contactEmail" name="email" placeholder="info@boxerhof.de">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactPhone">Telefon</label>
+                                    <input type="tel" id="contactPhone" name="phone" placeholder="+49 (0) 123 456 789">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactAddress">Adresse</label>
+                                    <input type="text" id="contactAddress" name="address" placeholder="Boxerhof 1, 12345 Tierlieben">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Speichern</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Animals Management Tab -->
+            <div id="animals" class="tab-content">
+                <div class="admin-container">
+                    <h2>🐕 Tiere verwalten</h2>
+                    
+                    <div class="animals-header">
+                        <button id="addAnimalBtn" class="btn btn-primary">Neues Tier hinzufügen</button>
+                        <div class="filter-options">
+                            <select id="statusFilter">
+                                <option value="all">Alle Status</option>
+                                <option value="available">Vermittlungsbereit</option>
+                                <option value="adopted">Vermittelt</option>
+                                <option value="not-ready">Nicht bereit</option>
+                            </select>
+                            <select id="typeFilter">
+                                <option value="all">Alle Tierarten</option>
+                                <option value="dog">Hunde</option>
+                                <option value="cat">Katzen</option>
+                                <option value="other">Andere</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="animalsList" class="animals-list">
+                        <!-- Animals will be loaded here -->
+                    </div>
+
+                    <!-- Add/Edit Animal Modal -->
+                    <div id="animalModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h3 id="animalModalTitle">Tier hinzufügen</h3>
+                            <form id="animalForm">
+                                <input type="hidden" id="animalId" name="id">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="animalName">Name</label>
+                                        <input type="text" id="animalName" name="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="animalType">Tierart</label>
+                                        <select id="animalType" name="type" required>
+                                            <option value="dog">Hund</option>
+                                            <option value="cat">Katze</option>
+                                            <option value="other">Andere</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="animalAge">Alter</label>
+                                        <input type="text" id="animalAge" name="age" placeholder="z.B. 2 Jahre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="animalGender">Geschlecht</label>
+                                        <select id="animalGender" name="gender">
+                                            <option value="male">Männlich</option>
+                                            <option value="female">Weiblich</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="animalBreed">Rasse</label>
+                                    <input type="text" id="animalBreed" name="breed" placeholder="z.B. Boxer">
+                                </div>
+                                <div class="form-group">
+                                    <label for="animalDescription">Beschreibung</label>
+                                    <textarea id="animalDescription" name="description" rows="4"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="animalStatus">Status</label>
+                                    <select id="animalStatus" name="status" required>
+                                        <option value="available">Vermittlungsbereit</option>
+                                        <option value="not-ready">Nicht bereit</option>
+                                        <option value="adopted">Vermittelt</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="animalImage">Bild URL</label>
+                                    <input type="url" id="animalImage" name="image" placeholder="https://...">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Speichern</button>
+                                    <button type="button" class="btn btn-secondary" onclick="closeAnimalModal()">Abbrechen</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Management Tab -->
+            <div id="gallery" class="tab-content">
+                <div class="admin-container">
+                    <h2>🖼️ Galerie verwalten</h2>
+                    
+                    <div class="gallery-header">
+                        <button id="uploadBtn" class="btn btn-primary">Bilder hochladen</button>
+                        <div class="gallery-info">
+                            <span id="galleryCount">0 Bilder</span>
+                        </div>
+                    </div>
+
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <div class="upload-icon">📁</div>
+                            <p>Bilder hier hinziehen oder <span class="upload-link">hier klicken</span></p>
+                            <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+
+                    <div id="galleryGrid" class="gallery-grid">
+                        <!-- Gallery images will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
