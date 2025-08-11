@@ -61,6 +61,9 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Enhanced contrast for better visibility */
+    color: var(--admin-text-primary);
+    font-weight: 500;
 }
 
 .admin-body::before {
@@ -331,6 +334,10 @@
     display: flex;
     flex-direction: column;
     animation: fadeIn 0.8s ease-out;
+    /* Improved contrast for better visibility */
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 .admin-header {
@@ -447,17 +454,25 @@
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-    background: var(--background-color);
+    background: rgba(255, 255, 255, 0.95);
     min-height: calc(100vh - 80px);
+    /* Enhanced contrast and readability */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px 12px 0 0;
+    color: var(--admin-text-primary);
 }
 
 .admin-container {
-    background: var(--surface-color);
-    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: var(--admin-radius-lg);
     padding: 2.5rem;
-    box-shadow: var(--shadow-medium);
-    border: 1px solid var(--border-color);
+    box-shadow: var(--admin-shadow-lg);
+    border: 1px solid rgba(230, 126, 34, 0.15);
     animation: slideInUp 0.5s ease-out;
+    /* Enhanced contrast for better readability */
+    color: var(--admin-text-primary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 @keyframes slideInUp {

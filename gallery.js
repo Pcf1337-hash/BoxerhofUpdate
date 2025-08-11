@@ -15,8 +15,22 @@ class GalleryPage {
     async init() {
         console.log('Initializing Gallery Page...');
         
+        // Wait for shared data manager if needed
+        if (typeof window.sharedDataManager === 'undefined') {
+            console.log('⏳ Waiting for shared data manager...');
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        
         // Setup event listeners
         this.setupEventListeners();
+        
+        // Listen for data changes from admin panel
+        document.addEventListener('boxerhofDataChanged', (e) => {
+            if (e.detail.dataType === 'gallery') {
+                console.log('🔄 Gallery data changed, reloading...');
+                this.loadImages();
+            }
+        });
         
         // Load images
         await this.loadImages();
@@ -58,61 +72,15 @@ class GalleryPage {
         console.log('Loading Boxerhof images...');
         this.showLoading(true);
         
-        // Create detailed image data for all 25 images
-        const imageCategories = {
-            buildings: [1, 2, 3, 7, 10, 23],
-            animals: [4, 5, 6, 11, 12, 13, 18, 19],
-            care: [8, 9, 14, 15, 20],
-            events: [16, 17, 21, 22],
-            nature: [24, 25]
-        };
-        
-        const imageData = [
-            { id: 1, title: 'Hauptgebäude des Boxerhofs', description: 'Unser gemütliches Haupthaus mit Büro und Aufenthaltsräumen für Besucher', category: 'buildings' },
-            { id: 2, title: 'Eingangsbereich', description: 'Der freundliche Empfangsbereich, wo Besucher herzlich willkommen geheißen werden', category: 'buildings' },
-            { id: 3, title: 'Außenanlagen Übersicht', description: 'Luftaufnahme unserer weitläufigen und sicheren Außenanlagen', category: 'buildings' },
-            { id: 4, title: 'Glückliche Boxerhunde', description: 'Unsere Boxer beim entspannten Spielen im großen Auslaufgehege', category: 'animals' },
-            { id: 5, title: 'Hundegruppe beim Spaziergang', description: 'Gemeinsamer Spaziergang unserer sozialisierten Hundegruppe', category: 'animals' },
-            { id: 6, title: 'Ruhige Momente', description: 'Hunde beim Entspannen in der Abendsonne auf der Hofterrasse', category: 'animals' },
-            { id: 7, title: 'Hundeunterkünfte', description: 'Komfortable und hygienische Innenräume für unsere Pensionsgäste', category: 'buildings' },
-            { id: 8, title: 'Medizinische Betreuung', description: 'Professionelle tierärztliche Untersuchung in unserem Behandlungsraum', category: 'care' },
-            { id: 9, title: 'Fellpflege', description: 'Liebevolle Körperpflege - ein wichtiger Teil unserer täglichen Betreuung', category: 'care' },
-            { id: 10, title: 'Futterküche', description: 'Unsere saubere Küche für die Zubereitung von gesundem Hundefutter', category: 'buildings' },
-            { id: 11, title: 'Welpenstube', description: 'Speziell eingerichteter Bereich für junge Hunde und Welpen', category: 'animals' },
-            { id: 12, title: 'Senior-Hunde Bereich', description: 'Ruhiger Bereich mit besonderen Annehmlichkeiten für ältere Hunde', category: 'animals' },
-            { id: 13, title: 'Trainingseinheit', description: 'Grundausbildung und Sozialisation mit erfahrenen Hundetrainern', category: 'animals' },
-            { id: 14, title: 'Erste Hilfe Station', description: 'Gut ausgestatteter Notfallbereich für schnelle medizinische Versorgung', category: 'care' },
-            { id: 15, title: 'Quarantänebereich', description: 'Separate, sichere Bereiche für neue oder kranke Tiere', category: 'care' },
-            { id: 16, title: 'Tag der offenen Tür', description: 'Besucher lernen unseren Hof und die Hunde bei einem besonderen Event kennen', category: 'events' },
-            { id: 17, title: 'Hoffest', description: 'Fröhliche Gemeinschaftsfeier mit Unterstützern und Hundefreunden', category: 'events' },
-            { id: 18, title: 'Adoption Moment', description: 'Der emotionale Moment, wenn ein Hund sein neues Zuhause findet', category: 'animals' },
-            { id: 19, title: 'Hundetraining Workshop', description: 'Besucher lernen von unseren Experten richtige Hundeerziehung', category: 'animals' },
-            { id: 20, title: 'Tierarzt Visite', description: 'Regelmäßige Gesundheitschecks durch unseren erfahrenen Tierarzt', category: 'care' },
-            { id: 21, title: 'Freiwillige bei der Arbeit', description: 'Unser engagiertes Team von Helfern beim täglichen Einsatz für die Tiere', category: 'events' },
-            { id: 22, title: 'Spendenübergabe', description: 'Dankbare Momente mit großzügigen Unterstützern unserer Arbeit', category: 'events' },
-            { id: 23, title: 'Sicherheitseinrichtungen', description: 'Moderne Umzäunung und Sicherheitssysteme zum Schutz aller Tiere', category: 'buildings' },
-            { id: 24, title: 'Naturlandschaft', description: 'Die wunderschöne Umgebung von Bad Oeynhausen um unseren Hof', category: 'nature' },
-            { id: 25, title: 'Sonnenuntergang am Hof', description: 'Friedliche Abendstimmung, wenn der Tag auf dem Boxerhof zu Ende geht', category: 'nature' }
-        ];
-        
-        // Try to load real images first
-        const realImages = await this.tryLoadRealImages();
-        
-        if (realImages.length > 0) {
-            // Use real images with metadata
-            this.allImages = realImages.map((img, index) => ({
-                ...img,
-                ...imageData[index],
-                url: img.url,
-                isReal: true
-            }));
+        // Use shared data manager if available
+        if (window.sharedDataManager) {
+            console.log('📊 Loading gallery images from Shared Data Manager...');
+            this.allImages = window.sharedDataManager.getGalleryData();
+            console.log(`✅ Loaded ${this.allImages.length} images from shared data`);
         } else {
-            // Create placeholder images with metadata
-            this.allImages = imageData.map(data => ({
-                ...data,
-                url: this.createPlaceholderImage(data),
-                isReal: false
-            }));
+            console.log('⚠️ Shared Data Manager not available, generating placeholder images...');
+            // Create detailed image data for all 25 images (fallback)
+            this.allImages = this.generatePlaceholderImages();
         }
         
         this.filteredImages = [...this.allImages];
@@ -146,7 +114,42 @@ class GalleryPage {
         return realImages;
     }
     
-    testImageAvailability(url, index) {
+    generatePlaceholderImages() {
+        const imageData = [
+            { id: 1, title: 'Hauptgebäude des Boxerhofs', description: 'Unser gemütliches Haupthaus mit Büro und Aufenthaltsräumen für Besucher', category: 'buildings' },
+            { id: 2, title: 'Eingangsbereich', description: 'Der freundliche Empfangsbereich, wo Besucher herzlich willkommen geheißen werden', category: 'buildings' },
+            { id: 3, title: 'Außenanlagen Übersicht', description: 'Luftaufnahme unserer weitläufigen und sicheren Außenanlagen', category: 'buildings' },
+            { id: 4, title: 'Glückliche Boxerhunde', description: 'Unsere Boxer beim entspannten Spielen im großen Auslaufgehege', category: 'animals' },
+            { id: 5, title: 'Hundegruppe beim Spaziergang', description: 'Gemeinsamer Spaziergang unserer sozialisierten Hundegruppe', category: 'animals' },
+            { id: 6, title: 'Ruhige Momente', description: 'Hunde beim Entspannen in der Abendsonne auf der Hofterrasse', category: 'animals' },
+            { id: 7, title: 'Hundeunterkünfte', description: 'Komfortable und hygienische Innenräume für unsere Pensionsgäste', category: 'buildings' },
+            { id: 8, title: 'Medizinische Betreuung', description: 'Professionelle tierärztliche Untersuchung in unserem Behandlungsraum', category: 'care' },
+            { id: 9, title: 'Fellpflege', description: 'Liebevolle Körperpflege - ein wichtiger Teil unserer täglichen Betreuung', category: 'care' },
+            { id: 10, title: 'Futterküche', description: 'Unsere saubere Küche für die Zubereitung von gesundem Hundefutter', category: 'buildings' },
+            { id: 11, title: 'Welpenstube', description: 'Speziell eingerichteter Bereich für junge Hunde und Welpen', category: 'animals' },
+            { id: 12, title: 'Senior-Hunde Bereich', description: 'Ruhiger Bereich mit besonderen Annehmlichkeiten für ältere Hunde', category: 'animals' },
+            { id: 13, title: 'Trainingseinheit', description: 'Grundausbildung und Sozialisation mit erfahrenen Hundetrainern', category: 'animals' },
+            { id: 14, title: 'Erste Hilfe Station', description: 'Gut ausgestatteter Notfallbereich für schnelle medizinische Versorgung', category: 'care' },
+            { id: 15, title: 'Quarantänebereich', description: 'Separate, sichere Bereiche für neue oder kranke Tiere', category: 'care' },
+            { id: 16, title: 'Tag der offenen Tür', description: 'Besucher lernen unseren Hof und die Hunde bei einem besonderen Event kennen', category: 'events' },
+            { id: 17, title: 'Hoffest', description: 'Fröhliche Gemeinschaftsfeier mit Unterstützern und Hundefreunden', category: 'events' },
+            { id: 18, title: 'Adoption Moment', description: 'Der emotionale Moment, wenn ein Hund sein neues Zuhause findet', category: 'animals' },
+            { id: 19, title: 'Hundetraining Workshop', description: 'Besucher lernen von unseren Experten richtige Hundeerziehung', category: 'animals' },
+            { id: 20, title: 'Tierarzt Visite', description: 'Regelmäßige Gesundheitschecks durch unseren erfahrenen Tierarzt', category: 'care' },
+            { id: 21, title: 'Freiwillige bei der Arbeit', description: 'Unser engagiertes Team von Helfern beim täglichen Einsatz für die Tiere', category: 'events' },
+            { id: 22, title: 'Spendenübergabe', description: 'Dankbare Momente mit großzügigen Unterstützern unserer Arbeit', category: 'events' },
+            { id: 23, title: 'Sicherheitseinrichtungen', description: 'Moderne Umzäunung und Sicherheitssysteme zum Schutz aller Tiere', category: 'buildings' },
+            { id: 24, title: 'Naturlandschaft', description: 'Die wunderschöne Umgebung von Bad Oeynhausen um unseren Hof', category: 'nature' },
+            { id: 25, title: 'Sonnenuntergang am Hof', description: 'Friedliche Abendstimmung, wenn der Tag auf dem Boxerhof zu Ende geht', category: 'nature' }
+        ];
+        
+        return imageData.map(data => ({
+            ...data,
+            url: this.createPlaceholderImage(data),
+            isReal: false,
+            uploadDate: new Date().toISOString()
+        }));
+    }
         return new Promise((resolve) => {
             const img = new Image();
             img.onload = () => resolve({

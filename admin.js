@@ -15,7 +15,7 @@ const DEMO_CREDENTIALS = {
     password: 'boxerhof123'
 };
 
-// Local storage keys
+// Local storage keys (legacy - now using shared data manager)
 const STORAGE_KEYS = {
     animals: 'boxerhof_animals',
     content: 'boxerhof_content',
@@ -24,10 +24,40 @@ const STORAGE_KEYS = {
 
 // Initialize admin panel
 document.addEventListener('DOMContentLoaded', function() {
-    initializeAdmin();
-    loadStoredData();
-    setupEventListeners();
-    updateDashboard();
+    // Wait for shared data manager to be available
+    if (typeof window.sharedDataManager === 'undefined') {
+        console.log('⏳ Waiting for shared data manager...');
+        setTimeout(() => {
+            initializeAdmin();
+            loadStoredData();
+            setupEventListeners();
+            updateDashboard();
+        }, 100);
+    } else {
+        initializeAdmin();
+        loadStoredData();
+        setupEventListeners();
+        updateDashboard();
+    }
+    
+    // Listen for data changes from other parts of the application
+    document.addEventListener('boxerhofDataChanged', (e) => {
+        console.log('🔄 Data changed:', e.detail);
+        if (adminState.isLoggedIn) {
+            switch(e.detail.dataType) {
+                case 'gallery':
+                    if (adminState.currentTab === 'gallery') loadGallery();
+                    break;
+                case 'animals':
+                    if (adminState.currentTab === 'animals') loadAnimals();
+                    break;
+                case 'content':
+                    if (adminState.currentTab === 'content') loadContentData();
+                    break;
+            }
+            updateDashboard(); // Always update dashboard stats
+        }
+    });
 });
 
 // Initialize admin interface
@@ -187,6 +217,28 @@ function switchTab(tabName) {
 
 // Load stored data
 function loadStoredData() {
+    // Use shared data manager if available, fallback to old system
+    if (window.sharedDataManager) {
+        console.log('📊 Loading data via Shared Data Manager...');
+        
+        // Load animals from shared data
+        adminState.animals = window.sharedDataManager.getAnimalsData();
+        
+        // Load gallery from shared data (now 25 images!)
+        adminState.gallery = window.sharedDataManager.getGalleryData();
+        
+        // Load content from shared data
+        adminState.content = window.sharedDataManager.getContentData();
+        
+        console.log(`✅ Loaded ${adminState.animals.length} animals, ${adminState.gallery.length} gallery images, and content data`);
+    } else {
+        console.log('⚠️ Shared Data Manager not available, using legacy storage...');
+        loadLegacyData();
+    }
+}
+
+// Fallback function for legacy data loading
+function loadLegacyData() {
     // Load animals
     const storedAnimals = localStorage.getItem(STORAGE_KEYS.animals);
     if (storedAnimals) {
@@ -260,14 +312,40 @@ function loadStoredData() {
 
 // Update dashboard statistics
 function updateDashboard() {
-    const animalsCount = adminState.animals.length;
-    const availableCount = adminState.animals.filter(animal => animal.status === 'available').length;
-    const imagesCount = adminState.gallery.length;
-    
-    document.getElementById('animalsCount').textContent = animalsCount;
-    document.getElementById('availableCount').textContent = availableCount;
-    document.getElementById('imagesCount').textContent = imagesCount;
-    document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('de-DE');
+    // Refresh data from shared data manager if available
+    if (window.sharedDataManager) {
+        // Reload fresh data from shared manager
+        adminState.animals = window.sharedDataManager.getAnimalsData();
+        adminState.gallery = window.sharedDataManager.getGalleryData();
+        adminState.content = window.sharedDataManager.getContentData();
+        
+        const stats = window.sharedDataManager.getDataStats();
+        
+        document.getElementById('animalsCount').textContent = stats.totalAnimals;
+        document.getElementById('availableCount').textContent = stats.availableAnimals;
+        document.getElementById('imagesCount').textContent = stats.totalImages;
+        document.getElementById('lastUpdate').textContent = new Date(parseInt(stats.lastUpdate)).toLocaleDateString('de-DE');
+        
+        // Update additional dashboard stats
+        const activeAdoptionsEl = document.getElementById('activeAdoptions');
+        if (activeAdoptionsEl) {
+            activeAdoptionsEl.textContent = stats.availableAnimals;
+        }
+        
+        console.log('📊 Dashboard updated with shared data stats:', stats);
+    } else {
+        // Fallback to local state
+        const animalsCount = adminState.animals.length;
+        const availableCount = adminState.animals.filter(animal => animal.status === 'available').length;
+        const imagesCount = adminState.gallery.length;
+        
+        document.getElementById('animalsCount').textContent = animalsCount;
+        document.getElementById('availableCount').textContent = availableCount;
+        document.getElementById('imagesCount').textContent = imagesCount;
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('de-DE');
+        
+        console.log('📊 Dashboard updated with local data');
+    }
 }
 
 // Content management
@@ -310,7 +388,11 @@ function handleContentSave(e) {
 }
 
 function saveContent() {
-    localStorage.setItem(STORAGE_KEYS.content, JSON.stringify(adminState.content));
+    if (window.sharedDataManager) {
+        window.sharedDataManager.setContentData(adminState.content);
+    } else {
+        localStorage.setItem(STORAGE_KEYS.content, JSON.stringify(adminState.content));
+    }
 }
 
 // Animal management
@@ -912,11 +994,21 @@ window.resolveNewDogDialog = function(shouldSend) {
 }
 
 function saveAnimals() {
-    localStorage.setItem(STORAGE_KEYS.animals, JSON.stringify(adminState.animals));
+    if (window.sharedDataManager) {
+        window.sharedDataManager.setAnimalsData(adminState.animals);
+    } else {
+        localStorage.setItem(STORAGE_KEYS.animals, JSON.stringify(adminState.animals));
+    }
 }
 
 // Gallery management
 function loadGallery() {
+    // Refresh gallery data from shared data manager if available
+    if (window.sharedDataManager) {
+        adminState.gallery = window.sharedDataManager.getGalleryData();
+        console.log(`🖼️ Gallery refreshed from shared data: ${adminState.gallery.length} images`);
+    }
+    
     displayGallery();
     updateGalleryCount();
 }
@@ -1015,7 +1107,11 @@ function deleteImage(imageId) {
 }
 
 function saveGallery() {
-    localStorage.setItem(STORAGE_KEYS.gallery, JSON.stringify(adminState.gallery));
+    if (window.sharedDataManager) {
+        window.sharedDataManager.setGalleryData(adminState.gallery);
+    } else {
+        localStorage.setItem(STORAGE_KEYS.gallery, JSON.stringify(adminState.gallery));
+    }
 }
 
 // Utility functions
@@ -1041,6 +1137,17 @@ function viewWebsite() {
     window.open('index.html', '_blank');
 }
 
+function forceCacheRefresh() {
+    if (window.sharedDataManager) {
+        if (confirm('Möchten Sie wirklich den Cache leeren? Dies kann helfen, wenn die Website nicht aktualisiert wird.')) {
+            showMessage('Cache wird geleert...', 'info');
+            window.sharedDataManager.forceCacheRefresh();
+        }
+    } else {
+        showMessage('Shared Data Manager nicht verfügbar', 'error');
+    }
+}
+
 function updateMainWebsite() {
     // This would update the main website content in a real implementation
     // For demo purposes, we'll just show a message
@@ -1054,6 +1161,7 @@ window.deleteAnimal = deleteAnimal;
 window.closeAnimalModal = closeAnimalModal;
 window.deleteImage = deleteImage;
 window.viewWebsite = viewWebsite;
+window.forceCacheRefresh = forceCacheRefresh;
 
 // Guestbook Management
 const GuestbookAdmin = {

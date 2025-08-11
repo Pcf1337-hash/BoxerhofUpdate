@@ -25,8 +25,24 @@ class AnimalFilterSystem {
 
     init() {
         this.createFilterUI();
-        this.loadAnimals();
-        this.bindEvents();
+        // Wait for shared data manager to be available
+        if (typeof window.sharedDataManager === 'undefined') {
+            setTimeout(() => {
+                this.loadAnimals();
+                this.bindEvents();
+            }, 100);
+        } else {
+            this.loadAnimals();
+            this.bindEvents();
+        }
+        
+        // Listen for data changes from admin panel
+        document.addEventListener('boxerhofDataChanged', (e) => {
+            if (e.detail.dataType === 'animals') {
+                console.log('🔄 Animals data changed, reloading...');
+                this.loadAnimals();
+            }
+        });
     }
 
     // Create enhanced filter UI
@@ -215,10 +231,18 @@ class AnimalFilterSystem {
         });
     }
 
-    // Load animals from localStorage
+    // Load animals from shared data manager
     loadAnimals() {
-        const storedAnimals = localStorage.getItem('boxerhof_animals');
-        this.animals = storedAnimals ? JSON.parse(storedAnimals) : this.getDefaultAnimals();
+        // Use shared data manager if available
+        if (typeof window.sharedDataManager !== 'undefined') {
+            this.animals = window.sharedDataManager.getAnimalsData();
+            console.log(`🐕 Loaded ${this.animals.length} animals from shared data manager`);
+        } else {
+            // Fallback to localStorage or default
+            const storedAnimals = localStorage.getItem('boxerhof_animals');
+            this.animals = storedAnimals ? JSON.parse(storedAnimals) : this.getDefaultAnimals();
+            console.log(`🐕 Loaded ${this.animals.length} animals from fallback data`);
+        }
         this.applyFilters();
     }
 
