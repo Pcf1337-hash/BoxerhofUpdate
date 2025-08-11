@@ -2184,3 +2184,175 @@
         max-width: 95%;
     }
 }
+
+/* Newsletter Deletion Modal Styles */
+.deletion-options {
+    margin: 2rem 0;
+}
+
+.option-group {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 2px solid transparent;
+    border-radius: var(--admin-radius-md);
+    background: var(--admin-background-light);
+    transition: all var(--admin-transition-normal);
+}
+
+.option-group:hover {
+    background: rgba(230, 126, 34, 0.05);
+    border-color: rgba(230, 126, 34, 0.2);
+}
+
+.option-group label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--admin-text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.option-group input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: var(--admin-primary);
+    transform: scale(1.2);
+}
+
+.option-description {
+    margin: 0.5rem 0 0 2.5rem;
+    color: var(--admin-text-secondary);
+    font-size: var(--admin-font-size-sm);
+    line-height: 1.5;
+}
+
+.option-description strong {
+    color: var(--admin-primary);
+    font-weight: 700;
+}
+
+.newsletter-info {
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+    border: 1px solid rgba(52, 152, 219, 0.2);
+    border-radius: var(--admin-radius-md);
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.newsletter-info span {
+    font-weight: 600;
+    color: var(--admin-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--admin-background-grey);
+}
+
+/* Email Preview Modal Styles */
+.email-preview-modal {
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.email-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: var(--admin-background-light);
+    border-radius: var(--admin-radius-md);
+    border: 1px solid var(--admin-background-grey);
+}
+
+.stat-item strong {
+    display: block;
+    font-size: var(--admin-font-size-xl);
+    font-weight: 700;
+    color: var(--admin-primary);
+    margin-bottom: 0.25rem;
+}
+
+.stat-item span {
+    font-size: var(--admin-font-size-sm);
+    color: var(--admin-text-secondary);
+    font-weight: 500;
+}
+
+.email-preview {
+    background: var(--admin-background-light);
+    border: 1px solid var(--admin-background-grey);
+    border-radius: var(--admin-radius-md);
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.email-preview h4 {
+    margin: 0 0 1rem 0;
+    color: var(--admin-text-primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.email-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--admin-radius-sm);
+    border: 1px solid var(--admin-background-grey);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Responsive adjustments for deletion modal */
+@media (max-width: 768px) {
+    .deletion-options {
+        margin: 1rem 0;
+    }
+    
+    .option-group {
+        padding: 0.75rem;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .email-stats {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .stat-item {
+        padding: 0.75rem;
+    }
+    
+    .email-content {
+        font-size: 0.9rem;
+        padding: 1rem;
+    }
+}
+}
