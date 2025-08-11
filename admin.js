@@ -312,8 +312,13 @@ function loadLegacyData() {
 
 // Update dashboard statistics
 function updateDashboard() {
-    // Get stats from shared data manager if available
+    // Refresh data from shared data manager if available
     if (window.sharedDataManager) {
+        // Reload fresh data from shared manager
+        adminState.animals = window.sharedDataManager.getAnimalsData();
+        adminState.gallery = window.sharedDataManager.getGalleryData();
+        adminState.content = window.sharedDataManager.getContentData();
+        
         const stats = window.sharedDataManager.getDataStats();
         
         document.getElementById('animalsCount').textContent = stats.totalAnimals;
@@ -998,6 +1003,12 @@ function saveAnimals() {
 
 // Gallery management
 function loadGallery() {
+    // Refresh gallery data from shared data manager if available
+    if (window.sharedDataManager) {
+        adminState.gallery = window.sharedDataManager.getGalleryData();
+        console.log(`🖼️ Gallery refreshed from shared data: ${adminState.gallery.length} images`);
+    }
+    
     displayGallery();
     updateGalleryCount();
 }
