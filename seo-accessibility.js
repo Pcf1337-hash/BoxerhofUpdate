@@ -803,7 +803,7 @@ class AccessibilityEnhancer {
             .contrast-toggle {
                 position: fixed;
                 top: 100px;
-                right: 20px;
+                right: 10px;
                 background: rgba(255, 255, 255, 0.9);
                 border: 1px solid #ccc;
                 border-radius: 4px;
@@ -812,6 +812,21 @@ class AccessibilityEnhancer {
                 cursor: pointer;
                 z-index: 1000;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                max-width: calc(100vw - 40px);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            @media (max-width: 480px) {
+                .contrast-toggle {
+                    top: 80px;
+                    right: 10px;
+                    left: auto;
+                    font-size: 11px;
+                    padding: 6px 8px;
+                    max-width: calc(100vw - 20px);
+                }
             }
         `;
         document.head.appendChild(style);
