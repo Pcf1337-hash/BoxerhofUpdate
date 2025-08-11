@@ -1,5 +1,5 @@
-// Local Storage keys - shared with admin panel
-const STORAGE_KEYS = {
+// Shared Local Storage keys (shared with admin panel)
+const MAIN_STORAGE_KEYS = {
     animals: 'boxerhof_animals',
     content: 'boxerhof_content',
     gallery: 'boxerhof_gallery'
@@ -600,7 +600,7 @@ function loadDynamicAnimals() {
     if (!animalsGrid) return;
     
     try {
-        const storedAnimals = localStorage.getItem(STORAGE_KEYS.animals);
+        const storedAnimals = localStorage.getItem(MAIN_STORAGE_KEYS.animals);
         let animals = storedAnimals ? JSON.parse(storedAnimals) : [];
         
         // Filter only available animals for public display

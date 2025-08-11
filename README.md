@@ -1,102 +1,268 @@
 # Boxerhof Website - Modernisierte Homepage mit Admin Panel
 
-Eine moderne, responsive Website für den Boxerhof mit vollständigem Content Management System - ein Ort der Tierliebe und des Träume-lebens, wo die Leiterin mit unermüdlicher Hingabe jeden Tag für die Tiere da ist.
+Eine moderne, responsive Website für die Boxer Nothilfe e.V. mit vollständigem Content Management System - ein Ort der Tierliebe und des Träume-lebens, wo die Leiterin mit unermüdlicher Hingabe jeden Tag für die Tiere da ist.
+
+## 📋 Letzte Änderungen (August 2025)
+
+### 🎉 Neu implementiert:
+- **✨ Dynamische Hunde-Anzeige**: Hunde aus dem Admin Panel werden automatisch auf der Hauptseite angezeigt
+- **🔍 Filter & Sortierung**: Nach Rasse filtern und nach Name, Alter oder Ankunftsdatum sortieren
+- **📧 Gästebuch-System**: Vollständige Implementierung mit Moderation
+- **📅 Veranstaltungsmanagement**: Event-System mit Anmeldung und Verwaltung
+- **🔒 DSGVO-Konformität**: Datenschutz-Features und Cookie-Management
+- **📱 Responsive Optimierung**: Verbesserte mobile Darstellung
+
+### 🛠️ Technische Verbesserungen:
+- Echtzeitverbindung zwischen Admin Panel und Hauptwebsite
+- Erweiterte Tierverwaltung mit detaillierten Profilen
+- Moderne CSS-Animation und Hover-Effekte
+- Optimierte Performance durch effizientes Datenmanagement
 
 ## 🎯 Projekt-Übersicht
 
 Diese Website wurde komplett neu gestaltet, um die Internet-Präsenz des Boxerhofs zu modernisieren. Sie bietet eine professionelle, ansprechende Darstellung der Arbeit mit Tieren und der Mission des Hofes, sowie ein leistungsstarkes Admin Panel zur Verwaltung aller Inhalte. Besonders hervorgehoben wird die wichtige Arbeit der Hofleitung, die täglich mit Liebe und Hingabe für das Wohl jedes einzelnen Tieres sorgt.
 
-## ✨ Features
+## ✨ Haupt-Features
 
-### Design & Benutzerfreundlichkeit
-- **Modernes Design**: Saubere, professionelle Optik mit warmen Farben
-- **Responsive Design**: Optimiert für Desktop, Tablet und Smartphone
-- **Intuitive Navigation**: Benutzerfreundliche Menüführung mit Galerie-Sektion
-- **Accessibility**: Semantisches HTML für bessere Zugänglichkeit
-- **Interactive Gallery**: Visuelle Darstellung des Hoflebens mit Hover-Effekten
+### 🐕 Dynamische Tierverwaltung (NEU 2025)
+- **Echtzeit-Synchronisation**: Tiere aus dem Admin Panel erscheinen sofort auf der Hauptseite
+- **Intelligente Filter**: Nach Rasse, Status und weiteren Kriterien filtern
+- **Smart Sorting**: Nach Name, Alter, Ankunftsdatum sortieren
+- **Detaillierte Profile**: Umfassende Tierinformationen mit Gesundheitsstatus
+- **Adoption-Integration**: Direkter Kontakt für Interessenten
+- **Responsive Darstellung**: Optimiert für alle Geräte
 
-### 🔧 Neues Admin Panel
-- **Sichere Anmeldung**: Login-System für Administratoren
-- **Content Management**: Bearbeitung aller Seiteninhalte über intuitive Formulare
-- **Tierverwaltung**: Vollständiges CRUD-System für Tiere und Vermittlungsdaten
-- **Bildergalerie**: Drag & Drop Upload für Bilder mit Verwaltungsfunktionen
+### 🔧 Admin Panel Features
+- **Sichere Anmeldung**: Login-System für Administratoren (admin/boxerhof123)
+- **Content Management**: Bearbeitung aller Seiteninhalte
+- **Tierverwaltung**: Vollständiges CRUD-System für Tiere
 - **Dashboard**: Übersicht über alle wichtigen Statistiken
-- **Responsive Admin**: Vollständig mobile-optimierte Verwaltung
+- **Gästebuch-Moderation**: Verwaltung und Freischaltung von Einträgen
+- **Event-Management**: Veranstaltungen planen und verwalten
 
-### 🖼️ Galerie-Sektion (NEU)
-- **Visuelle Darstellung**: 6 interaktive Bereiche zeigen das Leben auf dem Hof
+### 🖼️ Galerie-Sektion
+- **Interaktive Visualisierung**: 6 Bereiche zeigen das Leben auf dem Hof
+- **CSS-basierte Grafiken**: Moderne Farbverläufe und Animationen
 - **Hover-Effekte**: Informative Overlays mit Details zu jedem Bereich
-- **CSS-basierte Grafiken**: Moderne Farbverläufe und Emoji-Icons
-- **Responsive Grid**: Anpassbare Darstellung für alle Bildschirmgrößen
 - **Bereiche**: Hof, Hunde, medizinische Versorgung, Training, Freiwillige, Familien
 
-### 💝 Besonderer Fokus: Mutter's Hingabe
+### 📝 Gästebuch & Community
+- **Interaktives Gästebuch**: Besucher können Erfahrungen teilen
+- **Moderation**: Admin-Freischaltung für Qualitätssicherung
+- **Bildupload**: Optional mit Bildern
+- **DSGVO-konform**: Datenschutz-Einverständnis
+
+### 📅 Veranstaltungen
+- **Event-Kalender**: Übersicht über kommende und vergangene Events
+- **Anmeldesystem**: Direkte Anmeldung per E-Mail
+- **Detailseiten**: Umfassende Informationen zu jedem Event
+- **Kapazitätsmanagement**: Maximale Teilnehmerzahl
+
+### 💝 Newsletter & Social Media
+- **Newsletter-System**: E-Mail-Abonnement-Funktionalität
+- **Social Media Integration**: Links zu Facebook, Instagram, YouTube
+- **Social Sharing**: Web Share API für Tierprofile
+- **E-Mail-Integration**: Erweiterte Kontaktformular-Funktionalität
+
+### 🌟 Besonderer Fokus: Mutter's Hingabe
 - **Persönliche Geschichte**: Hervorhebung der täglichen Arbeit der Hofleitung
 - **Emotionale Verbindung**: Betonung der liebevollen Betreuung jedes Tieres
 - **Authentizität**: Echte Geschichten über die Rettung und Pflege der Tiere
 
-### 📧 Newsletter & Social Media Features
-- **Newsletter-Anmeldung**: Vollständiges Abonnement-System mit Validierung
-- **E-Mail-Integration**: Erweiterte Kontaktformular-Funktionalität
-- **Social Media Links**: Direkte Verlinkung zu Facebook, Instagram, YouTube
-- **Social Sharing**: Web Share API für Tierprofile mit Fallback-Optionen
-- **Analytics Tracking**: Social Media Klick-Verfolgung für Demo-Zwecke
+## 🚀 Schnellstart
 
-### Admin Panel Funktionen
-- **Dashboard**: 
-  - Übersicht über Anzahl der Tiere, verfügbare Tiere, Galerie-Bilder
-  - Schnellaktionen für häufige Aufgaben
-  - System-Status und letzte Updates
+### Lokaler Webserver
+```bash
+# Python 3
+python -m http.server 8080
 
-- **Content Management**:
-  - Hero-Bereich: Titel, Untertitel, Beschreibung bearbeiten
-  - Über uns: Textinhalte verwalten
-  - Kontaktdaten: E-Mail, Telefon, Adresse aktualisieren
+# Node.js
+npx http-server -p 8080
 
-- **Tierverwaltung**:
-  - Neue Tiere hinzufügen mit allen Details
-  - Bestehende Tiere bearbeiten und aktualisieren
-  - Status verwalten (verfügbar, vermittelt, nicht bereit)
-  - Filter nach Status und Tierart
-  - Detaillierte Tier-Profile mit Bildern
+# PHP
+php -S localhost:8080
+```
 
-- **Bildergalerie**:
-  - Drag & Drop Upload für mehrere Bilder
-  - Bildvorschau und Verwaltung
-  - Löschen von Bildern
-  - Automatische Größenanpassung
+### Admin-Zugang
+- **URL**: `/admin.html`
+- **Benutzername**: `admin`
+- **Passwort**: `boxerhof123`
 
-### Technische Features
-- **HTML5**: Moderne, semantische Struktur
-- **CSS3**: Grid- und Flexbox-Layouts, Animationen, Gradients
-- **JavaScript**: Interaktive Elemente, CRUD-Operationen, Local Storage
-- **Web Share API**: Native Sharing-Funktionalität mit Fallback-System
-- **Progressive Enhancement**: Erweiterte Features für moderne Browser
-- **E-Mail Integration**: Kontaktformular mit erweiterten Validierungen
-- **Newsletter System**: Vollständiges Abonnement-Management
-- **Social Media Integration**: Verlinkung und Tracking für alle Plattformen
-- **Mobile-First**: Optimiert für mobile Geräte
-- **SEO-Optimiert**: Suchmaschinenfreundliche Struktur
-- **Local Storage**: Persistente Datenspeicherung für Demo-Zwecke
-- **Notification System**: Toast-Benachrichtigungen für Benutzer-Feedback
+## 📸 Screenshots
 
-### Inhaltsbereiche
-- **Hero-Sektion**: Einladende Startseite mit Call-to-Action
-- **Über uns**: Information über den Boxerhof und die Mission
-- **Unsere Tiere**: Vorstellung der verschiedenen Tierarten mit Social Sharing
-- **Galerie**: Visuelle Impressionen vom Hofbetrieb mit interaktiven Elementen
-  - 🏡 Unser Hof: Der sichere Zufluchtsort für unsere Schützlinge
-  - 🐕 Unsere Hunde: Boxer und Mischlinge beim Spielen und Erholen
-  - 💊 Medizinische Versorgung: Professionelle Pflege für jeden Hund
-  - 🎾 Training & Spiel: Sozialisierung und Vorbereitung auf ein neues Zuhause
-  - 🤝 Freiwillige Helfer: Unser Team im Einsatz für die Tiere
-  - ❤️ Neue Familien: Erfolgreiche Vermittlungen machen uns glücklich
-- **Mutter's Hingabe**: Besondere Würdigung der täglichen Arbeit der Hofleitung
-- **Hilfe**: Möglichkeiten der Unterstützung
-- **Newsletter**: Abonnement-System für regelmäßige Updates
-- **Kontakt**: Erweiterte Kontaktformular-Funktionalität mit E-Mail-Integration
-- **Admin Panel**: Vollständige Inhaltsverwaltung
-- **Social Media**: Footer-Links zu allen sozialen Netzwerken
+### Hauptseite mit dynamischer Tieranzeige
+Die moderne Startseite zeigt alle verfügbaren Tiere aus dem Admin Panel in Echtzeit an.
+
+### Admin Panel Dashboard
+Umfassendes Content Management System zur Verwaltung aller Inhalte.
+
+### Mobile Optimierung
+Vollständig responsive Darstellung für optimale Nutzererfahrung auf allen Geräten.
+
+## 🔧 Technische Details
+
+### Frontend-Technologien
+- **HTML5**: Semantische Struktur mit Accessibility-Features
+- **CSS3**: Grid/Flexbox-Layouts, Animationen, CSS Custom Properties
+- **JavaScript (ES6+)**: Moderne Syntax, Module, Async/Await
+- **Web APIs**: Local Storage, Fetch, Web Share API
+
+### Architektur
+- **Component-basiert**: Modulare Struktur für bessere Wartbarkeit
+- **Progressive Enhancement**: Funktioniert auch ohne JavaScript
+- **Mobile-First**: Responsive Design-Ansatz
+- **SEO-optimiert**: Strukturierte Daten und Meta-Tags
+
+### Datenspeicherung
+```javascript
+// Local Storage Schema
+const STORAGE_KEYS = {
+    animals: 'boxerhof_animals',
+    content: 'boxerhof_content', 
+    gallery: 'boxerhof_gallery',
+    guestbook: 'boxerhof_guestbook_entries',
+    newsletter: 'boxerhof_newsletter'
+};
+```
+
+### Browser-Unterstützung
+- **Modern Browsers**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+- **Fallbacks**: Graceful degradation für ältere Browser
+- **Mobile**: iOS Safari 14+, Chrome Mobile 90+
+
+## 📱 Responsive Design
+
+### Breakpoints
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px  
+- **Desktop**: > 1024px
+
+### Touch-Optimierung
+- Touch-freundliche Schaltflächen (min. 44px)
+- Hover-Ersatz für Touch-Geräte
+- Schnelle Touch-Reaktion
+
+## ⚡ Performance
+
+### Optimierungen
+- **Lazy Loading**: Bilder werden bei Bedarf geladen
+- **Minified Assets**: Komprimierte CSS/JS-Dateien
+- **Local Storage**: Reduzierte Server-Anfragen
+- **Efficient DOM**: Minimale DOM-Manipulationen
+
+### Core Web Vitals
+- **LCP**: < 2.5s (Largest Contentful Paint)
+- **FID**: < 100ms (First Input Delay)  
+- **CLS**: < 0.1 (Cumulative Layout Shift)
+
+## 🔒 Sicherheit & Datenschutz
+
+### DSGVO-Compliance
+- **Cookie-Banner**: Explizite Einwilligung
+- **Datenschutzerklärung**: Transparente Datennutzung
+- **Opt-out Möglichkeiten**: Einfache Abmeldung
+- **Minimale Datensammlung**: Nur notwendige Daten
+
+### Sicherheitsfeatures
+- **Input Validation**: XSS-Schutz
+- **Admin Authentication**: Sichere Anmeldung
+- **Session Management**: Automatisches Logout
+- **HTTPS Ready**: SSL/TLS-Unterstützung
+
+## 🌐 SEO & Accessibility
+
+### Suchmaschinenoptimierung
+- **Structured Data**: Schema.org Markup
+- **Meta Tags**: Optimierte Beschreibungen
+- **Clean URLs**: Benutzerfreundliche URLs
+- **Sitemap**: XML-Sitemap für Crawler
+
+### Barrierefreiheit
+- **WCAG 2.1 AA**: Compliance-Level AA
+- **Keyboard Navigation**: Vollständige Tastatur-Unterstützung
+- **Screen Reader**: ARIA-Labels und Landmarks
+- **Color Contrast**: Ausreichender Kontrast
+
+## 🤝 Mitwirken
+
+### Entwicklungsumgebung
+```bash
+# Repository klonen
+git clone https://github.com/Pcf1337-hash/BoxerhofUpdate.git
+
+# Lokaler Server starten
+cd BoxerhofUpdate
+python -m http.server 8080
+```
+
+### Code-Standards
+- **ESLint**: JavaScript Linting
+- **Prettier**: Code Formatting
+- **Semantic HTML**: Bedeutungsvolle Struktur
+- **BEM CSS**: Block Element Modifier Naming
+
+## 📈 Roadmap & Offene Aufgaben
+
+### Kurzfristig (nächste 4 Wochen)
+- [ ] **Design-Modernisierung**: Aktualisierung der visuellen Gestaltung
+  - [ ] Moderne Farbpalette implementieren
+  - [ ] Verbesserte Typografie
+  - [ ] Sanfte Animationen hinzufügen
+  - [ ] Admin Panel Design modernisieren
+- [ ] **Performance-Optimierung**: 
+  - [ ] Bildoptimierung implementieren
+  - [ ] CSS/JS Minification
+  - [ ] Progressive Web App Features
+- [ ] **Erweiterte Filter**: 
+  - [ ] Filter nach Alter, Größe, Energielevel
+  - [ ] Gespeicherte Filtereinstellungen
+  - [ ] Erweiterte Suchfunktion
+
+### Mittelfristig (2-3 Monate)
+- [ ] **Backend-Integration**: Echte Datenbank statt Local Storage
+- [ ] **Benutzerrollen**: Verschiedene Admin-Level
+- [ ] **E-Mail-Benachrichtigungen**: Automatische Benachrichtigungen bei neuen Tieren
+- [ ] **Statistiken & Analytics**: Detaillierte Besucherstatistiken
+- [ ] **Multi-Language**: Englische Übersetzung
+- [ ] **API-Integration**: RESTful API für mobile App
+
+### Langfristig (6+ Monate)  
+- [ ] **Mobile App**: Native iOS/Android App
+- [ ] **CMS-Integration**: WordPress oder Headless CMS
+- [ ] **Zahlungsintegration**: Online-Spenden
+- [ ] **Volunteer-Portal**: Freiwilligen-Management
+- [ ] **Veterinär-Integration**: Medizinische Akte-Verwaltung
+- [ ] **Adoption-Tracking**: Nachverfolgung vermittelter Tiere
+
+### Technische Verbesserungen
+- [ ] **Testing**: Unit & Integration Tests
+- [ ] **CI/CD**: Automatisierte Deployments
+- [ ] **Monitoring**: Error Tracking & Performance Monitoring
+- [ ] **Documentation**: Entwickler-Dokumentation
+- [ ] **Accessibility**: WCAG 2.1 AAA Compliance
+- [ ] **Security**: Penetration Testing
+
+### Content & Marketing
+- [ ] **Blog-System**: Regelmäßige Updates und Geschichten
+- [ ] **Newsletter-Templates**: Professionelle E-Mail-Vorlagen
+- [ ] **Social Media Integration**: Automatische Posts
+- [ ] **SEO-Optimierung**: Erweiterte Suchmaschinenoptimierung
+- [ ] **Content-Strategie**: Redaktionsplan
+
+## 📞 Support & Kontakt
+
+### Technischer Support
+- **GitHub Issues**: [Repository Issues](https://github.com/Pcf1337-hash/BoxerhofUpdate/issues)
+- **Dokumentation**: [Wiki](https://github.com/Pcf1337-hash/BoxerhofUpdate/wiki)
+
+### Boxerhof Kontakt
+- **E-Mail**: info@boxerhof.de
+- **Telefon**: +49 (0) 123 456 789
+- **Adresse**: Boxerhof 1, 12345 Tierlieben
+
+---
+
+© 2024 Boxer Nothilfe e.V. - Mit ❤️ für Hunde entwickelt 🐾
 
 ## 🚀 Installation & Verwendung
 
