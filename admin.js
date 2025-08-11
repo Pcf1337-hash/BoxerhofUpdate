@@ -202,8 +202,44 @@ function loadStoredData() {
                 age: '3 Jahre',
                 gender: 'male',
                 status: 'available',
-                description: 'Max ist ein freundlicher Boxer, der gerne spielt und kuschelt.',
-                image: 'https://via.placeholder.com/300x200?text=Max+der+Boxer'
+                description: 'Max ist ein freundlicher Boxer, der gerne spielt und kuschelt. Er liebt lange Spaziergänge und ist sehr gut mit Kindern.',
+                image: 'https://via.placeholder.com/300x200?text=Max+der+Boxer',
+                size: 'large',
+                weight: '30 kg',
+                color: 'Braun-weiß',
+                vaccinated: 'yes',
+                neutered: 'yes',
+                goodWith: {
+                    dogs: true,
+                    children: true
+                },
+                energyLevel: 'medium',
+                trainingLevel: 'basic',
+                adoptionFee: 350
+            },
+            {
+                id: 2,
+                name: 'Luna',
+                type: 'dog',
+                breed: 'Mischling',
+                age: '2 Jahre',
+                gender: 'female',
+                status: 'available',
+                description: 'Luna ist eine sanfte und liebevolle Hündin, die eine ruhige Familie sucht. Sie ist sehr verschmust und anhänglich.',
+                image: 'https://via.placeholder.com/300x200?text=Luna+die+Mischlingshündin',
+                size: 'medium',
+                weight: '22 kg',
+                color: 'Schwarz-braun',
+                vaccinated: 'yes',
+                neutered: 'yes',
+                goodWith: {
+                    dogs: false,
+                    children: true
+                },
+                energyLevel: 'low',
+                trainingLevel: 'advanced',
+                adoptionFee: 250,
+                specialNeeds: 'Braucht als Einzelhund ein ruhiges Zuhause ohne andere Hunde.'
             }
         ];
         saveAnimals();

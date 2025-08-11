@@ -91,48 +91,36 @@
 
         <section id="animals" class="animals">
             <div class="container">
-                <h2>Unsere Hunde</h2>
+                <h2>Unsere Hunde zur Vermittlung</h2>
                 <p class="section-subtitle">Lernen Sie die wunderbaren Hunde kennen, die auf ein neues Zuhause warten</p>
-                <div class="animals-grid">
-                    <div class="animal-card">
-                        <div class="animal-icon">🐕</div>
-                        <h3>Boxer</h3>
-                        <p>Unsere geliebten Boxer sind das Herz des Hofes. Diese treuen Begleiter kommen oft aus schwierigen Verhältnissen und brauchen besondere Zuwendung.</p>
-                        <div class="animal-share">
-                            <button class="share-btn" data-animal="Boxer" data-description="Unsere geliebten Boxer sind das Herz des Hofes">
-                                📤 Teilen
-                            </button>
+                
+                <!-- Dog filter controls -->
+                <div class="animals-controls">
+                    <div class="search-filter">
+                        <input type="text" id="dogSearch" placeholder="Hunde suchen..." class="search-input">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">Alle</button>
+                            <button class="filter-btn" data-filter="small">Klein</button>
+                            <button class="filter-btn" data-filter="medium">Mittel</button>
+                            <button class="filter-btn" data-filter="large">Groß</button>
                         </div>
                     </div>
-                    <div class="animal-card">
-                        <div class="animal-icon">🦮</div>
-                        <h3>Mischlingshunde</h3>
-                        <p>Auch Mischlinge finden bei uns Schutz und Pflege. Jeder Hund ist einzigartig und verdient eine zweite Chance auf ein glückliches Leben.</p>
-                        <div class="animal-share">
-                            <button class="share-btn" data-animal="Mischlingshunde" data-description="Mischlinge die eine zweite Chance verdienen">
-                                📤 Teilen
-                            </button>
-                        </div>
+                </div>
+                
+                <!-- Available dogs will be loaded here -->
+                <div id="dogsContainer" class="dogs-grid">
+                    <div class="loading-message">
+                        <p>Lade verfügbare Hunde...</p>
                     </div>
-                    <div class="animal-card">
-                        <div class="animal-icon">🐕‍🦺</div>
-                        <h3>Senior-Hunde</h3>
-                        <p>Ältere Hunde brauchen besondere Aufmerksamkeit und medizinische Versorgung. Wir geben ihnen die Ruhe und Pflege, die sie verdienen.</p>
-                        <div class="animal-share">
-                            <button class="share-btn" data-animal="Senior-Hunde" data-description="Ältere Hunde die besondere Pflege brauchen">
-                                📤 Teilen
-                            </button>
-                        </div>
-                    </div>
-                    <div class="animal-card">
-                        <div class="animal-icon">🐶</div>
-                        <h3>Welpen & Junghunde</h3>
-                        <p>Junge Hunde benötigen viel Aufmerksamkeit, Training und Sozialisation. Wir bereiten sie optimal auf ihr neues Leben vor.</p>
-                        <div class="animal-share">
-                            <button class="share-btn" data-animal="Welpen" data-description="Junge Hunde die eine liebevolle Familie suchen">
-                                📤 Teilen
-                            </button>
-                        </div>
+                </div>
+                
+                <!-- Fallback message when no dogs available -->
+                <div id="noDogs" class="no-dogs" style="display: none;">
+                    <div class="no-dogs-content">
+                        <div class="no-dogs-icon">🐾</div>
+                        <h3>Momentan keine Hunde zur Vermittlung</h3>
+                        <p>Derzeit haben wir keine Hunde, die zur Vermittlung bereit sind. Bitte schauen Sie bald wieder vorbei oder kontaktieren Sie uns für weitere Informationen.</p>
+                        <a href="#contact" class="btn btn-primary">Kontakt aufnehmen</a>
                     </div>
                 </div>
             </div>
