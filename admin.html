@@ -41,6 +41,8 @@
                     <button class="tab-btn" data-tab="content">Inhalte</button>
                     <button class="tab-btn" data-tab="animals">Hunde</button>
                     <button class="tab-btn" data-tab="gallery">Galerie</button>
+                    <button class="tab-btn" data-tab="guestbook">Gästebuch</button>
+                    <button class="tab-btn" data-tab="events">Veranstaltungen</button>
                 </nav>
                 <button id="logoutBtn" class="btn btn-secondary">Abmelden</button>
             </div>
@@ -402,6 +404,191 @@
 
                     <div id="galleryGrid" class="gallery-grid">
                         <!-- Gallery images will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guestbook Management Tab -->
+            <div id="guestbook" class="tab-content">
+                <div class="admin-container">
+                    <h2>📝 Gästebuch verwalten</h2>
+                    
+                    <div class="guestbook-stats">
+                        <div class="stat-row">
+                            <div class="stat-card">
+                                <h3>⏳ Warteschlange</h3>
+                                <div class="stat-number" id="pendingEntries">0</div>
+                                <p>Zu moderierende Einträge</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>✅ Veröffentlicht</h3>
+                                <div class="stat-number" id="approvedEntries">0</div>
+                                <p>Freigeschaltete Einträge</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>❌ Abgelehnt</h3>
+                                <div class="stat-number" id="rejectedEntries">0</div>
+                                <p>Abgelehnte Einträge</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="guestbook-filters">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-status="all">Alle</button>
+                            <button class="filter-btn" data-status="pending">Warteschlange</button>
+                            <button class="filter-btn" data-status="approved">Veröffentlicht</button>
+                            <button class="filter-btn" data-status="rejected">Abgelehnt</button>
+                        </div>
+                        <div class="search-box">
+                            <input type="text" id="guestbookSearch" placeholder="Einträge suchen..." class="search-input">
+                            <span class="search-icon">🔍</span>
+                        </div>
+                    </div>
+
+                    <div id="guestbookEntries" class="guestbook-entries-admin">
+                        <!-- Guestbook entries will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events Management Tab -->
+            <div id="events" class="tab-content">
+                <div class="admin-container">
+                    <h2>📅 Veranstaltungen verwalten</h2>
+                    
+                    <div class="events-header">
+                        <button id="addEventBtn" class="btn btn-primary">
+                            <span>📅</span> Neue Veranstaltung erstellen
+                        </button>
+                        <div class="events-stats">
+                            <span class="stat">Kommende: <strong id="upcomingEventsCount">0</strong></span>
+                            <span class="stat">Vergangene: <strong id="pastEventsCount">0</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="events-filters">
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">Alle Events</button>
+                            <button class="filter-btn" data-filter="upcoming">Kommende</button>
+                            <button class="filter-btn" data-filter="past">Vergangene</button>
+                            <button class="filter-btn" data-filter="draft">Entwürfe</button>
+                        </div>
+                        <div class="search-box">
+                            <input type="text" id="eventsSearch" placeholder="Events suchen..." class="search-input">
+                            <span class="search-icon">🔍</span>
+                        </div>
+                    </div>
+
+                    <div id="eventsList" class="events-list-admin">
+                        <!-- Events will be loaded here -->
+                    </div>
+
+                    <!-- Add/Edit Event Modal -->
+                    <div id="eventModal" class="modal">
+                        <div class="modal-content large-modal">
+                            <span class="close">&times;</span>
+                            <h3 id="eventModalTitle">Veranstaltung erstellen</h3>
+                            <form id="eventForm">
+                                <input type="hidden" id="eventId" name="id">
+                                
+                                <div class="form-section">
+                                    <h4>Grundinformationen</h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="eventTitle">Titel *</label>
+                                            <input type="text" id="eventTitle" name="title" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eventStatus">Status</label>
+                                            <select id="eventStatus" name="status" required>
+                                                <option value="draft">Entwurf</option>
+                                                <option value="published">Veröffentlicht</option>
+                                                <option value="cancelled">Abgesagt</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eventDescription">Beschreibung *</label>
+                                        <textarea id="eventDescription" name="description" rows="4" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>Datum und Zeit</h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="eventDate">Datum *</label>
+                                            <input type="date" id="eventDate" name="date" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eventTime">Uhrzeit</label>
+                                            <input type="time" id="eventTime" name="time">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="eventEndDate">Enddatum (optional)</label>
+                                            <input type="date" id="eventEndDate" name="endDate">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eventEndTime">Endzeit</label>
+                                            <input type="time" id="eventEndTime" name="endTime">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>Ort und Details</h4>
+                                    <div class="form-group">
+                                        <label for="eventLocation">Veranstaltungsort</label>
+                                        <input type="text" id="eventLocation" name="location" placeholder="z.B. Boxerhof, Hauptplatz 1">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="eventCapacity">Teilnehmerzahl (max.)</label>
+                                            <input type="number" id="eventCapacity" name="capacity" min="0">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eventPrice">Kosten (€)</label>
+                                            <input type="number" id="eventPrice" name="price" step="0.01" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>Anmeldung</h4>
+                                    <div class="form-group checkbox-group">
+                                        <label>
+                                            <input type="checkbox" id="eventRegistrationRequired" name="registrationRequired">
+                                            <span class="checkmark"></span>
+                                            Anmeldung erforderlich
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eventRegistrationDeadline">Anmeldeschluss</label>
+                                        <input type="date" id="eventRegistrationDeadline" name="registrationDeadline">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eventContactInfo">Kontakt für Anmeldungen</label>
+                                        <input type="text" id="eventContactInfo" name="contactInfo" placeholder="E-Mail oder Telefon">
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>Medien</h4>
+                                    <div class="form-group">
+                                        <label for="eventImage">Bild URL</label>
+                                        <input type="url" id="eventImage" name="image" placeholder="https://...">
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Speichern</button>
+                                    <button type="button" class="btn btn-secondary" onclick="closeEventModal()">Abbrechen</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
