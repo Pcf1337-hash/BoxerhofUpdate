@@ -1,5 +1,16 @@
+// Shared Local Storage keys (shared with admin panel)
+const MAIN_STORAGE_KEYS = {
+    animals: 'boxerhof_animals',
+    content: 'boxerhof_content',
+    gallery: 'boxerhof_gallery'
+};
+
 // Mobile Navigation Toggle
 document.addEventListener('DOMContentLoaded', function() {
+    // Load dynamic content
+    loadDynamicAnimals();
+    
+    // Initialize existing functionality
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
     
@@ -582,6 +593,247 @@ function fallbackCopyToClipboard(text) {
 
 // Initialize social sharing when DOM is ready
 document.addEventListener('DOMContentLoaded', setupSocialSharing);
+
+// Dynamic Animals Loading
+function loadDynamicAnimals() {
+    const animalsGrid = document.querySelector('.animals-grid');
+    if (!animalsGrid) return;
+    
+    try {
+        const storedAnimals = localStorage.getItem(MAIN_STORAGE_KEYS.animals);
+        let animals = storedAnimals ? JSON.parse(storedAnimals) : [];
+        
+        // Filter only available animals for public display
+        animals = animals.filter(animal => animal.status === 'available');
+        
+        if (animals.length === 0) {
+            // Keep static content if no dynamic animals are available
+            return;
+        }
+        
+        // Clear existing static content and add dynamic animals
+        animalsGrid.innerHTML = '';
+        
+        // Add filter/sort controls
+        const filterControls = createAnimalFilters(animals);
+        const animalsSection = document.getElementById('animals');
+        const subtitle = animalsSection.querySelector('.section-subtitle');
+        subtitle.insertAdjacentHTML('afterend', filterControls);
+        
+        // Display animals
+        displayPublicAnimals(animals);
+        
+        // Setup filter event listeners
+        setupAnimalFilters(animals);
+        
+    } catch (error) {
+        console.error('Error loading dynamic animals:', error);
+        // Keep static content on error
+    }
+}
+
+function createAnimalFilters(animals) {
+    // Get unique breeds for filter
+    const breeds = [...new Set(animals.map(animal => animal.breed).filter(Boolean))];
+    
+    return `
+        <div class="animals-filters">
+            <div class="filter-group">
+                <label for="breed-filter">Nach Rasse filtern:</label>
+                <select id="breed-filter" class="filter-select">
+                    <option value="">Alle Rassen</option>
+                    ${breeds.map(breed => `<option value="${breed}">${breed}</option>`).join('')}
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="sort-animals">Sortieren nach:</label>
+                <select id="sort-animals" class="filter-select">
+                    <option value="name">Name (A-Z)</option>
+                    <option value="age">Alter (jüngste zuerst)</option>
+                    <option value="arrival">Ankunft (neueste zuerst)</option>
+                </select>
+            </div>
+            <div class="animals-count">
+                <span id="animals-count">${animals.length}</span> Hunde warten auf ein neues Zuhause
+            </div>
+        </div>
+    `;
+}
+
+function displayPublicAnimals(animals) {
+    const animalsGrid = document.querySelector('.animals-grid');
+    if (!animalsGrid) return;
+    
+    if (animals.length === 0) {
+        animalsGrid.innerHTML = `
+            <div class="no-animals-message">
+                <div class="no-animals-icon">🐕</div>
+                <h3>Aktuell keine Hunde zur Vermittlung</h3>
+                <p>Alle unsere Hunde haben bereits ein liebevolles Zuhause gefunden! Schauen Sie bald wieder vorbei oder kontaktieren Sie uns für weitere Informationen.</p>
+                <a href="#contact" class="btn btn-primary">Kontakt aufnehmen</a>
+            </div>
+        `;
+        return;
+    }
+    
+    animalsGrid.innerHTML = animals.map(animal => createPublicAnimalCard(animal)).join('');
+    
+    // Update animals count
+    const countElement = document.getElementById('animals-count');
+    if (countElement) {
+        countElement.textContent = animals.length;
+    }
+}
+
+function createPublicAnimalCard(animal) {
+    const genderIcon = animal.gender === 'male' ? '♂️' : '♀️';
+    const sizeText = {
+        small: 'Klein',
+        medium: 'Mittel', 
+        large: 'Groß'
+    }[animal.size] || '';
+    
+    const energyText = {
+        low: 'Ruhig',
+        medium: 'Ausgeglichen',
+        high: 'Aktiv'
+    }[animal.energyLevel] || '';
+    
+    // Health indicators
+    const healthBadges = [];
+    if (animal.vaccinated === 'yes') healthBadges.push('💉 Geimpft');
+    if (animal.neutered === 'yes') healthBadges.push('🏥 Kastriert');
+    
+    // Compatibility indicators
+    const compatibilityItems = [];
+    if (animal.goodWith?.dogs) compatibilityItems.push('🐕 Hunde');
+    if (animal.goodWith?.children) compatibilityItems.push('👶 Kinder');
+    
+    // Calculate days since arrival
+    let daysSinceArrival = '';
+    if (animal.arrivalDate) {
+        const arrivalDate = new Date(animal.arrivalDate);
+        const today = new Date();
+        const diffTime = Math.abs(today - arrivalDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        daysSinceArrival = `Seit ${diffDays} Tagen bei uns`;
+    }
+    
+    return `
+        <div class="animal-card dynamic" data-id="${animal.id}" data-breed="${animal.breed}" data-age="${animal.age}" data-arrival="${animal.arrivalDate}">
+            <div class="animal-image">
+                ${animal.image ? 
+                    `<img src="${animal.image}" alt="${animal.name}" class="animal-photo" onerror="this.style.display='none';">` : 
+                    `<div class="animal-icon">${getAnimalIcon(animal.breed)}</div>`
+                }
+                ${animal.adoptionFee ? `<div class="adoption-fee">Schutzgebühr: ${animal.adoptionFee}€</div>` : ''}
+            </div>
+            <div class="animal-content">
+                <div class="animal-header">
+                    <h3>${animal.name} ${genderIcon}</h3>
+                    <div class="animal-meta">
+                        <span class="breed">${animal.breed}</span>
+                        <span class="age">${animal.age}</span>
+                        ${sizeText ? `<span class="size">${sizeText}</span>` : ''}
+                        ${animal.weight ? `<span class="weight">${animal.weight}</span>` : ''}
+                    </div>
+                </div>
+                
+                <p class="animal-description">${animal.description}</p>
+                
+                ${energyText ? `<div class="energy-level"><strong>Energielevel:</strong> ${energyText}</div>` : ''}
+                
+                ${healthBadges.length > 0 ? `<div class="health-badges">${healthBadges.join(' • ')}</div>` : ''}
+                
+                ${compatibilityItems.length > 0 ? `<div class="compatibility"><strong>Verträglich mit:</strong> ${compatibilityItems.join(', ')}</div>` : ''}
+                
+                ${animal.specialNeeds ? `<div class="special-needs"><strong>Besondere Bedürfnisse:</strong> ${animal.specialNeeds}</div>` : ''}
+                
+                ${daysSinceArrival ? `<div class="arrival-info">${daysSinceArrival}</div>` : ''}
+                
+                <div class="animal-actions">
+                    <button class="btn btn-primary contact-btn" onclick="contactAboutAnimal('${animal.name}', '${animal.id}')">
+                        💝 Interesse zeigen
+                    </button>
+                    <button class="share-btn" data-animal="${animal.name}" data-description="${animal.description}">
+                        📤 Teilen
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function getAnimalIcon(breed) {
+    const breedLower = breed?.toLowerCase() || '';
+    if (breedLower.includes('boxer')) return '🥊';
+    if (breedLower.includes('schäfer')) return '🐕‍🦺';
+    if (breedLower.includes('retriever')) return '🦮';
+    if (breedLower.includes('terrier')) return '🐕';
+    return '🐶';
+}
+
+function setupAnimalFilters(allAnimals) {
+    const breedFilter = document.getElementById('breed-filter');
+    const sortSelect = document.getElementById('sort-animals');
+    
+    if (breedFilter) {
+        breedFilter.addEventListener('change', () => filterAndSortAnimals(allAnimals));
+    }
+    
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => filterAndSortAnimals(allAnimals));
+    }
+}
+
+function filterAndSortAnimals(allAnimals) {
+    const breedFilter = document.getElementById('breed-filter');
+    const sortSelect = document.getElementById('sort-animals');
+    
+    let filteredAnimals = [...allAnimals];
+    
+    // Apply breed filter
+    if (breedFilter && breedFilter.value) {
+        filteredAnimals = filteredAnimals.filter(animal => animal.breed === breedFilter.value);
+    }
+    
+    // Apply sorting
+    if (sortSelect) {
+        const sortBy = sortSelect.value;
+        filteredAnimals.sort((a, b) => {
+            switch (sortBy) {
+                case 'name':
+                    return a.name.localeCompare(b.name);
+                case 'age':
+                    // Parse age to number for sorting (assuming format like "3 Jahre")
+                    const ageA = parseInt(a.age) || 0;
+                    const ageB = parseInt(b.age) || 0;
+                    return ageA - ageB;
+                case 'arrival':
+                    const dateA = new Date(a.arrivalDate || 0);
+                    const dateB = new Date(b.arrivalDate || 0);
+                    return dateB - dateA; // newest first
+                default:
+                    return 0;
+            }
+        });
+    }
+    
+    displayPublicAnimals(filteredAnimals);
+}
+
+function contactAboutAnimal(animalName, animalId) {
+    const subject = `Interesse an ${animalName}`;
+    const body = `Hallo,\n\nich interessiere mich für ${animalName} und würde gerne mehr Informationen erhalten.\n\nTier-ID: ${animalId}\n\nVielen Dank!`;
+    
+    const mailtoLink = `mailto:info@boxerhof.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Try to open email client
+    window.location.href = mailtoLink;
+    
+    // Show confirmation message
+    showNotification(`Ihr E-Mail-Programm wird geöffnet um Interesse an ${animalName} zu bekunden.`, 'info');
+}
 
 // Guestbook functionality
 const GuestbookManager = {
