@@ -56,11 +56,15 @@ minify_js() {
 minify_css "style.css" "dist/style.min.css"
 minify_css "admin-style.css" "dist/admin-style.min.css"
 minify_css "enhancements.css" "dist/enhancements.min.css"
+minify_css "modern-design.css" "dist/modern-design.min.css"
 
 # Minify JavaScript files
 minify_js "script.js" "dist/script.min.js"
 minify_js "admin.js" "dist/admin.min.js"
 minify_js "performance-enhancements.js" "dist/performance-enhancements.min.js"
+minify_js "image-optimization.js" "dist/image-optimization.min.js"
+minify_js "animal-filter-system.js" "dist/animal-filter-system.min.js"
+minify_js "pwa-enhancement.js" "dist/pwa-enhancement.min.js"
 
 # Update HTML files to use minified versions
 echo "🔗 Updating HTML references to minified files..."
@@ -68,14 +72,18 @@ echo "🔗 Updating HTML references to minified files..."
 sed -i 's/style\.css/style.min.css/g' dist/index.html
 sed -i 's/admin-style\.css/admin-style.min.css/g' dist/index.html dist/admin.html
 sed -i 's/enhancements\.css/enhancements.min.css/g' dist/index.html dist/admin.html
+sed -i 's/modern-design\.css/modern-design.min.css/g' dist/index.html dist/admin.html
 sed -i 's/script\.js/script.min.js/g' dist/index.html dist/admin.html
 sed -i 's/admin\.js/admin.min.js/g' dist/admin.html
 sed -i 's/performance-enhancements\.js/performance-enhancements.min.js/g' dist/index.html dist/admin.html
+sed -i 's/image-optimization\.js/image-optimization.min.js/g' dist/index.html dist/admin.html
+sed -i 's/animal-filter-system\.js/animal-filter-system.min.js/g' dist/index.html dist/admin.html
+sed -i 's/pwa-enhancement\.js/pwa-enhancement.min.js/g' dist/index.html dist/admin.html
 
 # Calculate file sizes
 echo "📊 Build Statistics:"
 echo "Original sizes:"
-for file in style.css admin-style.css enhancements.css script.js admin.js performance-enhancements.js; do
+for file in style.css admin-style.css enhancements.css modern-design.css script.js admin.js performance-enhancements.js image-optimization.js animal-filter-system.js pwa-enhancement.js; do
     if [ -f "$file" ]; then
         size=$(wc -c < "$file")
         echo "   $file: ${size} bytes"
