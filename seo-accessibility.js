@@ -562,7 +562,8 @@ class AccessibilityEnhancer {
         this.addSkipLinks();
         this.improveAriaLabels();
         this.setupFocusManagement();
-        this.addHighContrastMode();
+        // Contrast button removed as requested - not needed
+        // this.addHighContrastMode();
         console.log('♿ Accessibility enhancements initialized');
     }
 

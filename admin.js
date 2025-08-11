@@ -111,9 +111,9 @@ function setupEventListeners() {
         });
     });
     
-    // Click outside modal to close
+    // Click outside modal to close (but not for login modal)
     window.addEventListener('click', (e) => {
-        if (e.target.classList.contains('modal')) {
+        if (e.target.classList.contains('modal') && e.target.id !== 'loginModal') {
             e.target.style.display = 'none';
         }
     });
