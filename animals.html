@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Unsere Hunde zur Vermittlung - Lernen Sie die Hunde kennen, die ein neues Zuhause suchen">
+    <title>Unsere Hunde - Boxerhof Bad Oeynhausen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="boxerhof-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e67e22">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Boxerhof">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>🏡 Boxerhof Bad Oeynhausen</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="animals.html" class="active">Unsere Hunde</a></li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="pension.html">Pension</a></li>
+                    <li><a href="adoption.html">Vermittlung</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                    <li><a href="support.html">Unterstützen</a></li>
+                    <li><a href="admin.html" class="admin-link">🔧 Admin</a></li>
+                </ul>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Unsere Hunde zur Vermittlung</h1>
+                    <p class="hero-subtitle">Lernen Sie unsere wunderbaren Hunde kennen, die ein liebevolles Zuhause suchen</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animals Section -->
+        <section class="animals-main">
+            <div class="container">
+                <!-- Filter and Search -->
+                <div class="animals-controls">
+                    <div class="search-section">
+                        <div class="search-box">
+                            <input type="text" id="animalSearch" placeholder="Hunde suchen..." />
+                            <button class="search-btn">🔍</button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <div class="filter-group">
+                            <label for="raceFilter">Nach Rasse filtern:</label>
+                            <select id="raceFilter">
+                                <option value="all">Alle Rassen</option>
+                                <option value="boxer">Boxer</option>
+                                <option value="labrador">Labrador</option>
+                                <option value="mischling">Mischling</option>
+                                <option value="schaeferhund">Schäferhund</option>
+                                <option value="golden-retriever">Golden Retriever</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="sizeFilter">Nach Größe:</label>
+                            <select id="sizeFilter">
+                                <option value="all">Alle Größen</option>
+                                <option value="klein">Klein (bis 30cm)</option>
+                                <option value="mittel">Mittel (30-60cm)</option>
+                                <option value="gross">Groß (über 60cm)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="ageFilter">Nach Alter:</label>
+                            <select id="ageFilter">
+                                <option value="all">Alle Altersgruppen</option>
+                                <option value="welpe">Welpe (bis 1 Jahr)</option>
+                                <option value="jung">Jung (1-3 Jahre)</option>
+                                <option value="adult">Erwachsen (3-7 Jahre)</option>
+                                <option value="senior">Senior (über 7 Jahre)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="sortFilter">Sortieren nach:</label>
+                            <select id="sortFilter">
+                                <option value="name">Name (A-Z)</option>
+                                <option value="age-asc">Alter (jüngste zuerst)</option>
+                                <option value="age-desc">Alter (älteste zuerst)</option>
+                                <option value="arrival">Ankunft (neueste zuerst)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Info -->
+                <div class="results-info">
+                    <span id="resultsCount">Lade Hunde...</span>
+                    <button id="clearFilters" class="btn btn-small btn-outline">Filter zurücksetzen</button>
+                </div>
+
+                <!-- Animals Grid -->
+                <div class="animals-grid" id="animalsContainer">
+                    <!-- Animals will be loaded dynamically -->
+                    <div class="loading-message">
+                        <div class="loading-icon">🐕</div>
+                        <p>Lade unsere Hunde...</p>
+                    </div>
+                </div>
+
+                <!-- No Results Message -->
+                <div id="noResults" class="no-results" style="display: none;">
+                    <div class="no-results-icon">🔍</div>
+                    <h3>Keine Hunde gefunden</h3>
+                    <p>Mit den aktuellen Filtereinstellungen wurden keine Hunde gefunden.</p>
+                    <button onclick="clearAllFilters()" class="btn btn-primary">Filter zurücksetzen</button>
+                </div>
+
+                <!-- Emergency Dogs Section -->
+                <div class="emergency-section">
+                    <div class="emergency-header">
+                        <h2>🚨 Notfälle - Dringend Hilfe benötigt</h2>
+                        <p>Diese Hunde benötigen besonders dringend unsere Hilfe</p>
+                    </div>
+                    <div id="emergencyAnimals" class="emergency-grid">
+                        <!-- Emergency animals will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2>🐕 Über neue Hunde informiert bleiben</h2>
+                        <p class="newsletter-lead">
+                            Erfahren Sie als Erste, wenn ein neuer Hund bei uns ankommt!
+                        </p>
+                        <p>
+                            Melden Sie sich für unseren Newsletter an und erhalten Sie sofort eine 
+                            Benachrichtigung, wenn neue Hunde bei uns ankommen oder erfolgreich 
+                            vermittelt werden.
+                        </p>
+                    </div>
+                    <div class="newsletter-form-wrapper">
+                        <form class="newsletter-form" id="newsletterForm">
+                            <h3>✉️ Newsletter abonnieren</h3>
+                            <div class="form-group">
+                                <label for="newsletter-name">Name (optional)</label>
+                                <input type="text" id="newsletter-name" name="name" placeholder="Ihr Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="newsletter-email">E-Mail-Adresse *</label>
+                                <input type="email" id="newsletter-email" name="email" required placeholder="ihre@email.de">
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="gdpr" required>
+                                    <span class="checkbox-text">
+                                        Ich stimme zu, dass meine E-Mail-Adresse für Newsletter-Zwecke gespeichert wird. 
+                                        <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>
+                                    </span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary newsletter-btn">
+                                📧 Newsletter abonnieren
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Adoption Process Teaser -->
+        <section class="adoption-teaser">
+            <div class="container">
+                <div class="teaser-content">
+                    <h2>Interesse an einem unserer Hunde?</h2>
+                    <p>
+                        Erfahren Sie mehr über unseren Vermittlungsprozess und wie Sie einem 
+                        unserer Hunde ein liebevolles Zuhause geben können.
+                    </p>
+                    <div class="teaser-buttons">
+                        <a href="adoption.html" class="btn btn-primary">Vermittlungsprozess</a>
+                        <a href="contact.html" class="btn btn-secondary">Kontakt aufnehmen</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏡 Boxerhof Bad Oeynhausen</h3>
+                    <p>Ein liebevolles Zuhause für Hunde in Not</p>
+                    <p class="footer-motto">Mit Herz und Hingabe für jedes Tier</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="animals.html">Unsere Hunde</a></li>
+                        <li><a href="pension.html">Pension</a></li>
+                        <li><a href="adoption.html">Vermittlung</a></li>
+                        <li><a href="gallery.html">Galerie</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>📧 info@boxerhof-badoeynhausen.de</p>
+                    <p>📞 +49 (0) 5731 923 4567</p>
+                    <p>📍 Boxerhof 1, 32547 Bad Oeynhausen</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Unterstützen</h4>
+                    <p>Helfen Sie uns dabei, mehr Hunden zu helfen:</p>
+                    <a href="support.html" class="btn btn-small btn-outline">Spenden</a>
+                    <div class="social-links">
+                        <a href="https://facebook.com/boxerhof" target="_blank" rel="noopener">
+                            📘 Facebook
+                        </a>
+                        <a href="mailto:info@boxerhof-badoeynhausen.de">
+                            ✉️ E-Mail
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boxerhof Bad Oeynhausen. Teil der Boxer Nothilfe e.V. Mit Liebe für Hunde gemacht. 🐾</p>
+                <div class="footer-legal">
+                    <a href="impressum.html">Impressum</a>
+                    <a href="datenschutz.html">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Animal Detail Modal -->
+    <div id="animalModal" class="animal-modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeAnimalModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAnimalModal()">×</button>
+            <div class="modal-body" id="animalModalContent">
+                <!-- Animal details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="newsletter-system.js"></script>
+    <script src="animal-filter-system.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Animals page specific functionality
+        let allAnimals = [];
+        let filteredAnimals = [];
+
+        // Load animals on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAnimals();
+            setupFilters();
+        });
+
+        function loadAnimals() {
+            // Load animals from localStorage (from admin panel)
+            const storedAnimals = localStorage.getItem('boxerhof_animals');
+            if (storedAnimals) {
+                try {
+                    allAnimals = JSON.parse(storedAnimals);
+                } catch (error) {
+                    console.error('Error loading animals:', error);
+                    allAnimals = [];
+                }
+            }
+
+            // If no animals in storage, use demo data
+            if (allAnimals.length === 0) {
+                allAnimals = getDemoAnimals();
+            }
+
+            filteredAnimals = [...allAnimals];
+            displayAnimals();
+            updateResultsCount();
+        }
+
+        function getDemoAnimals() {
+            return [
+                {
+                    id: 1,
+                    name: "Max",
+                    type: "Hund",
+                    breed: "Boxer",
+                    age: "3 Jahre",
+                    gender: "Männlich",
+                    size: "Groß",
+                    description: "Max ist ein freundlicher und verspielter Boxer, der gerne spielt und kuschelt. Er ist sehr sozial und versteht sich gut mit anderen Hunden.",
+                    status: "Vermittlungsbereit",
+                    arrivalDate: "2024-01-15",
+                    energyLevel: "Hoch",
+                    goodWith: {
+                        dogs: true,
+                        children: true,
+                        cats: false
+                    },
+                    isEmergency: false
+                },
+                {
+                    id: 2,
+                    name: "Bella",
+                    type: "Hund",
+                    breed: "Labrador Mix",
+                    age: "5 Jahre",
+                    gender: "Weiblich",
+                    size: "Mittel",
+                    description: "Bella ist eine ruhige und liebevolle Hündin, die perfekt für eine Familie geeignet ist. Sie liebt lange Spaziergänge und ist sehr gehorsam.",
+                    status: "Vermittlungsbereit",
+                    arrivalDate: "2024-02-01",
+                    energyLevel: "Mittel",
+                    goodWith: {
+                        dogs: true,
+                        children: true,
+                        cats: true
+                    },
+                    isEmergency: false
+                },
+                {
+                    id: 3,
+                    name: "Charlie",
+                    type: "Hund",
+                    breed: "Mischling",
+                    age: "8 Jahre",
+                    gender: "Männlich",
+                    size: "Klein",
+                    description: "Charlie ist ein ruhiger Senior-Hund, der ein gemütliches Zuhause für seine goldenen Jahre sucht. Er ist sehr verschmust und dankbar.",
+                    status: "Vermittlungsbereit",
+                    arrivalDate: "2024-01-20",
+                    energyLevel: "Niedrig",
+                    goodWith: {
+                        dogs: true,
+                        children: false,
+                        cats: true
+                    },
+                    isEmergency: true
+                }
+            ];
+        }
+
+        function displayAnimals() {
+            const container = document.getElementById('animalsContainer');
+            const emergencyContainer = document.getElementById('emergencyAnimals');
+            
+            if (filteredAnimals.length === 0) {
+                container.innerHTML = '';
+                document.getElementById('noResults').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('noResults').style.display = 'none';
+
+            // Regular animals
+            const regularAnimals = filteredAnimals.filter(animal => !animal.isEmergency);
+            container.innerHTML = regularAnimals.map(animal => createAnimalCard(animal)).join('');
+
+            // Emergency animals
+            const emergencyAnimals = filteredAnimals.filter(animal => animal.isEmergency);
+            if (emergencyAnimals.length > 0) {
+                emergencyContainer.innerHTML = emergencyAnimals.map(animal => createAnimalCard(animal, true)).join('');
+                document.querySelector('.emergency-section').style.display = 'block';
+            } else {
+                document.querySelector('.emergency-section').style.display = 'none';
+            }
+        }
+
+        function createAnimalCard(animal, isEmergency = false) {
+            const compatibility = [];
+            if (animal.goodWith?.dogs) compatibility.push('Hunden');
+            if (animal.goodWith?.children) compatibility.push('Kindern');
+            if (animal.goodWith?.cats) compatibility.push('Katzen');
+            
+            const compatibilityText = compatibility.length > 0 ? compatibility.join(', ') : 'Keine Angaben';
+            const genderIcon = animal.gender === 'Männlich' ? '♂️' : '♀️';
+            const emergencyClass = isEmergency ? 'emergency-card' : '';
+
+            return `
+                <div class="animal-card ${emergencyClass}" onclick="showAnimalDetails(${animal.id})">
+                    ${isEmergency ? '<div class="emergency-badge">🚨 Notfall</div>' : ''}
+                    <div class="animal-image">
+                        <div class="image-placeholder">
+                            <span class="placeholder-icon">🐕</span>
+                        </div>
+                    </div>
+                    <div class="animal-info">
+                        <h3>${animal.name} ${genderIcon}</h3>
+                        <div class="animal-meta">
+                            <span class="breed">${animal.breed}</span>
+                            <span class="age">${animal.age}</span>
+                            <span class="size">${animal.size}</span>
+                        </div>
+                        <p class="animal-description">${animal.description}</p>
+                        <div class="animal-compatibility">
+                            <strong>Verträglich mit:</strong> ${compatibilityText}
+                        </div>
+                        <div class="animal-actions">
+                            <button class="btn btn-primary btn-small" onclick="event.stopPropagation(); showInterest(${animal.id})">
+                                💝 Interesse zeigen
+                            </button>
+                            <button class="btn btn-outline btn-small" onclick="event.stopPropagation(); shareAnimal(${animal.id})">
+                                📤 Teilen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function setupFilters() {
+            const filters = ['raceFilter', 'sizeFilter', 'ageFilter', 'sortFilter'];
+            filters.forEach(filterId => {
+                document.getElementById(filterId).addEventListener('change', applyFilters);
+            });
+
+            document.getElementById('animalSearch').addEventListener('input', applyFilters);
+            document.getElementById('clearFilters').addEventListener('click', clearAllFilters);
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('animalSearch').value.toLowerCase();
+            const raceFilter = document.getElementById('raceFilter').value;
+            const sizeFilter = document.getElementById('sizeFilter').value;
+            const ageFilter = document.getElementById('ageFilter').value;
+            const sortFilter = document.getElementById('sortFilter').value;
+
+            filteredAnimals = allAnimals.filter(animal => {
+                // Search filter
+                if (searchTerm && !animal.name.toLowerCase().includes(searchTerm) && 
+                    !animal.breed.toLowerCase().includes(searchTerm) &&
+                    !animal.description.toLowerCase().includes(searchTerm)) {
+                    return false;
+                }
+
+                // Race filter
+                if (raceFilter !== 'all' && animal.breed.toLowerCase() !== raceFilter) {
+                    return false;
+                }
+
+                // Size filter
+                if (sizeFilter !== 'all') {
+                    const sizeMap = {
+                        'klein': 'Klein',
+                        'mittel': 'Mittel',
+                        'gross': 'Groß'
+                    };
+                    if (animal.size !== sizeMap[sizeFilter]) {
+                        return false;
+                    }
+                }
+
+                // Age filter
+                if (ageFilter !== 'all') {
+                    const age = parseInt(animal.age);
+                    switch (ageFilter) {
+                        case 'welpe': return age <= 1;
+                        case 'jung': return age > 1 && age <= 3;
+                        case 'adult': return age > 3 && age <= 7;
+                        case 'senior': return age > 7;
+                    }
+                }
+
+                return true;
+            });
+
+            // Apply sorting
+            filteredAnimals.sort((a, b) => {
+                switch (sortFilter) {
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'age-asc':
+                        return parseInt(a.age) - parseInt(b.age);
+                    case 'age-desc':
+                        return parseInt(b.age) - parseInt(a.age);
+                    case 'arrival':
+                        return new Date(b.arrivalDate) - new Date(a.arrivalDate);
+                    default:
+                        return 0;
+                }
+            });
+
+            displayAnimals();
+            updateResultsCount();
+        }
+
+        function clearAllFilters() {
+            document.getElementById('animalSearch').value = '';
+            document.getElementById('raceFilter').value = 'all';
+            document.getElementById('sizeFilter').value = 'all';
+            document.getElementById('ageFilter').value = 'all';
+            document.getElementById('sortFilter').value = 'name';
+            
+            filteredAnimals = [...allAnimals];
+            displayAnimals();
+            updateResultsCount();
+        }
+
+        function updateResultsCount() {
+            const count = filteredAnimals.length;
+            const countElement = document.getElementById('resultsCount');
+            if (count === 0) {
+                countElement.textContent = 'Keine Hunde gefunden';
+            } else if (count === 1) {
+                countElement.textContent = '1 Hund wartet auf ein neues Zuhause';
+            } else {
+                countElement.textContent = `${count} Hunde warten auf ein neues Zuhause`;
+            }
+        }
+
+        function showAnimalDetails(animalId) {
+            const animal = allAnimals.find(a => a.id === animalId);
+            if (!animal) return;
+
+            const modal = document.getElementById('animalModal');
+            const content = document.getElementById('animalModalContent');
+            
+            const compatibility = [];
+            if (animal.goodWith?.dogs) compatibility.push('🐕 Hunden');
+            if (animal.goodWith?.children) compatibility.push('👶 Kindern');
+            if (animal.goodWith?.cats) compatibility.push('🐱 Katzen');
+            
+            content.innerHTML = `
+                <div class="animal-detail">
+                    <div class="animal-detail-header">
+                        <h2>${animal.name}</h2>
+                        <span class="animal-gender">${animal.gender === 'Männlich' ? '♂️' : '♀️'}</span>
+                    </div>
+                    <div class="animal-detail-meta">
+                        <span><strong>Rasse:</strong> ${animal.breed}</span>
+                        <span><strong>Alter:</strong> ${animal.age}</span>
+                        <span><strong>Größe:</strong> ${animal.size}</span>
+                        <span><strong>Energielevel:</strong> ${animal.energyLevel || 'Unbekannt'}</span>
+                    </div>
+                    <div class="animal-detail-description">
+                        <h3>Über ${animal.name}</h3>
+                        <p>${animal.description}</p>
+                    </div>
+                    <div class="animal-detail-compatibility">
+                        <h3>Verträglichkeit</h3>
+                        <p>${compatibility.length > 0 ? compatibility.join(', ') : 'Keine spezifischen Angaben'}</p>
+                    </div>
+                    <div class="animal-detail-actions">
+                        <button class="btn btn-primary" onclick="showInterest(${animal.id})">
+                            💝 Interesse zeigen
+                        </button>
+                        <button class="btn btn-secondary" onclick="shareAnimal(${animal.id})">
+                            📤 Teilen
+                        </button>
+                        <a href="contact.html" class="btn btn-outline">
+                            📞 Kontakt aufnehmen
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeAnimalModal() {
+            document.getElementById('animalModal').style.display = 'none';
+        }
+
+        function showInterest(animalId) {
+            const animal = allAnimals.find(a => a.id === animalId);
+            if (!animal) return;
+
+            // Create interest email
+            const subject = `Interesse an ${animal.name} - Boxerhof Bad Oeynhausen`;
+            const body = `Hallo liebes Boxerhof-Team,
+
+ich interessiere mich für ${animal.name} (${animal.breed}, ${animal.age}).
+
+Bitte kontaktieren Sie mich für weitere Informationen.
+
+Mit freundlichen Grüßen`;
+
+            window.location.href = `mailto:info@boxerhof-badoeynhausen.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        async function shareAnimal(animalId) {
+            const animal = allAnimals.find(a => a.id === animalId);
+            if (!animal) return;
+
+            const shareData = {
+                title: `${animal.name} sucht ein Zuhause - Boxerhof Bad Oeynhausen`,
+                text: `${animal.name}, ein ${animal.age} alter ${animal.breed}, sucht ein liebevolles Zuhause. ${animal.description}`,
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (error) {
+                    console.log('Sharing cancelled');
+                }
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
+                alert('Link wurde in die Zwischenablage kopiert!');
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('animalModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAnimalModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAnimalModal();
+            }
+        });
+    </script>
+</body>
+</html>
