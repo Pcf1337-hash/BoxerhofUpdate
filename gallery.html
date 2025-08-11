@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bildergalerie des Boxerhofs in Bad Oeynhausen - Entdecken Sie unsere schönen Anlagen und glücklichen Hunde">
+    <title>Galerie - Boxerhof Bad Oeynhausen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="boxerhof-style.css">
+    <link rel="stylesheet" href="gallery-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>🏡 Boxerhof Bad Oeynhausen</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="boxerhof.html">Home</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="animals.html">Unsere Hunde</a></li>
+                    <li><a href="gallery.html" class="active">Galerie</a></li>
+                    <li><a href="pension.html">Pension</a></li>
+                    <li><a href="adoption.html">Vermittlung</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                    <li><a href="support.html">Unterstützen</a></li>
+                    <li><a href="admin.html" class="admin-link">🔧 Admin</a></li>
+                </ul>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Gallery Hero -->
+        <section class="gallery-hero">
+            <div class="container">
+                <h1>Unsere Bildergalerie</h1>
+                <p class="hero-subtitle">Entdecken Sie den wunderschönen Boxerhof und unsere glücklichen Hunde</p>
+                <p class="hero-description">
+                    Diese Bilder zeigen das Leben auf unserem Hof - von den schönen Anlagen bis zu den 
+                    herzerwärmenden Momenten mit unseren vierbeinigen Freunden. Jedes Bild erzählt eine 
+                    Geschichte von Liebe, Fürsorge und der Mission, Hunden ein besseres Leben zu ermöglichen.
+                </p>
+            </div>
+        </section>
+
+        <!-- Gallery Categories -->
+        <section class="gallery-categories">
+            <div class="container">
+                <h2>Kategorien</h2>
+                <div class="category-filters">
+                    <button class="category-btn active" data-category="all">Alle Bilder</button>
+                    <button class="category-btn" data-category="buildings">Gebäude & Anlagen</button>
+                    <button class="category-btn" data-category="animals">Unsere Hunde</button>
+                    <button class="category-btn" data-category="care">Pflege & Betreuung</button>
+                    <button class="category-btn" data-category="events">Events & Gemeinschaft</button>
+                    <button class="category-btn" data-category="nature">Natur & Umgebung</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Gallery -->
+        <section class="main-gallery">
+            <div class="container">
+                <div class="gallery-stats">
+                    <span id="imageCount">25 Bilder</span>
+                    <div class="view-options">
+                        <button class="view-btn active" data-view="grid" title="Rasteransicht">⊞</button>
+                        <button class="view-btn" data-view="masonry" title="Mauerwerkansicht">⊟</button>
+                        <button class="view-btn" data-view="list" title="Listenansicht">☰</button>
+                    </div>
+                </div>
+
+                <div class="gallery-container" id="galleryContainer">
+                    <!-- Images will be loaded here by JavaScript -->
+                    <div class="loading-message">
+                        <div class="loading-spinner"></div>
+                        <p>Lade wunderschöne Bilder vom Boxerhof...</p>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container" style="display: none;">
+                    <button class="btn btn-primary" id="loadMoreBtn">Weitere Bilder laden</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Features -->
+        <section class="gallery-features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📸</div>
+                        <h3>Hochqualitative Bilder</h3>
+                        <p>Alle Fotos zeigen den Boxerhof in seiner ganzen Schönheit und dokumentieren unser tägliches Leben mit den Hunden.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🖼️</div>
+                        <h3>Vollbild-Ansicht</h3>
+                        <p>Klicken Sie auf ein beliebiges Bild, um es in voller Größe zu betrachten und weitere Details zu entdecken.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Mobilfreundlich</h3>
+                        <p>Genießen Sie die Galerie auf jedem Gerät - die Bilder passen sich automatisch an Ihre Bildschirmgröße an.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Durchsuchbar</h3>
+                        <p>Finden Sie schnell spezifische Bilder mit unseren Kategorie-Filtern und der Suchfunktion.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="gallery-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Besuchen Sie uns persönlich!</h2>
+                    <p>Die Bilder geben nur einen kleinen Einblick in das Leben auf unserem Boxerhof. 
+                    Vereinbaren Sie einen Termin und erleben Sie die warme Atmosphäre und die 
+                    Freude unserer Hunde hautnah.</p>
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn btn-primary">Termin vereinbaren</a>
+                        <a href="animals.html" class="btn btn-secondary">Unsere Hunde kennenlernen</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏡 Boxerhof Bad Oeynhausen</h3>
+                    <p>Ein liebevolles Zuhause für Hunde in Not</p>
+                    <p class="footer-motto">Mit Herz und Hingabe für jedes Tier</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="animals.html">Unsere Hunde</a></li>
+                        <li><a href="pension.html">Pension</a></li>
+                        <li><a href="adoption.html">Vermittlung</a></li>
+                        <li><a href="gallery.html">Galerie</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>📧 info@boxerhof-badoeynhausen.de</p>
+                    <p>📞 +49 (0) 5731 923 4567</p>
+                    <p>📍 Boxerhof 1, 32547 Bad Oeynhausen</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Unterstützen</h4>
+                    <p>Helfen Sie uns dabei, mehr Hunden zu helfen:</p>
+                    <a href="support.html" class="btn btn-small btn-outline">Spenden</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boxerhof Bad Oeynhausen. Teil der Boxer Nothilfe e.V. Mit Liebe für Hunde gemacht. 🐾</p>
+                <div class="footer-legal">
+                    <a href="impressum.html">Impressum</a>
+                    <a href="datenschutz.html">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="boxerhof-slideshow.js"></script>
+    <script src="gallery.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

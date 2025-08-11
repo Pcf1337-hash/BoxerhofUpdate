@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Boxerhof in Bad Oeynhausen - Ein liebevolles Zuhause für Hunde in Not. Temporäre Unterbringung, Pensionsgäste und Vermittlung von Hunden.">
+    <title>Boxerhof Bad Oeynhausen - Ein liebevolles Zuhause für Hunde in Not</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="boxerhof-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e67e22">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Boxerhof">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>🏡 Boxerhof Bad Oeynhausen</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="boxerhof.html" class="active">Home</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="animals.html">Unsere Hunde</a></li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="pension.html">Pension</a></li>
+                    <li><a href="adoption.html">Vermittlung</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                    <li><a href="support.html">Unterstützen</a></li>
+                    <li><a href="admin.html" class="admin-link">🔧 Admin</a></li>
+                </ul>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section with Boxerhof Images -->
+        <section class="hero-boxerhof">
+            <div class="hero-slideshow">
+                <div class="slide active" data-bg="boxerhof-1">
+                    <div class="slide-content">
+                        <h1>Willkommen auf dem Boxerhof</h1>
+                        <p class="hero-subtitle">Ein liebevolles Zuhause für Hunde in Not</p>
+                        <p class="hero-description">
+                            In Bad Oeynhausen bieten wir Hunden aus schwierigen Verhältnissen ein 
+                            sicheres Zuhause auf Zeit. Mit viel Liebe und Hingabe päppeln wir sie 
+                            wieder auf und finden für jeden das perfekte neue Zuhause.
+                        </p>
+                    </div>
+                </div>
+                <div class="slide" data-bg="boxerhof-2">
+                    <div class="slide-content">
+                        <h2>Unser wunderschöner Hof</h2>
+                        <p>Weitläufige Außenanlagen, wo unsere Hunde sicher spielen und sich erholen können.</p>
+                    </div>
+                </div>
+                <div class="slide" data-bg="boxerhof-3">
+                    <div class="slide-content">
+                        <h2>Liebevolle Betreuung</h2>
+                        <p>Jeder Hund erhält individuelle Aufmerksamkeit und die Pflege, die er braucht.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slideshow Controls -->
+            <div class="slideshow-controls">
+                <button class="prev-slide" aria-label="Vorheriges Bild">❮</button>
+                <button class="next-slide" aria-label="Nächstes Bild">❯</button>
+            </div>
+            
+            <!-- Slide Indicators -->
+            <div class="slide-indicators">
+                <button class="indicator active" data-slide="0"></button>
+                <button class="indicator" data-slide="1"></button>
+                <button class="indicator" data-slide="2"></button>
+            </div>
+
+            <div class="hero-cta">
+                <a href="animals.html" class="btn btn-primary">Unsere Hunde kennenlernen</a>
+                <a href="support.html" class="btn btn-secondary">Jetzt helfen</a>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mission">
+            <div class="container">
+                <div class="mission-grid">
+                    <div class="mission-text">
+                        <h2>Unsere Mission</h2>
+                        <p class="mission-lead">
+                            Der Boxerhof ist mehr als nur eine Auffangstation - er ist ein Ort der Heilung, 
+                            des Vertrauens und der Hoffnung.
+                        </p>
+                        <p>
+                            Hier in Bad Oeynhausen kümmern wir uns mit unermüdlicher Hingabe um jeden 
+                            einzelnen Hund. Als Teil der Boxer Nothilfe e.V. sind wir spezialisiert auf 
+                            die Betreuung von Hunden, die ein neues Zuhause brauchen - sei es temporär 
+                            als Pensionsgäste oder dauerhaft durch Vermittlung.
+                        </p>
+                        <div class="mission-features">
+                            <div class="feature">
+                                <div class="feature-icon">🏠</div>
+                                <h3>Temporäres Zuhause</h3>
+                                <p>Sichere Unterbringung für Hunde in Übergangszeiten</p>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">🐕</div>
+                                <h3>Pensionsgäste</h3>
+                                <p>Liebevolle Betreuung während Urlauben oder Notfällen</p>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">❤️</div>
+                                <h3>Vermittlung</h3>
+                                <p>Wir finden für jeden Hund das perfekte neue Zuhause</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-image">
+                        <div class="image-placeholder" style="background: linear-gradient(135deg, #e67e22, #f39c12);">
+                            <div class="placeholder-content">
+                                <span class="placeholder-icon">🏡</span>
+                                <span class="placeholder-text">Unser liebevoller Boxerhof</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Animals Teaser -->
+        <section class="animals-teaser">
+            <div class="container">
+                <h2>Unsere aktuellen Schützlinge</h2>
+                <p>Lernen Sie die wunderbaren Hunde kennen, die gerade bei uns leben</p>
+                
+                <div class="animals-preview" id="animals-preview">
+                    <!-- Will be populated by JavaScript -->
+                    <div class="animal-card-small">
+                        <div class="animal-image">🐕</div>
+                        <h3>Bella</h3>
+                        <p>Liebevolle Labrador-Mix Hündin sucht neues Zuhause</p>
+                    </div>
+                    <div class="animal-card-small">
+                        <div class="animal-image">🦮</div>
+                        <h3>Max</h3>
+                        <p>Verspielter Boxer-Rüde, ideal für aktive Familien</p>
+                    </div>
+                    <div class="animal-card-small">
+                        <div class="animal-image">🐕‍🦺</div>
+                        <h3>Luna</h3>
+                        <p>Ruhige Senior-Hündin für gemütliche Spaziergänge</p>
+                    </div>
+                </div>
+                
+                <div class="teaser-cta">
+                    <a href="animals.html" class="btn btn-primary">Alle Hunde ansehen</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview -->
+        <section class="services">
+            <div class="container">
+                <h2>Unsere Leistungen</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🏠</div>
+                        <h3>Notfallbetreuung</h3>
+                        <p>Kurzfristige Unterbringung von Hunden in Notlagen oder bei familiären Problemen.</p>
+                        <a href="contact.html" class="service-link">Mehr erfahren</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🧳</div>
+                        <h3>Hundepension</h3>
+                        <p>Liebevolle Betreuung Ihres Vierbeiners während Ihres Urlaubs oder geschäftlicher Termine.</p>
+                        <a href="pension.html" class="service-link">Mehr erfahren</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💝</div>
+                        <h3>Vermittlung</h3>
+                        <p>Wir finden für Hunde in Not das perfekte neue Zuhause bei liebevollen Familien.</p>
+                        <a href="adoption.html" class="service-link">Mehr erfahren</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🏥</div>
+                        <h3>Gesundheitsvorsorge</h3>
+                        <p>Medizinische Betreuung und Rehabilitation für Hunde aus schlechten Verhältnissen.</p>
+                        <a href="about.html" class="service-link">Mehr erfahren</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Contact -->
+        <section class="quick-contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h2>Kontaktieren Sie uns</h2>
+                        <p>Haben Sie Fragen oder möchten Sie uns besuchen? Wir freuen uns auf Sie!</p>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">📧</div>
+                                <div class="contact-text">
+                                    <strong>E-Mail</strong>
+                                    <a href="mailto:info@boxerhof-badoeynhausen.de">info@boxerhof-badoeynhausen.de</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">📞</div>
+                                <div class="contact-text">
+                                    <strong>Telefon</strong>
+                                    <a href="tel:+4957319234567">+49 (0) 5731 923 4567</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">📍</div>
+                                <div class="contact-text">
+                                    <strong>Adresse</strong>
+                                    <span>Boxerhof 1, 32547 Bad Oeynhausen</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">🕒</div>
+                                <div class="contact-text">
+                                    <strong>Besuchszeiten</strong>
+                                    <span>Mo-Fr: 9:00-17:00, Sa: 9:00-15:00<br>
+                                    Termine nach Vereinbarung</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-cta">
+                        <h3>Besuchen Sie uns</h3>
+                        <p>Vereinbaren Sie einen Termin und lernen Sie unsere Hunde persönlich kennen.</p>
+                        <a href="contact.html" class="btn btn-primary">Termin vereinbaren</a>
+                        <a href="support.html" class="btn btn-outline">Jetzt spenden</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏡 Boxerhof Bad Oeynhausen</h3>
+                    <p>Ein liebevolles Zuhause für Hunde in Not</p>
+                    <p class="footer-motto">Mit Herz und Hingabe für jedes Tier</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="animals.html">Unsere Hunde</a></li>
+                        <li><a href="pension.html">Pension</a></li>
+                        <li><a href="adoption.html">Vermittlung</a></li>
+                        <li><a href="gallery.html">Galerie</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>📧 info@boxerhof-badoeynhausen.de</p>
+                    <p>📞 +49 (0) 5731 923 4567</p>
+                    <p>📍 Boxerhof 1, 32547 Bad Oeynhausen</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Unterstützen</h4>
+                    <p>Helfen Sie uns dabei, mehr Hunden zu helfen:</p>
+                    <a href="support.html" class="btn btn-small btn-outline">Spenden</a>
+                    <div class="social-links">
+                        <a href="https://facebook.com/boxerhof" target="_blank" rel="noopener">
+                            📘 Facebook
+                        </a>
+                        <a href="mailto:info@boxerhof-badoeynhausen.de">
+                            ✉️ E-Mail
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boxerhof Bad Oeynhausen. Teil der Boxer Nothilfe e.V. Mit Liebe für Hunde gemacht. 🐾</p>
+                <div class="footer-legal">
+                    <a href="impressum.html">Impressum</a>
+                    <a href="datenschutz.html">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="boxerhof-slideshow.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

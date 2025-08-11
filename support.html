@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Unterstützen Sie den Boxerhof in Bad Oeynhausen - Spenden, PayPal, Banküberweisung und weitere Möglichkeiten zu helfen">
+    <title>Unterstützen - Boxerhof Bad Oeynhausen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="boxerhof-style.css">
+    <link rel="stylesheet" href="support-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>🏡 Boxerhof Bad Oeynhausen</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="boxerhof.html">Home</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="animals.html">Unsere Hunde</a></li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="pension.html">Pension</a></li>
+                    <li><a href="adoption.html">Vermittlung</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                    <li><a href="support.html" class="active">Unterstützen</a></li>
+                    <li><a href="admin.html" class="admin-link">🔧 Admin</a></li>
+                </ul>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Support Hero -->
+        <section class="support-hero">
+            <div class="container">
+                <h1>Helfen Sie uns zu helfen</h1>
+                <p class="hero-subtitle">Ihre Unterstützung macht den Unterschied im Leben unserer Hunde</p>
+                <p class="hero-description">
+                    Jede Spende, jede helfende Hand und jede freundliche Geste hilft uns dabei, 
+                    mehr Hunden in Not zu helfen und ihnen ein neues, glückliches Leben zu ermöglichen.
+                </p>
+            </div>
+        </section>
+
+        <!-- Quick Donation -->
+        <section class="quick-donation">
+            <div class="container">
+                <h2>Schnell spenden</h2>
+                <div class="donation-methods">
+                    <div class="donation-card paypal-card">
+                        <div class="donation-icon">💙</div>
+                        <h3>PayPal</h3>
+                        <p>Sichere und schnelle Online-Spende</p>
+                        <a href="https://www.paypal.com/donate/?hosted_button_id=XXXXXXXXX" 
+                           class="btn btn-primary" 
+                           target="_blank" 
+                           rel="noopener">
+                            Mit PayPal spenden
+                        </a>
+                    </div>
+                    
+                    <div class="donation-card bank-card">
+                        <div class="donation-icon">🏦</div>
+                        <h3>Banküberweisung</h3>
+                        <p>Direkte Überweisung auf unser Konto</p>
+                        <button class="btn btn-secondary" onclick="showBankDetails()">
+                            Bankdaten anzeigen
+                        </button>
+                    </div>
+                    
+                    <div class="donation-card betterplace-card">
+                        <div class="donation-icon">🌟</div>
+                        <h3>betterplace.org</h3>
+                        <p>Über die bekannte Spendenplattform</p>
+                        <a href="https://www.betterplace.org/de/projects/XXXXX" 
+                           class="btn btn-accent" 
+                           target="_blank" 
+                           rel="noopener">
+                            Bei betterplace spenden
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bank Details Modal -->
+        <div id="bankDetailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeBankDetails()">&times;</span>
+                <h3>Bankverbindung</h3>
+                <div class="bank-details">
+                    <div class="bank-item">
+                        <strong>Empfänger:</strong>
+                        <span>Boxer Nothilfe e.V.</span>
+                    </div>
+                    <div class="bank-item">
+                        <strong>Bank:</strong>
+                        <span>Sparkasse Herford</span>
+                    </div>
+                    <div class="bank-item">
+                        <strong>IBAN:</strong>
+                        <span>DE89 4945 0120 0000 0123 45</span>
+                        <button class="copy-btn" onclick="copyToClipboard('DE89 4945 0120 0000 0123 45')">Kopieren</button>
+                    </div>
+                    <div class="bank-item">
+                        <strong>BIC:</strong>
+                        <span>WLAHDE44XXX</span>
+                        <button class="copy-btn" onclick="copyToClipboard('WLAHDE44XXX')">Kopieren</button>
+                    </div>
+                    <div class="bank-item">
+                        <strong>Verwendungszweck:</strong>
+                        <span>Spende Boxerhof Bad Oeynhausen</span>
+                    </div>
+                </div>
+                <p class="bank-note">
+                    <strong>Hinweis:</strong> Für Spendenbescheinigungen ab 200€ bitte Name und Adresse 
+                    im Verwendungszweck angeben oder uns per E-Mail kontaktieren.
+                </p>
+            </div>
+        </div>
+
+        <!-- Support Options -->
+        <section class="support-options">
+            <div class="container">
+                <h2>Weitere Unterstützungsmöglichkeiten</h2>
+                <div class="support-grid">
+                    <div class="support-card">
+                        <div class="support-icon">🤲</div>
+                        <h3>Ehrenamtliche Hilfe</h3>
+                        <p>Helfen Sie uns bei der täglichen Betreuung der Hunde, beim Gassi gehen oder bei Veranstaltungen.</p>
+                        <ul class="support-list">
+                            <li>Gassi gehen mit den Hunden</li>
+                            <li>Reinigung und Pflege der Anlagen</li>
+                            <li>Hilfe bei Veranstaltungen</li>
+                            <li>Transportfahrten zum Tierarzt</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-outline">Freiwillig melden</a>
+                    </div>
+                    
+                    <div class="support-card">
+                        <div class="support-icon">🎁</div>
+                        <h3>Sachspenden</h3>
+                        <p>Spenden Sie Gegenstände, die wir für die Betreuung der Hunde benötigen.</p>
+                        <ul class="support-list">
+                            <li>Hochwertiges Hundefutter</li>
+                            <li>Decken und Hundekörbe</li>
+                            <li>Spielzeug und Beschäftigungsmaterial</li>
+                            <li>Reinigungsmittel und Hygieneartikel</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-outline">Spende ankündigen</a>
+                    </div>
+                    
+                    <div class="support-card">
+                        <div class="support-icon">🏠</div>
+                        <h3>Pflegestelle werden</h3>
+                        <p>Bieten Sie einem Hund vorübergehend ein liebevolles Zuhause, bis er vermittelt wird.</p>
+                        <ul class="support-list">
+                            <li>Temporäre Aufnahme von Hunden</li>
+                            <li>Individuelle Betreuung</li>
+                            <li>Sozialisierung und Training</li>
+                            <li>Unterstützung durch unser Team</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn-outline">Pflegestelle anbieten</a>
+                    </div>
+                    
+                    <div class="support-card">
+                        <div class="support-icon">📢</div>
+                        <h3>Öffentlichkeitsarbeit</h3>
+                        <p>Helfen Sie uns dabei, mehr Menschen über unsere Arbeit zu informieren.</p>
+                        <ul class="support-list">
+                            <li>Teilen in sozialen Medien</li>
+                            <li>Mundpropaganda in Ihrem Umfeld</li>
+                            <li>Verteilung von Informationsmaterial</li>
+                            <li>Organisation von Spendenaktionen</li>
+                        </ul>
+                        <div class="social-share">
+                            <a href="https://facebook.com/sharer/sharer.php?u=" class="social-btn facebook">📘 Facebook</a>
+                            <a href="https://twitter.com/intent/tweet?text=" class="social-btn twitter">🐦 Twitter</a>
+                            <a href="mailto:?subject=Boxerhof%20Bad%20Oeynhausen&body=" class="social-btn email">✉️ E-Mail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Impact -->
+        <section class="donation-impact">
+            <div class="container">
+                <h2>Wofür werden Spenden verwendet?</h2>
+                <p class="impact-intro">
+                    Transparenz ist uns wichtig. Hier sehen Sie, wofür Ihre Spenden konkret verwendet werden:
+                </p>
+                
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <div class="impact-icon">🍽️</div>
+                        <div class="impact-content">
+                            <h3>Futter und Leckerlis</h3>
+                            <p>Hochwertiges Hundefutter für eine gesunde Ernährung aller Hunde</p>
+                            <div class="impact-cost">ca. 25€ pro Hund/Monat</div>
+                        </div>
+                    </div>
+                    
+                    <div class="impact-item">
+                        <div class="impact-icon">🏥</div>
+                        <div class="impact-content">
+                            <h3>Tierarztkosten</h3>
+                            <p>Medizinische Versorgung, Impfungen, Operationen und Notfallbehandlungen</p>
+                            <div class="impact-cost">ca. 150€ pro Hund/Jahr</div>
+                        </div>
+                    </div>
+                    
+                    <div class="impact-item">
+                        <div class="impact-icon">🏠</div>
+                        <div class="impact-content">
+                            <h3>Unterbringung und Pflege</h3>
+                            <p>Reinigung, Instandhaltung der Anlagen und Beschäftigungsmaterial</p>
+                            <div class="impact-cost">ca. 40€ pro Hund/Monat</div>
+                        </div>
+                    </div>
+                    
+                    <div class="impact-item">
+                        <div class="impact-icon">🚗</div>
+                        <div class="impact-content">
+                            <h3>Transport und Rettung</h3>
+                            <p>Fahrten zu Tierärzten, Rettungsfahrten und Vermittlungstransporte</p>
+                            <div class="impact-cost">ca. 200€ pro Rettung</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="impact-examples">
+                    <h3>Beispiele für Ihre Hilfe:</h3>
+                    <div class="examples-grid">
+                        <div class="example-card">
+                            <strong>25€</strong>
+                            <p>1 Monat Futter für einen Hund</p>
+                        </div>
+                        <div class="example-card">
+                            <strong>50€</strong>
+                            <p>Grundausstattung für einen neuen Hund</p>
+                        </div>
+                        <div class="example-card">
+                            <strong>100€</strong>
+                            <p>Tierarztbesuch mit Impfungen</p>
+                        </div>
+                        <div class="example-card">
+                            <strong>200€</strong>
+                            <p>Komplette Rettungsaktion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Stories -->
+        <section class="success-stories">
+            <div class="container">
+                <h2>Ihre Hilfe wirkt!</h2>
+                <p class="stories-intro">
+                    Dank Ihrer Unterstützung konnten wir bereits vielen Hunden helfen:
+                </p>
+                
+                <div class="stories-grid">
+                    <div class="story-card">
+                        <div class="story-image">🐕</div>
+                        <h3>Bella's Geschichte</h3>
+                        <p>
+                            Bella kam schwer vernachlässigt zu uns. Dank Ihrer Spenden konnte sie 
+                            medizinisch versorgt werden und fand nach 3 Monaten ihre Traumfamilie.
+                        </p>
+                        <div class="story-outcome">✅ Erfolgreich vermittelt</div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-image">🦮</div>
+                        <h3>Max's Rettung</h3>
+                        <p>
+                            Max wurde aus schlechter Haltung gerettet. Mit liebevoller Pflege und 
+                            Training ist er heute ein glücklicher Familienhund.
+                        </p>
+                        <div class="story-outcome">✅ Erfolgreich vermittelt</div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-image">🐕‍🦺</div>
+                        <h3>Luna's Behandlung</h3>
+                        <p>
+                            Luna benötigte eine teure Operation. Durch Spenden konnte sie behandelt 
+                            werden und lebt heute schmerzfrei bei ihrer neuen Familie.
+                        </p>
+                        <div class="story-outcome">✅ Gesund und vermittelt</div>
+                    </div>
+                </div>
+                
+                <div class="annual-stats">
+                    <h3>Jahresstatistik 2024</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">127</div>
+                            <div class="stat-label">Gerettete Hunde</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">89</div>
+                            <div class="stat-label">Erfolgreich vermittelt</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">245</div>
+                            <div class="stat-label">Tierarztbesuche</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">156</div>
+                            <div class="stat-label">Freiwillige Helfer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact for Support -->
+        <section class="support-contact">
+            <div class="container">
+                <h2>Fragen zur Unterstützung?</h2>
+                <p>Wir beraten Sie gerne über die verschiedenen Möglichkeiten zu helfen.</p>
+                
+                <div class="contact-options">
+                    <div class="contact-option">
+                        <div class="contact-icon">📧</div>
+                        <h3>E-Mail</h3>
+                        <p>Schreiben Sie uns Ihre Fragen</p>
+                        <a href="mailto:spenden@boxerhof-badoeynhausen.de">spenden@boxerhof-badoeynhausen.de</a>
+                    </div>
+                    
+                    <div class="contact-option">
+                        <div class="contact-icon">📞</div>
+                        <h3>Telefon</h3>
+                        <p>Rufen Sie uns an</p>
+                        <a href="tel:+4957319234567">+49 (0) 5731 923 4567</a>
+                    </div>
+                    
+                    <div class="contact-option">
+                        <div class="contact-icon">🕒</div>
+                        <h3>Beratungszeiten</h3>
+                        <p>Mo-Fr: 9:00-17:00 Uhr<br>Sa: 9:00-15:00 Uhr</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏡 Boxerhof Bad Oeynhausen</h3>
+                    <p>Ein liebevolles Zuhause für Hunde in Not</p>
+                    <p class="footer-motto">Mit Herz und Hingabe für jedes Tier</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="animals.html">Unsere Hunde</a></li>
+                        <li><a href="pension.html">Pension</a></li>
+                        <li><a href="adoption.html">Vermittlung</a></li>
+                        <li><a href="gallery.html">Galerie</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Spenden</h4>
+                    <p><strong>IBAN:</strong> DE89 4945 0120 0000 0123 45</p>
+                    <p><strong>PayPal:</strong> <a href="mailto:spenden@boxerhof-badoeynhausen.de">spenden@boxerhof-badoeynhausen.de</a></p>
+                    <p>Boxer Nothilfe e.V. ist als gemeinnützig anerkannt</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>📧 info@boxerhof-badoeynhausen.de</p>
+                    <p>📞 +49 (0) 5731 923 4567</p>
+                    <p>📍 Boxerhof 1, 32547 Bad Oeynhausen</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boxerhof Bad Oeynhausen. Teil der Boxer Nothilfe e.V. Mit Liebe für Hunde gemacht. 🐾</p>
+                <div class="footer-legal">
+                    <a href="impressum.html">Impressum</a>
+                    <a href="datenschutz.html">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="support.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
