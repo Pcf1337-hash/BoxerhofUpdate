@@ -594,19 +594,298 @@
 
         function showInterest(animalId) {
             const animal = allAnimals.find(a => a.id === animalId);
-            if (!animal) return;
+            if (!animal) {
+                alert('Fehler: Tier nicht gefunden.');
+                return;
+            }
 
-            // Create interest email
-            const subject = `Interesse an ${animal.name} - Boxerhof Bad Oeynhausen`;
-            const body = `Hallo liebes Boxerhof-Team,
+            // Create interest form modal
+            const interestModal = document.createElement('div');
+            interestModal.className = 'modal interest-modal';
+            interestModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                padding: 20px;
+                box-sizing: border-box;
+            `;
+            
+            interestModal.innerHTML = `
+                <div class="modal-content" style="
+                    background: white;
+                    padding: 30px;
+                    border-radius: 12px;
+                    max-width: 600px;
+                    width: 100%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    position: relative;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                ">
+                    <button class="modal-close" onclick="this.closest('.modal').remove(); document.body.style.overflow = 'auto';" style="
+                        position: absolute;
+                        top: 15px;
+                        right: 20px;
+                        background: none;
+                        border: none;
+                        font-size: 24px;
+                        cursor: pointer;
+                        color: #666;
+                        width: 30px;
+                        height: 30px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        transition: all 0.2s ease;
+                    " onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='none'">×</button>
+                    
+                    <div class="interest-header" style="margin-bottom: 25px;">
+                        <h3 style="color: #e67e22; margin: 0 0 10px 0; font-size: 24px;">💝 Interesse an ${animal.name}</h3>
+                        <p style="color: #666; margin: 0; line-height: 1.5;">Vielen Dank für Ihr Interesse an ${animal.name}! Bitte füllen Sie das Formular aus, damit wir Sie kontaktieren können.</p>
+                    </div>
+                    
+                    <form class="interest-form" onsubmit="submitInterest(event, ${animalId})" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div class="form-section" style="border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px;">
+                            <h4 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 16px;">📋 Ihre Kontaktdaten</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Name *</label>
+                                    <input type="text" name="name" required style="
+                                        width: 100%;
+                                        padding: 10px;
+                                        border: 1px solid #ddd;
+                                        border-radius: 4px;
+                                        font-size: 14px;
+                                        box-sizing: border-box;
+                                    ">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">E-Mail *</label>
+                                    <input type="email" name="email" required style="
+                                        width: 100%;
+                                        padding: 10px;
+                                        border: 1px solid #ddd;
+                                        border-radius: 4px;
+                                        font-size: 14px;
+                                        box-sizing: border-box;
+                                    ">
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Telefon (optional)</label>
+                                    <input type="tel" name="phone" style="
+                                        width: 100%;
+                                        padding: 10px;
+                                        border: 1px solid #ddd;
+                                        border-radius: 4px;
+                                        font-size: 14px;
+                                        box-sizing: border-box;
+                                    ">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Wohnort</label>
+                                    <input type="text" name="city" style="
+                                        width: 100%;
+                                        padding: 10px;
+                                        border: 1px solid #ddd;
+                                        border-radius: 4px;
+                                        font-size: 14px;
+                                        box-sizing: border-box;
+                                    ">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section" style="border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px;">
+                            <h4 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 16px;">🏠 Ihre Situation</h4>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Hundeerfahrung</label>
+                                <select name="experience" required style="
+                                    width: 100%;
+                                    padding: 10px;
+                                    border: 1px solid #ddd;
+                                    border-radius: 4px;
+                                    font-size: 14px;
+                                    box-sizing: border-box;
+                                ">
+                                    <option value="">Bitte wählen</option>
+                                    <option value="none">Nein, ich bin Anfänger</option>
+                                    <option value="some">Ja, etwas Erfahrung</option>
+                                    <option value="experienced">Ja, viel Erfahrung</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Wohnsituation</label>
+                                <select name="housing" required style="
+                                    width: 100%;
+                                    padding: 10px;
+                                    border: 1px solid #ddd;
+                                    border-radius: 4px;
+                                    font-size: 14px;
+                                    box-sizing: border-box;
+                                ">
+                                    <option value="">Bitte wählen</option>
+                                    <option value="apartment">Wohnung ohne Garten</option>
+                                    <option value="apartment-balcony">Wohnung mit Balkon</option>
+                                    <option value="house-small-garden">Haus mit kleinem Garten</option>
+                                    <option value="house-large-garden">Haus mit großem Garten</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section" style="border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px;">
+                            <h4 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 16px;">💬 Nachricht (optional)</h4>
+                            <textarea name="message" rows="4" placeholder="Erzählen Sie uns etwas über sich und warum Sie sich für ${animal.name} interessieren..." style="
+                                width: 100%;
+                                padding: 10px;
+                                border: 1px solid #ddd;
+                                border-radius: 4px;
+                                font-size: 14px;
+                                font-family: inherit;
+                                resize: vertical;
+                                box-sizing: border-box;
+                            "></textarea>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
+                            <button type="button" onclick="this.closest('.modal').remove(); document.body.style.overflow = 'auto';" style="
+                                padding: 12px 24px;
+                                border: 1px solid #ddd;
+                                background: white;
+                                color: #666;
+                                border-radius: 6px;
+                                font-size: 14px;
+                                cursor: pointer;
+                                transition: all 0.2s ease;
+                            " onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">
+                                Abbrechen
+                            </button>
+                            <button type="submit" style="
+                                padding: 12px 24px;
+                                border: none;
+                                background: #e67e22;
+                                color: white;
+                                border-radius: 6px;
+                                font-size: 14px;
+                                cursor: pointer;
+                                transition: all 0.2s ease;
+                            " onmouseover="this.style.background='#d35400'" onmouseout="this.style.background='#e67e22'">
+                                📧 Interesse senden
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            document.body.appendChild(interestModal);
+            document.body.style.overflow = 'hidden';
+            
+            // Close on outside click
+            interestModal.addEventListener('click', function(e) {
+                if (e.target === interestModal) {
+                    interestModal.remove();
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
 
-ich interessiere mich für ${animal.name} (${animal.breed}, ${animal.age}).
-
-Bitte kontaktieren Sie mich für weitere Informationen.
-
-Mit freundlichen Grüßen`;
-
-            window.location.href = `mailto:info@boxerhof-badoeynhausen.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        function submitInterest(event, animalId) {
+            event.preventDefault();
+            
+            const animal = allAnimals.find(a => a.id === animalId);
+            const formData = new FormData(event.target);
+            
+            const interestData = {
+                animal: animal.name,
+                animalId: animalId,
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone') || 'Nicht angegeben',
+                city: formData.get('city') || 'Nicht angegeben',
+                experience: formData.get('experience'),
+                housing: formData.get('housing'),
+                message: formData.get('message') || 'Keine zusätzliche Nachricht',
+                timestamp: new Date().toISOString()
+            };
+            
+            // Store interest in localStorage (in a real app, this would go to a server)
+            let interests = JSON.parse(localStorage.getItem('boxerhof_interests') || '[]');
+            interests.push(interestData);
+            localStorage.setItem('boxerhof_interests', JSON.stringify(interests));
+            
+            // Show success message
+            const modal = event.target.closest('.modal');
+            modal.innerHTML = `
+                <div class="modal-content" style="
+                    background: white;
+                    padding: 40px;
+                    border-radius: 12px;
+                    max-width: 500px;
+                    width: 100%;
+                    text-align: center;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                ">
+                    <div style="font-size: 64px; margin-bottom: 20px;">✅</div>
+                    <h3 style="color: #27ae60; margin: 0 0 15px 0; font-size: 24px;">Vielen Dank für Ihr Interesse!</h3>
+                    <p style="color: #666; margin: 0 0 25px 0; line-height: 1.6;">
+                        Wir haben Ihre Anfrage für <strong style="color: #e67e22;">${animal.name}</strong> erhalten und werden uns schnellstmöglich bei Ihnen melden.
+                    </p>
+                    
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 25px; text-align: left;">
+                        <h4 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 16px;">📋 Wie geht es weiter?</h4>
+                        <ul style="margin: 0; padding-left: 20px; color: #555; line-height: 1.6;">
+                            <li style="margin-bottom: 8px;">📞 Wir rufen Sie in den nächsten 24-48 Stunden an</li>
+                            <li style="margin-bottom: 8px;">💬 Wir besprechen Ihre Wünsche und Möglichkeiten</li>
+                            <li style="margin-bottom: 8px;">🏠 Bei Interesse vereinbaren wir einen Besuchstermin</li>
+                            <li style="margin-bottom: 8px;">🐕 Sie lernen ${animal.name} persönlich kennen</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <button onclick="this.closest('.modal').remove(); document.body.style.overflow = 'auto';" style="
+                            padding: 12px 24px;
+                            border: none;
+                            background: #e67e22;
+                            color: white;
+                            border-radius: 6px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            transition: all 0.2s ease;
+                        " onmouseover="this.style.background='#d35400'" onmouseout="this.style.background='#e67e22'">
+                            Verstanden
+                        </button>
+                        <button onclick="this.closest('.modal').remove(); document.body.style.overflow = 'auto'; showAnimalDetails(${animalId});" style="
+                            padding: 12px 24px;
+                            border: 1px solid #ddd;
+                            background: white;
+                            color: #666;
+                            border-radius: 6px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            transition: all 0.2s ease;
+                        " onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">
+                            Zurück zu ${animal.name}
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Auto-close after 8 seconds
+            setTimeout(() => {
+                if (document.body.contains(modal)) {
+                    modal.remove();
+                    document.body.style.overflow = 'auto';
+                }
+            }, 8000);
         }
 
         async function shareAnimal(animalId) {
@@ -616,20 +895,201 @@ Mit freundlichen Grüßen`;
             const shareData = {
                 title: `${animal.name} sucht ein Zuhause - Boxerhof Bad Oeynhausen`,
                 text: `${animal.name}, ein ${animal.age} alter ${animal.breed}, sucht ein liebevolles Zuhause. ${animal.description}`,
-                url: window.location.href
+                url: `${window.location.origin}/animals.html#animal-${animalId}`
             };
 
+            // Try native sharing first (mobile devices)
             if (navigator.share) {
                 try {
                     await navigator.share(shareData);
+                    return;
                 } catch (error) {
-                    console.log('Sharing cancelled');
+                    console.log('Native sharing cancelled');
                 }
-            } else {
-                // Fallback: copy to clipboard
-                navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
-                alert('Link wurde in die Zwischenablage kopiert!');
             }
+            
+            // Fallback: Show share modal
+            const shareModal = document.createElement('div');
+            shareModal.className = 'modal share-modal';
+            shareModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                padding: 20px;
+                box-sizing: border-box;
+            `;
+            
+            shareModal.innerHTML = `
+                <div class="modal-content" style="
+                    background: white;
+                    padding: 30px;
+                    border-radius: 12px;
+                    max-width: 500px;
+                    width: 100%;
+                    position: relative;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                ">
+                    <button class="modal-close" onclick="this.closest('.modal').remove(); document.body.style.overflow = 'auto';" style="
+                        position: absolute;
+                        top: 15px;
+                        right: 20px;
+                        background: none;
+                        border: none;
+                        font-size: 24px;
+                        cursor: pointer;
+                        color: #666;
+                        width: 30px;
+                        height: 30px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        transition: all 0.2s ease;
+                    " onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='none'">×</button>
+                    
+                    <h3 style="color: #e67e22; margin: 0 0 15px 0; font-size: 24px;">📤 ${animal.name} teilen</h3>
+                    <p style="color: #666; margin: 0 0 25px 0; line-height: 1.5;">Helfen Sie uns dabei, ein Zuhause für ${animal.name} zu finden!</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+                        <button onclick="shareOnFacebook('${encodeURIComponent(shareData.url)}', '${encodeURIComponent(shareData.text)}')" style="
+                            padding: 12px;
+                            border: none;
+                            background: #1877f2;
+                            color: white;
+                            border-radius: 6px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            transition: all 0.2s ease;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                        " onmouseover="this.style.background='#166fe5'" onmouseout="this.style.background='#1877f2'">
+                            📘 Facebook
+                        </button>
+                        <button onclick="shareOnWhatsApp('${encodeURIComponent(shareData.text + ' ' + shareData.url)}')" style="
+                            padding: 12px;
+                            border: none;
+                            background: #25d366;
+                            color: white;
+                            border-radius: 6px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            transition: all 0.2s ease;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                        " onmouseover="this.style.background='#20ba5a'" onmouseout="this.style.background='#25d366'">
+                            💬 WhatsApp
+                        </button>
+                        <button onclick="shareViaEmail('${encodeURIComponent(shareData.title)}', '${encodeURIComponent(shareData.text + '\\n\\n' + shareData.url)}')" style="
+                            padding: 12px;
+                            border: none;
+                            background: #ea4335;
+                            color: white;
+                            border-radius: 6px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            transition: all 0.2s ease;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                        " onmouseover="this.style.background='#d33b2c'" onmouseout="this.style.background='#ea4335'">
+                            ✉️ E-Mail
+                        </button>
+                        <button onclick="copyShareToClipboard('${shareData.url}', this)" style="
+                            padding: 12px;
+                            border: 1px solid #ddd;
+                            background: white;
+                            color: #333;
+                            border-radius: 6px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            transition: all 0.2s ease;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                        " onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">
+                            📋 Link kopieren
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Direkter Link:</label>
+                        <input type="text" value="${shareData.url}" readonly onclick="this.select()" style="
+                            width: 100%;
+                            padding: 10px;
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            font-size: 12px;
+                            background: #f8f9fa;
+                            box-sizing: border-box;
+                        ">
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(shareModal);
+            document.body.style.overflow = 'hidden';
+            
+            // Close on outside click
+            shareModal.addEventListener('click', function(e) {
+                if (e.target === shareModal) {
+                    shareModal.remove();
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        function shareOnFacebook(url, text) {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+        }
+
+        function shareOnWhatsApp(text) {
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function shareViaEmail(subject, body) {
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+
+        function copyShareToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Kopiert!';
+                button.style.background = '#27ae60';
+                button.style.color = 'white';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = 'white';
+                    button.style.color = '#333';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Kopiert!';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                }, 2000);
+            });
         }
 
         // Close modal when clicking outside
