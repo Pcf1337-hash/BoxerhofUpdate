@@ -3,27 +3,50 @@
 /* Gallery Hero */
 .gallery-hero {
     padding: 6rem 0 4rem;
-    background: linear-gradient(135deg, var(--boxerhof-cream), #ffffff);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
     text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><text x="600" y="400" font-family="Arial" font-size="200" text-anchor="middle" fill="rgba(255,255,255,0.1)">📸</text></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .gallery-hero h1 {
+    position: relative;
+    z-index: 2;
     font-size: 3rem;
-    color: var(--boxerhof-primary);
+    color: white;
     margin-bottom: 1rem;
     font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 .gallery-hero .hero-subtitle {
+    position: relative;
+    z-index: 2;
     font-size: 1.4rem;
-    color: var(--boxerhof-primary-dark);
+    color: rgba(255,255,255,0.95);
     margin-bottom: 1.5rem;
     font-weight: 500;
 }
 
 .gallery-hero .hero-description {
+    position: relative;
+    z-index: 2;
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: rgba(255,255,255,0.9);
     max-width: 800px;
     margin: 0 auto;
     line-height: 1.7;
