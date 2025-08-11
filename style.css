@@ -981,4 +981,354 @@ p {
     line-height: 1.7;
     font-size: 1rem;
 }
+
+/* Dog Adoption Section Styles */
+.animals-controls {
+    margin-bottom: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.search-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem 1.5rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #e67e22;
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #e0e0e0;
+    background: white;
+    color: #333;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    border-color: #e67e22;
+    color: #e67e22;
+}
+
+.filter-btn.active {
+    background: #e67e22;
+    border-color: #e67e22;
+    color: white;
+}
+
+.dogs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.dog-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.dog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.dog-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.dog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.dog-card:hover .dog-image img {
+    transform: scale(1.05);
+}
+
+.dog-status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(0, 184, 148, 0.3);
+}
+
+.dog-info {
+    padding: 1.5rem;
+}
+
+.dog-header {
+    margin-bottom: 1rem;
+}
+
+.dog-name {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.dog-breed-age {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.dog-description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.dog-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.detail-tag {
+    background: #f8f9fa;
+    color: #666;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid #e9ecef;
+}
+
+.dog-compatibility,
+.dog-health {
+    margin-bottom: 1rem;
+}
+
+.tag {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.dog-special-needs {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dog-special-needs strong {
+    color: #856404;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.dog-special-needs p {
+    color: #856404;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.dog-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.dog-fee {
+    text-align: center;
+}
+
+.fee {
+    background: #e8f5e8;
+    color: #2d7d32;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.dog-interest-btn,
+.dog-share-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.dog-interest-btn {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+}
+
+.dog-interest-btn:hover {
+    background: linear-gradient(135deg, #d35400, #a0390d);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+}
+
+.dog-share-btn {
+    background: linear-gradient(135deg, #74b9ff, #0984e3);
+    color: white;
+}
+
+.dog-share-btn:hover {
+    background: linear-gradient(135deg, #0984e3, #0652a1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+}
+
+.loading-message {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.no-dogs {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.no-dogs-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.no-dogs-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+}
+
+.no-dogs h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.no-dogs p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #666;
+    grid-column: 1 / -1;
+}
+
+.no-results p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* Responsive adjustments for dog cards */
+@media (max-width: 768px) {
+    .dogs-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-filter {
+        text-align: center;
+    }
+    
+    .filter-buttons {
+        flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+        flex: 1;
+        min-width: 100px;
+    }
+    
+    .dog-actions {
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .animals-controls {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .dogs-grid {
+        gap: 1.5rem;
+    }
+    
+    .dog-card {
+        border-radius: 15px;
+    }
+    
+    .dog-info {
+        padding: 1.25rem;
+    }
+    
+    .dog-name {
+        font-size: 1.3rem;
+    }
+    
+    .filter-buttons {
+        gap: 0.25rem;
+    }
+    
+    .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
 }

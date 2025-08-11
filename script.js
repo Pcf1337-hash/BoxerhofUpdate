@@ -582,3 +582,313 @@ function fallbackCopyToClipboard(text) {
 
 // Initialize social sharing when DOM is ready
 document.addEventListener('DOMContentLoaded', setupSocialSharing);
+
+// Dog adoption functionality
+document.addEventListener('DOMContentLoaded', function() {
+    loadAdoptableDogs();
+    setupDogFilters();
+});
+
+// Load dogs from admin localStorage and display them
+function loadAdoptableDogs() {
+    try {
+        const storedAnimals = localStorage.getItem('boxerhof_animals');
+        let availableDogs = [];
+        
+        if (storedAnimals) {
+            const allAnimals = JSON.parse(storedAnimals);
+            // Filter for dogs that are available for adoption
+            availableDogs = allAnimals.filter(animal => 
+                animal.type === 'dog' && 
+                animal.status === 'available'
+            );
+        }
+        
+        displayDogs(availableDogs);
+        
+    } catch (error) {
+        console.error('Error loading dogs:', error);
+        showNoDogs();
+    }
+}
+
+// Display dogs in the container
+function displayDogs(dogs) {
+    const container = document.getElementById('dogsContainer');
+    const noDogs = document.getElementById('noDogs');
+    
+    if (!container) return;
+    
+    if (dogs.length === 0) {
+        showNoDogs();
+        return;
+    }
+    
+    // Hide no dogs message and show container
+    noDogs.style.display = 'none';
+    container.style.display = 'grid';
+    
+    // Generate dog cards
+    const dogCards = dogs.map(dog => createDogCard(dog)).join('');
+    container.innerHTML = dogCards;
+    
+    // Add click event listeners to dog cards
+    addDogCardEventListeners();
+}
+
+// Create individual dog card HTML
+function createDogCard(dog) {
+    const genderIcon = dog.gender === 'male' ? '♂️' : '♀️';
+    const sizeText = getSizeText(dog.size);
+    const energyText = getEnergyText(dog.energyLevel);
+    
+    // Create compatibility tags
+    const compatibilityTags = [];
+    if (dog.goodWith?.children) compatibilityTags.push('👶 Kinderfreundlich');
+    if (dog.goodWith?.dogs) compatibilityTags.push('🐕 Hundeverträglich');
+    
+    const compatibilityHtml = compatibilityTags.length > 0 
+        ? `<div class="dog-compatibility">${compatibilityTags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+        : '';
+    
+    // Health tags
+    const healthTags = [];
+    if (dog.vaccinated === 'yes') healthTags.push('💉 Geimpft');
+    if (dog.neutered === 'yes') healthTags.push('🏥 Kastriert');
+    
+    const healthHtml = healthTags.length > 0 
+        ? `<div class="dog-health">${healthTags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+        : '';
+    
+    return `
+        <div class="dog-card" data-dog-id="${dog.id}" data-size="${dog.size || ''}" data-energy="${dog.energyLevel || ''}">
+            <div class="dog-image">
+                <img src="${dog.image || 'https://via.placeholder.com/300x200?text=Kein+Bild+verfügbar'}" 
+                     alt="${dog.name}" 
+                     onerror="this.src='https://via.placeholder.com/300x200?text=Bild+nicht+verfügbar'">
+                <div class="dog-status-badge">Vermittlungsbereit</div>
+            </div>
+            
+            <div class="dog-info">
+                <div class="dog-header">
+                    <h3 class="dog-name">${dog.name} ${genderIcon}</h3>
+                    <div class="dog-breed-age">${dog.breed} • ${dog.age}</div>
+                </div>
+                
+                <div class="dog-description">
+                    ${dog.description}
+                </div>
+                
+                <div class="dog-details">
+                    ${sizeText ? `<span class="detail-tag">📏 ${sizeText}</span>` : ''}
+                    ${dog.weight ? `<span class="detail-tag">⚖️ ${dog.weight}</span>` : ''}
+                    ${energyText ? `<span class="detail-tag">⚡ ${energyText}</span>` : ''}
+                    ${dog.color ? `<span class="detail-tag">🎨 ${dog.color}</span>` : ''}
+                </div>
+                
+                ${compatibilityHtml}
+                ${healthHtml}
+                
+                ${dog.specialNeeds ? `
+                    <div class="dog-special-needs">
+                        <strong>🏠 Besondere Bedürfnisse:</strong>
+                        <p>${dog.specialNeeds}</p>
+                    </div>
+                ` : ''}
+                
+                <div class="dog-actions">
+                    <div class="dog-fee">
+                        ${dog.adoptionFee ? `<span class="fee">Schutzgebühr: ${dog.adoptionFee}€</span>` : ''}
+                    </div>
+                    <button class="btn btn-primary dog-interest-btn" data-dog-name="${dog.name}">
+                        💝 Interesse zeigen
+                    </button>
+                    <button class="btn btn-secondary dog-share-btn" data-dog-name="${dog.name}" data-dog-breed="${dog.breed}">
+                        📤 Teilen
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Helper functions for text display
+function getSizeText(size) {
+    const sizeMap = {
+        'small': 'Klein',
+        'medium': 'Mittel',
+        'large': 'Groß'
+    };
+    return sizeMap[size] || '';
+}
+
+function getEnergyText(energy) {
+    const energyMap = {
+        'low': 'Ruhig',
+        'medium': 'Ausgeglichen',
+        'high': 'Sehr aktiv'
+    };
+    return energyMap[energy] || '';
+}
+
+// Show no dogs message
+function showNoDogs() {
+    const container = document.getElementById('dogsContainer');
+    const noDogs = document.getElementById('noDogs');
+    
+    if (container) container.style.display = 'none';
+    if (noDogs) noDogs.style.display = 'block';
+}
+
+// Setup dog filtering functionality
+function setupDogFilters() {
+    const searchInput = document.getElementById('dogSearch');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    // Search functionality
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            filterDogs();
+        });
+    }
+    
+    // Size filter buttons
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            filterDogs();
+        });
+    });
+}
+
+// Filter dogs based on search and selected filters
+function filterDogs() {
+    const searchTerm = document.getElementById('dogSearch')?.value.toLowerCase() || '';
+    const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+    const dogCards = document.querySelectorAll('.dog-card');
+    
+    dogCards.forEach(card => {
+        const dogName = card.querySelector('.dog-name')?.textContent.toLowerCase() || '';
+        const dogBreed = card.querySelector('.dog-breed-age')?.textContent.toLowerCase() || '';
+        const dogDescription = card.querySelector('.dog-description')?.textContent.toLowerCase() || '';
+        const cardSize = card.dataset.size || '';
+        
+        // Check search match
+        const matchesSearch = !searchTerm || 
+            dogName.includes(searchTerm) || 
+            dogBreed.includes(searchTerm) || 
+            dogDescription.includes(searchTerm);
+        
+        // Check size filter match
+        const matchesFilter = activeFilter === 'all' || cardSize === activeFilter;
+        
+        // Show or hide card
+        if (matchesSearch && matchesFilter) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    
+    // Check if any cards are visible
+    const visibleCards = Array.from(dogCards).filter(card => card.style.display !== 'none');
+    const container = document.getElementById('dogsContainer');
+    const noDogs = document.getElementById('noDogs');
+    
+    if (visibleCards.length === 0 && dogCards.length > 0) {
+        // Show "no results" message
+        if (container) {
+            container.innerHTML = `
+                <div class="no-results">
+                    <p>🔍 Keine Hunde gefunden, die Ihren Suchkriterien entsprechen.</p>
+                    <button onclick="clearDogFilters()" class="btn btn-secondary">Filter zurücksetzen</button>
+                </div>
+            `;
+        }
+    }
+}
+
+// Clear all filters
+function clearDogFilters() {
+    const searchInput = document.getElementById('dogSearch');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    if (searchInput) searchInput.value = '';
+    
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    document.querySelector('.filter-btn[data-filter="all"]')?.classList.add('active');
+    
+    loadAdoptableDogs(); // Reload all dogs
+}
+
+// Add event listeners to dog cards
+function addDogCardEventListeners() {
+    // Interest buttons
+    document.querySelectorAll('.dog-interest-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const dogName = this.dataset.dogName;
+            showInterestInDog(dogName);
+        });
+    });
+    
+    // Share buttons
+    document.querySelectorAll('.dog-share-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const dogName = this.dataset.dogName;
+            const dogBreed = this.dataset.dogBreed;
+            shareDog(dogName, dogBreed);
+        });
+    });
+}
+
+// Handle interest in a dog
+function showInterestInDog(dogName) {
+    const contactEmail = 'info@boxerhof.de';
+    const subject = `Interesse an ${dogName}`;
+    const body = `Hallo,
+
+ich interessiere mich für ${dogName} und würde gerne mehr erfahren.
+
+Bitte kontaktieren Sie mich für weitere Informationen über eine mögliche Adoption.
+
+Mit freundlichen Grüßen`;
+
+    const mailtoLink = `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Try to open email client
+    if (window.navigator.userAgent.indexOf('Mobile') !== -1) {
+        // On mobile, try to open email app
+        window.location.href = mailtoLink;
+    } else {
+        // On desktop, show a confirmation and open email
+        if (confirm(`Möchten Sie eine E-Mail senden, um Ihr Interesse an ${dogName} zu bekunden?`)) {
+            window.open(mailtoLink);
+        }
+    }
+    
+    // Also show a notification
+    showNotification(`Vielen Dank für Ihr Interesse an ${dogName}! Eine E-Mail wurde vorbereitet.`, 'success');
+}
+
+// Share a dog
+function shareDog(dogName, dogBreed) {
+    const url = window.location.href;
+    const shareText = `🐾 ${dogName} (${dogBreed}) sucht ein neues Zuhause! Besuchen Sie die Boxer Nothilfe e.V.`;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: `Boxer Nothilfe - ${dogName}`,
+            text: shareText,
+            url: url
+        }).catch(err => {
+            fallbackShare(dogName, shareText, url);
+        });
+    } else {
+        fallbackShare(dogName, shareText, url);
+    }
+}
+
+// Make functions available globally
+window.clearDogFilters = clearDogFilters;
