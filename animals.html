@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Unsere Hunde zur Vermittlung - Lernen Sie die wunderbaren Hunde kennen, die ein liebevolles neues Zuhause suchen.">
+    <title>Unsere Hunde - Boxerhof Bad Oeynhausen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="boxerhof-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e67e22">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Boxerhof">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>🏡 Boxerhof Bad Oeynhausen</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="animals.html" class="active">Unsere Hunde</a></li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="pension.html">Pension</a></li>
+                    <li><a href="adoption.html">Vermittlung</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                    <li><a href="support.html">Unterstützen</a></li>
+                    <li><a href="admin.html" class="admin-link">🔧 Admin</a></li>
+                </ul>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero hero-small">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Unsere Hunde zur Vermittlung</h1>
+                    <p class="hero-subtitle">Lernen Sie unsere liebevollen Hunde kennen, die ein neues Zuhause suchen</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animals Section -->
+        <section class="animals-section">
+            <div class="container">
+                <div class="animals-filter">
+                    <button class="filter-btn active" data-filter="all">Alle</button>
+                    <button class="filter-btn" data-filter="small">Klein</button>
+                    <button class="filter-btn" data-filter="medium">Mittel</button>
+                    <button class="filter-btn" data-filter="large">Groß</button>
+                </div>
+                
+                <div class="animals-grid" id="animals-container">
+                    <!-- Dynamic content will be loaded here from admin panel -->
+                    <div class="animal-card">
+                        <div class="animal-image">
+                            <img src="https://via.placeholder.com/300x200?text=Bald+neue+Hunde" alt="Neue Hunde bald verfügbar">
+                        </div>
+                        <div class="animal-info">
+                            <h3>Neue Hunde bald verfügbar</h3>
+                            <p>Wir arbeiten ständig daran, Hunden in Not zu helfen. Schauen Sie bald wieder vorbei oder kontaktieren Sie uns direkt.</p>
+                            <a href="contact.html" class="btn btn-primary btn-small">Kontakt</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="no-animals" id="no-animals-message" style="display: none;">
+                    <h3>🐕 Momentan keine Hunde zur Vermittlung</h3>
+                    <p>Aktuell haben alle unsere Schützlinge bereits ein liebevolles Zuhause gefunden!</p>
+                    <p>Schauen Sie gerne in ein paar Tagen wieder vorbei oder kontaktieren Sie uns direkt für weitere Informationen.</p>
+                    <a href="contact.html" class="btn btn-primary">Kontakt aufnehmen</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Adoption Process Info -->
+        <section class="adoption-info">
+            <div class="container">
+                <h2>So läuft eine Adoption ab</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Kennenlernen</h3>
+                        <p>Besuchen Sie uns und lernen Sie unsere Hunde kennen. Wir nehmen uns Zeit für Sie und beraten Sie gerne.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Beratungsgespräch</h3>
+                        <p>Gemeinsam besprechen wir die Bedürfnisse des Hundes und schauen, ob er zu Ihrer Lebenssituation passt.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Probezeit</h3>
+                        <p>Nach positiver Vorabprüfung kann der Hund für eine Probezeit zu Ihnen nach Hause.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Glückliches Zuhause</h3>
+                        <p>Bei erfolgreicher Vermittlung steht einem glücklichen Leben nichts mehr im Weg!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2>Über neue Hunde informiert bleiben</h2>
+                        <p>Melden Sie sich für unseren Newsletter an und erfahren Sie als Erstes, wenn neue Hunde zur Vermittlung kommen.</p>
+                        <ul class="newsletter-benefits">
+                            <li>✅ Sofortige Benachrichtigung bei neuen Hunden</li>
+                            <li>✅ Exklusive Updates über unsere Schützlinge</li>
+                            <li>✅ Wichtige Informationen zum Tierschutz</li>
+                            <li>✅ Jederzeit kündbar</li>
+                        </ul>
+                    </div>
+                    <div class="newsletter-form">
+                        <form id="newsletterForm" class="newsletter-signup">
+                            <div class="form-group">
+                                <label for="newsletter-name">Name (optional)</label>
+                                <input type="text" id="newsletter-name" name="name" placeholder="Ihr Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="newsletter-email">E-Mail-Adresse *</label>
+                                <input type="email" id="newsletter-email" name="email" required placeholder="ihre@email.de">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Newsletter abonnieren</button>
+                            <p class="privacy-note">
+                                Mit der Anmeldung akzeptieren Sie unsere <a href="datenschutz.html">Datenschutzbestimmungen</a>.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏡 Boxerhof Bad Oeynhausen</h3>
+                    <p>Ein liebevolles Zuhause für Hunde in Not</p>
+                    <p class="footer-motto">Mit Herz und Hingabe für jedes Tier</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="animals.html">Unsere Hunde</a></li>
+                        <li><a href="pension.html">Pension</a></li>
+                        <li><a href="adoption.html">Vermittlung</a></li>
+                        <li><a href="gallery.html">Galerie</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>📧 info@boxerhof-badoeynhausen.de</p>
+                    <p>📞 +49 (0) 5731 923 4567</p>
+                    <p>📍 Boxerhof 1, 32547 Bad Oeynhausen</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Unterstützen</h4>
+                    <p>Helfen Sie uns dabei, mehr Hunden zu helfen:</p>
+                    <a href="support.html" class="btn btn-small btn-outline">Spenden</a>
+                    <div class="social-links">
+                        <a href="https://facebook.com/boxerhof" target="_blank" rel="noopener">
+                            📘 Facebook
+                        </a>
+                        <a href="mailto:info@boxerhof-badoeynhausen.de">
+                            ✉️ E-Mail
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boxerhof Bad Oeynhausen. Teil der Boxer Nothilfe e.V. Mit Liebe für Hunde gemacht. 🐾</p>
+                <div class="footer-legal">
+                    <a href="impressum.html">Impressum</a>
+                    <a href="datenschutz.html">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="animal-filter-system.js"></script>
+    <script>
+        // Load animals from admin panel
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAnimalsFromAdmin();
+        });
+
+        function loadAnimalsFromAdmin() {
+            try {
+                const animals = JSON.parse(localStorage.getItem('boxerhof_animals') || '[]');
+                const availableAnimals = animals.filter(animal => animal.status === 'Vermittlungsbereit');
+                
+                const container = document.getElementById('animals-container');
+                const noAnimalsMessage = document.getElementById('no-animals-message');
+                
+                if (availableAnimals.length === 0) {
+                    container.style.display = 'none';
+                    noAnimalsMessage.style.display = 'block';
+                } else {
+                    container.style.display = 'grid';
+                    noAnimalsMessage.style.display = 'none';
+                    
+                    // Clear existing placeholder content
+                    container.innerHTML = '';
+                    
+                    availableAnimals.forEach(animal => {
+                        const animalCard = createAnimalCard(animal);
+                        container.appendChild(animalCard);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading animals:', error);
+            }
+        }
+
+        function createAnimalCard(animal) {
+            const card = document.createElement('div');
+            card.className = 'animal-card';
+            card.setAttribute('data-size', animal.size || 'medium');
+            
+            card.innerHTML = `
+                <div class="animal-image">
+                    <img src="${animal.image || 'https://via.placeholder.com/300x200?text=' + encodeURIComponent(animal.name)}" 
+                         alt="${animal.name}" loading="lazy">
+                </div>
+                <div class="animal-info">
+                    <h3>${animal.name}</h3>
+                    <p class="animal-meta">${animal.breed} • ${animal.gender} • ${animal.age}</p>
+                    <p class="animal-description">${animal.description}</p>
+                    <div class="animal-details">
+                        ${animal.energyLevel ? `<span class="detail-tag">⚡ ${animal.energyLevel}</span>` : ''}
+                        ${animal.size ? `<span class="detail-tag">📏 ${animal.size}</span>` : ''}
+                    </div>
+                    <a href="contact.html?interest=${encodeURIComponent(animal.name)}" class="btn btn-primary btn-small">
+                        Interesse bekunden
+                    </a>
+                </div>
+            `;
+            
+            return card;
+        }
+    </script>
+</body>
+</html>
