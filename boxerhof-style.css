@@ -1,7 +1,7 @@
-/* Boxerhof Specific Styles */
+/* Boxerhof Specific Styles - Enhanced Modern Design */
 
 :root {
-    /* Boxerhof Color Palette - Warm and Welcoming */
+    /* Boxerhof Color Palette - Enhanced with Modern Gradients */
     --boxerhof-primary: #d35400;
     --boxerhof-primary-light: #e67e22;
     --boxerhof-primary-dark: #a0401a;
@@ -16,23 +16,48 @@
     --boxerhof-sky: #64b5f6;
     --boxerhof-earth: #a1887f;
     
+    /* Modern Gradients */
+    --boxerhof-gradient-primary: linear-gradient(135deg, #d35400, #e67e22, #f39c12);
+    --boxerhof-gradient-warm: linear-gradient(135deg, #e8a87c, #f39c12, #e67e22);
+    --boxerhof-gradient-nature: linear-gradient(135deg, #27ae60, #7cb342, #64b5f6);
+    
     /* Typography */
     --boxerhof-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     
     /* Spacing */
     --boxerhof-section-padding: 4rem 0;
     --boxerhof-container-padding: 0 2rem;
+    
+    /* Animations */
+    --boxerhof-animation-bounce: bounce 6s ease-in-out infinite;
+    --boxerhof-animation-float: float 3s ease-in-out infinite;
+    --boxerhof-animation-glow: glow 2s ease-in-out infinite alternate;
 }
 
-/* Hero Slideshow */
+/* Enhanced Hero Slideshow with Modern Effects */
 .hero-boxerhof {
     position: relative;
-    height: 80vh;
-    min-height: 600px;
+    height: 85vh;
+    min-height: 650px;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--boxerhof-gradient-primary);
+}
+
+.hero-boxerhof::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(39, 174, 96, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(243, 156, 18, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(230, 126, 34, 0.05) 0%, transparent 70%);
+    z-index: 2;
 }
 
 .hero-slideshow {
@@ -51,7 +76,7 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,6 +87,7 @@
 
 .slide.active {
     opacity: 1;
+    transform: scale(1.02);
 }
 
 /* Fallback backgrounds for when images aren't available */
@@ -94,19 +120,27 @@
     z-index: 3;
     text-align: center;
     color: white;
-    max-width: 800px;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: var(--radius-lg);
-    backdrop-filter: blur(10px);
+    max-width: 900px;
+    padding: 3rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: var(--boxerhof-animation-float);
 }
 
 .slide-content h1,
 .slide-content h2 {
     font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    background: var(--boxerhof-gradient-warm);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: var(--boxerhof-animation-glow);
 }
 
 .hero-subtitle {
@@ -1061,4 +1095,134 @@
     .pension-features {
         grid-template-columns: 1fr;
     }
+}
+
+/* Modern Animations for Eye-Catching Design */
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px); 
+    }
+    50% { 
+        transform: translateY(-10px); 
+    }
+}
+
+@keyframes glow {
+    0% { 
+        filter: drop-shadow(0 0 5px rgba(243, 156, 18, 0.5)); 
+    }
+    100% { 
+        filter: drop-shadow(0 0 20px rgba(243, 156, 18, 0.8)); 
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { 
+        transform: translateY(0); 
+    }
+    40% { 
+        transform: translateY(-15px); 
+    }
+    60% { 
+        transform: translateY(-7px); 
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.05); 
+        opacity: 0.8;
+    }
+}
+
+@keyframes slideInUp {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Enhanced Card Animations */
+.service-card,
+.animal-card-small,
+.feature {
+    animation: slideInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.service-card:nth-child(1) { animation-delay: 0.1s; }
+.service-card:nth-child(2) { animation-delay: 0.2s; }
+.service-card:nth-child(3) { animation-delay: 0.3s; }
+.service-card:nth-child(4) { animation-delay: 0.4s; }
+
+.animal-card-small:nth-child(1) { animation-delay: 0.1s; }
+.animal-card-small:nth-child(2) { animation-delay: 0.2s; }
+.animal-card-small:nth-child(3) { animation-delay: 0.3s; }
+
+/* Enhanced Hover Effects */
+.service-card:hover,
+.animal-card-small:hover {
+    animation: pulse 0.6s ease-in-out;
+}
+
+/* Enhanced Button Styling */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Enhanced Mission Section */
+.mission {
+    background: 
+        linear-gradient(135deg, var(--boxerhof-cream) 0%, white 50%, var(--boxerhof-cream) 100%),
+        radial-gradient(circle at 20% 20%, rgba(39, 174, 96, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(243, 156, 18, 0.05) 0%, transparent 50%);
+}
+
+/* Enhanced Services Section */
+.services {
+    background: 
+        var(--boxerhof-gradient-nature),
+        linear-gradient(135deg, #f8f9fa, var(--boxerhof-cream));
+    background-blend-mode: overlay;
 }
