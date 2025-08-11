@@ -487,6 +487,70 @@
                 </div>
             </div>
         </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2>🐕 Newsletter abonnieren</h2>
+                        <p class="newsletter-lead">
+                            Bleiben Sie informiert über neue Hunde und erfolgreiche Vermittlungen!
+                        </p>
+                        <p>
+                            Erhalten Sie automatisch Benachrichtigungen, wenn ein neuer Hund bei uns ankommt 
+                            oder wenn einer unserer Schützlinge erfolgreich vermittelt wurde. So verpassen Sie 
+                            keine wichtigen Updates vom Boxerhof.
+                        </p>
+                        <div class="newsletter-benefits">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">📧</span>
+                                <span>Sofortige Benachrichtigung bei neuen Hunden</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">❤️</span>
+                                <span>Frohe Nachrichten über erfolgreiche Vermittlungen</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">🚫</span>
+                                <span>Jederzeit abbestellbar</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="newsletter-form-wrapper">
+                        <form class="newsletter-form" id="newsletterForm">
+                            <h3>✉️ Jetzt anmelden</h3>
+                            <div class="form-group">
+                                <label for="newsletter-name">Name (optional)</label>
+                                <input type="text" id="newsletter-name" name="name" placeholder="Ihr Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="newsletter-email">E-Mail-Adresse *</label>
+                                <input type="email" id="newsletter-email" name="email" required placeholder="ihre@email.de">
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="gdpr" required>
+                                    <span class="checkbox-text">
+                                        Ich stimme zu, dass meine E-Mail-Adresse für Newsletter-Zwecke gespeichert wird. 
+                                        <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>
+                                    </span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary newsletter-btn">
+                                📧 Newsletter abonnieren
+                            </button>
+                            <p class="newsletter-note">
+                                <small>
+                                    Sie können sich jederzeit wieder abmelden. 
+                                    Ihre Daten werden vertraulich behandelt.
+                                </small>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -539,6 +603,7 @@
     </footer>
 
     <script src="boxerhof-slideshow.js"></script>
+    <script src="newsletter-system.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

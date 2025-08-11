@@ -593,6 +593,7 @@ function handleAnimalSave(e) {
     };
     
     const existingIndex = adminState.animals.findIndex(a => a.id == animalData.id);
+    const isNewAnimal = existingIndex === -1;
     
     if (existingIndex !== -1) {
         // Keep original creation date when updating
@@ -610,6 +611,11 @@ function handleAnimalSave(e) {
     loadAnimals();
     closeAnimalModal();
     updateDashboard();
+
+    // Send newsletter notification for new dogs if status is "Vermittlungsbereit"
+    if (isNewAnimal && animalData.status === 'Vermittlungsbereit' && window.newsletterSystem) {
+        handleNewDogNotification(animalData);
+    }
 }
 
 function editAnimal(animalId) {
@@ -617,12 +623,291 @@ function editAnimal(animalId) {
 }
 
 function deleteAnimal(animalId) {
-    if (confirm('Sind Sie sicher, dass Sie dieses Tier löschen möchten?')) {
+    const animal = adminState.animals.find(a => a.id === animalId);
+    if (!animal) {
+        showMessage('Tier nicht gefunden!', 'error');
+        return;
+    }
+
+    // Create custom confirmation dialog with newsletter option
+    showAdoptionConfirmDialog(animal, animalId);
+}
+
+function showAdoptionConfirmDialog(animal, animalId) {
+    // Create custom modal for deletion with newsletter notification option
+    const modal = document.createElement('div');
+    modal.className = 'adoption-modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        font-family: Inter, sans-serif;
+    `;
+
+    modal.innerHTML = `
+        <div class="adoption-modal-content" style="
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        ">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="font-size: 48px; margin-bottom: 15px;">🐕❤️</div>
+                <h3 style="margin: 0 0 10px 0; color: #2d3436;">Hund von der Liste entfernen</h3>
+                <p style="color: #636e72; margin: 0;">
+                    Möchten Sie <strong>${animal.name}</strong> von der Vermittlungsliste entfernen?
+                </p>
+            </div>
+            
+            <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                <h4 style="margin: 0 0 15px 0; color: #495057; display: flex; align-items: center;">
+                    <span style="margin-right: 8px;">📧</span>
+                    Newsletter-Benachrichtigung
+                </h4>
+                <label style="display: flex; align-items: flex-start; cursor: pointer; margin-bottom: 10px;">
+                    <input type="checkbox" id="notifyAdoption" checked style="margin-right: 10px; margin-top: 2px;">
+                    <span style="color: #495057; line-height: 1.5;">
+                        <strong>Newsletter-Abonnenten benachrichtigen</strong><br>
+                        <small style="color: #6c757d;">
+                            Alle Newsletter-Abonnenten werden darüber informiert, dass ${animal.name} erfolgreich vermittelt wurde.
+                            Dies hilft dabei, positive Nachrichten zu teilen und das Vertrauen in unsere Arbeit zu stärken.
+                        </small>
+                    </span>
+                </label>
+                <div style="background: #e3f2fd; border-radius: 6px; padding: 12px; margin-top: 15px;">
+                    <small style="color: #0277bd; display: flex; align-items: center;">
+                        <span style="margin-right: 5px;">💡</span>
+                        <span id="subscriberCount">Lade Newsletter-Statistik...</span>
+                    </small>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button onclick="cancelAdoptionDialog()" style="
+                    background: #6c757d;
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-weight: 500;
+                    transition: background-color 0.2s;
+                " onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">
+                    Abbrechen
+                </button>
+                <button onclick="confirmAnimalDeletion(${animalId})" style="
+                    background: #e67e22;
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-weight: 500;
+                    transition: background-color 0.2s;
+                " onmouseover="this.style.background='#d35400'" onmouseout="this.style.background='#e67e22'">
+                    🐕 Von Liste entfernen
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Load and display subscriber count
+    if (window.newsletterSystem) {
+        const stats = window.newsletterSystem.getStats();
+        const subscriberCountEl = document.getElementById('subscriberCount');
+        if (subscriberCountEl) {
+            subscriberCountEl.textContent = `${stats.preferences.adoptions} Abonnenten werden über die erfolgreiche Vermittlung informiert.`;
+        }
+    }
+
+    // Store reference for cleanup
+    window.currentAdoptionModal = modal;
+}
+
+function cancelAdoptionDialog() {
+    if (window.currentAdoptionModal) {
+        window.currentAdoptionModal.remove();
+        window.currentAdoptionModal = null;
+    }
+}
+
+async function confirmAnimalDeletion(animalId) {
+    const animal = adminState.animals.find(a => a.id === animalId);
+    if (!animal) {
+        showMessage('Tier nicht gefunden!', 'error');
+        cancelAdoptionDialog();
+        return;
+    }
+
+    const notifyCheckbox = document.getElementById('notifyAdoption');
+    const shouldNotify = notifyCheckbox && notifyCheckbox.checked;
+
+    try {
+        // Remove the animal from the list first
         adminState.animals = adminState.animals.filter(a => a.id !== animalId);
         saveAnimals();
         loadAnimals();
         updateDashboard();
-        showMessage('Tier erfolgreich gelöscht!', 'success');
+
+        // Send newsletter notification if requested
+        if (shouldNotify && window.newsletterSystem) {
+            showMessage('Hund wird von der Liste entfernt und Newsletter wird versendet...', 'info');
+            
+            try {
+                const result = await window.newsletterSystem.notifyDogAdopted(animal);
+                
+                if (result.success) {
+                    showMessage(`✅ ${animal.name} wurde von der Liste entfernt und ${result.sent} Newsletter-Abonnenten wurden benachrichtigt!`, 'success');
+                } else {
+                    showMessage(`⚠️ ${animal.name} wurde von der Liste entfernt, aber Newsletter konnte nicht versendet werden: ${result.reason}`, 'warning');
+                }
+            } catch (error) {
+                console.error('Newsletter notification failed:', error);
+                showMessage(`⚠️ ${animal.name} wurde von der Liste entfernt, aber es gab einen Fehler beim Newsletter-Versand.`, 'warning');
+            }
+        } else {
+            showMessage(`✅ ${animal.name} wurde erfolgreich von der Liste entfernt!`, 'success');
+        }
+
+    } catch (error) {
+        console.error('Error during animal deletion:', error);
+        showMessage('Fehler beim Entfernen des Hundes!', 'error');
+    }
+
+    cancelAdoptionDialog();
+}
+
+async function handleNewDogNotification(animalData) {
+    // Show confirmation dialog for newsletter notification
+    const shouldNotify = await showNewDogNotificationDialog(animalData);
+    
+    if (shouldNotify) {
+        try {
+            showMessage('Newsletter wird an Abonnenten versendet...', 'info');
+            const result = await window.newsletterSystem.notifyNewDog(animalData);
+            
+            if (result.success) {
+                showMessage(`📧 Newsletter über ${animalData.name} wurde an ${result.sent} Abonnenten versendet!`, 'success');
+            } else {
+                showMessage(`⚠️ Newsletter konnte nicht versendet werden: ${result.reason}`, 'warning');
+            }
+        } catch (error) {
+            console.error('Newsletter notification failed:', error);
+            showMessage('Fehler beim Newsletter-Versand.', 'error');
+        }
+    }
+}
+
+function showNewDogNotificationDialog(animalData) {
+    return new Promise((resolve) => {
+        const modal = document.createElement('div');
+        modal.className = 'new-dog-notification-modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            font-family: Inter, sans-serif;
+        `;
+
+        const stats = window.newsletterSystem ? window.newsletterSystem.getStats() : { preferences: { newDogs: 0 } };
+
+        modal.innerHTML = `
+            <div class="notification-modal-content" style="
+                background: white;
+                border-radius: 12px;
+                padding: 30px;
+                max-width: 500px;
+                width: 90%;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            ">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🐕✨</div>
+                    <h3 style="margin: 0 0 10px 0; color: #2d3436;">Neuer Hund hinzugefügt!</h3>
+                    <p style="color: #636e72; margin: 0;">
+                        <strong>${animalData.name}</strong> wurde erfolgreich zur Vermittlungsliste hinzugefügt.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                    <h4 style="margin: 0 0 15px 0; color: #495057; display: flex; align-items: center;">
+                        <span style="margin-right: 8px;">📧</span>
+                        Newsletter-Benachrichtigung versenden?
+                    </h4>
+                    <p style="color: #495057; line-height: 1.5; margin-bottom: 15px;">
+                        Möchten Sie alle Newsletter-Abonnenten über ${animalData.name} informieren? 
+                        Dies hilft dabei, schnell potentielle Adoptanten zu finden.
+                    </p>
+                    <div style="background: #e3f2fd; border-radius: 6px; padding: 12px;">
+                        <small style="color: #0277bd; display: flex; align-items: center;">
+                            <span style="margin-right: 5px;">👥</span>
+                            ${stats.preferences.newDogs} Abonnenten erhalten die Benachrichtigung
+                        </small>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button onclick="resolveNewDogDialog(false)" style="
+                        background: #6c757d;
+                        color: white;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: 500;
+                        transition: background-color 0.2s;
+                    " onmouseover="this.style.background='#5a6268'" onmouseout="this.style.background='#6c757d'">
+                        Nicht senden
+                    </button>
+                    <button onclick="resolveNewDogDialog(true)" style="
+                        background: #74b9ff;
+                        color: white;
+                        border: none;
+                        padding: 12px 24px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: 500;
+                        transition: background-color 0.2s;
+                    " onmouseover="this.style.background='#0984e3'" onmouseout="this.style.background='#74b9ff'">
+                        📧 Newsletter senden
+                    </button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        // Store resolver function globally for button handlers
+        window.currentNewDogResolver = resolve;
+        window.currentNewDogModal = modal;
+    });
+}
+
+window.resolveNewDogDialog = function(shouldSend) {
+    if (window.currentNewDogResolver) {
+        window.currentNewDogResolver(shouldSend);
+        window.currentNewDogResolver = null;
+    }
+    if (window.currentNewDogModal) {
+        window.currentNewDogModal.remove();
+        window.currentNewDogModal = null;
     }
 }
 
