@@ -3,45 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Boxer Nothilfe e.V. - Ein sicherer Hafen für Hunde in Not. Wir päppeln Hunde aus schlechten Verhältnissen wieder auf und vermitteln sie liebevoll weiter.">
-    <title>Boxer Nothilfe e.V. - Ein sicherer Hafen für Hunde in Not</title>
+    <meta name="description" content="Boxerhof in Bad Oeynhausen - Ein liebevolles Zuhause für Hunde in Not. Temporäre Unterbringung, Pensionsgäste und Vermittlung von Hunden.">
+    <title>Boxerhof Bad Oeynhausen - Ein liebevolles Zuhause für Hunde in Not</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="enhancements.css">
-    <link rel="stylesheet" href="modern-design.css">
+    <link rel="stylesheet" href="boxerhof-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#667eea">
+    <meta name="theme-color" content="#e67e22">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Boxerhof">
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="script.js" as="script">
-    <link rel="preload" href="performance-enhancements.js" as="script">
-    <link rel="preload" href="image-optimization.js" as="script">
-    <link rel="preload" href="animal-filter-system.js" as="script">
-    <link rel="preload" href="pwa-enhancement.js" as="script">
 </head>
 <body>
     <header class="header">
         <nav class="nav">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <h1>🐕 Boxer Nothilfe e.V.</h1>
+                    <h1>🏡 Boxerhof Bad Oeynhausen</h1>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="#about">Über uns</a></li>
                     <li><a href="#animals">Unsere Hunde</a></li>
-                    <li><a href="#gallery">Galerie</a></li>
-                    <li><a href="#guestbook">Gästebuch</a></li>
-                    <li><a href="#events">Veranstaltungen</a></li>
-                    <li><a href="#help">Hilfe</a></li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="#pension">Pension</a></li>
+                    <li><a href="#adoption">Vermittlung</a></li>
                     <li><a href="#contact">Kontakt</a></li>
+                    <li><a href="support.html">Unterstützen</a></li>
                     <li><a href="admin.html" class="admin-link">🔧 Admin</a></li>
                 </ul>
                 <div class="nav-toggle">
@@ -54,52 +46,92 @@
     </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Willkommen bei der Boxer Nothilfe e.V.</h1>
-                <p class="hero-subtitle">Ein sicherer Hafen für Hunde in Not</p>
-                <p class="hero-description">
-                    Hier auf unserem Hof kümmern wir uns liebevoll um Hunde aus schlechten Verhältnissen. Wir päppeln sie wieder auf, geben ihnen medizinische Versorgung und vermitteln sie an liebevolle Familien weiter. Jeder Hund verdient eine zweite Chance auf ein glückliches Leben.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#about" class="btn btn-primary">Mehr erfahren</a>
-                    <a href="#help" class="btn btn-secondary">Hunden helfen</a>
+        <!-- Hero Section with Boxerhof Images -->
+        <section class="hero-boxerhof">
+            <div class="hero-slideshow">
+                <div class="slide active" data-bg="boxerhof-1">
+                    <div class="slide-content">
+                        <h1>Willkommen auf dem Boxerhof</h1>
+                        <p class="hero-subtitle">Ein liebevolles Zuhause für Hunde in Not</p>
+                        <p class="hero-description">
+                            In Bad Oeynhausen bieten wir Hunden aus schwierigen Verhältnissen ein 
+                            sicheres Zuhause auf Zeit. Mit viel Liebe und Hingabe päppeln wir sie 
+                            wieder auf und finden für jeden das perfekte neue Zuhause.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-image">
-                <div class="hero-placeholder">
-                    <div class="hero-visual">
-                        <div class="hero-icon">🏡</div>
-                        <div class="hero-dogs">🐕 🐶 🦮</div>
-                        <div class="hero-heart">💝</div>
+                <div class="slide" data-bg="boxerhof-2">
+                    <div class="slide-content">
+                        <h2>Unser wunderschöner Hof</h2>
+                        <p>Weitläufige Außenanlagen, wo unsere Hunde sicher spielen und sich erholen können.</p>
+                    </div>
+                </div>
+                <div class="slide" data-bg="boxerhof-3">
+                    <div class="slide-content">
+                        <h2>Liebevolle Betreuung</h2>
+                        <p>Jeder Hund erhält individuelle Aufmerksamkeit und die Pflege, die er braucht.</p>
                     </div>
                 </div>
             </div>
+            
+            <!-- Slideshow Controls -->
+            <div class="slideshow-controls">
+                <button class="prev-slide" aria-label="Vorheriges Bild">❮</button>
+                <button class="next-slide" aria-label="Nächstes Bild">❯</button>
+            </div>
+            
+            <!-- Slide Indicators -->
+            <div class="slide-indicators">
+                <button class="indicator active" data-slide="0"></button>
+                <button class="indicator" data-slide="1"></button>
+                <button class="indicator" data-slide="2"></button>
+            </div>
+
+            <div class="hero-cta">
+                <a href="animals.html" class="btn btn-primary">Unsere Hunde kennenlernen</a>
+                <a href="support.html" class="btn btn-secondary">Jetzt helfen</a>
+            </div>
         </section>
 
-        <section id="about" class="about">
+        <!-- Mission Section -->
+        <section class="mission">
             <div class="container">
-                <h2>Über die Boxer Nothilfe e.V.</h2>
-                <div class="about-grid">
-                    <div class="about-text">
-                        <p>
-                            Die Boxer Nothilfe e.V. ist mehr als nur ein Zuhause für Hunde in Not – es ist ein Ort, an dem Liebe, Fürsorge und Hingabe im Mittelpunkt stehen. Hier verwirklichen wir täglich den Traum, Hunden aus schlechten Verhältnissen zu helfen und sie wieder aufzupäppeln.
+                <div class="mission-grid">
+                    <div class="mission-text">
+                        <h2>Unsere Mission</h2>
+                        <p class="mission-lead">
+                            Der Boxerhof ist mehr als nur eine Auffangstation - er ist ein Ort der Heilung, 
+                            des Vertrauens und der Hoffnung.
                         </p>
                         <p>
-                            Unsere Mission ist es, Hunden in Not ein sicheres und liebevolles Zuhause zu bieten, sie wieder gesund zu pflegen und an liebevolle Familien zu vermitteln. Als Teil der Boxer Nothilfe e.V. arbeiten wir täglich daran, das Leben von Boxern und anderen Hunden zu verbessern.
+                            Hier in Bad Oeynhausen kümmern wir uns mit unermüdlicher Hingabe um jeden 
+                            einzelnen Hund. Als Teil der Boxer Nothilfe e.V. sind wir spezialisiert auf 
+                            die Betreuung von Hunden, die ein neues Zuhause brauchen - sei es temporär 
+                            als Pensionsgäste oder dauerhaft durch Vermittlung.
                         </p>
-                        <div class="features">
+                        <div class="mission-features">
                             <div class="feature">
-                                <h3>💝 Hundeliebe</h3>
-                                <p>Jeder Hund wird mit bedingungsloser Liebe und Respekt behandelt</p>
-                            </div>
-                            <div class="feature">
-                                <h3>🏠 Sicheres Zuhause</h3>
-                                <p>Ein geschützter Ort, an dem sich Hunde sicher und geliebt fühlen</p>
+                                <div class="feature-icon">🏠</div>
+                                <h3>Temporäres Zuhause</h3>
+                                <p>Sichere Unterbringung für Hunde in Übergangszeiten</p>
                             </div>
                             <div class="feature">
-                                <h3>🤝 Vermittlung</h3>
-                                <p>Wir finden für jeden Hund die passende, liebevolle Familie</p>
+                                <div class="feature-icon">🐕</div>
+                                <h3>Pensionsgäste</h3>
+                                <p>Liebevolle Betreuung während Urlauben oder Notfällen</p>
+                            </div>
+                            <div class="feature">
+                                <div class="feature-icon">❤️</div>
+                                <h3>Vermittlung</h3>
+                                <p>Wir finden für jeden Hund das perfekte neue Zuhause</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mission-image">
+                        <div class="image-placeholder" style="background: linear-gradient(135deg, #e67e22, #f39c12);">
+                            <div class="placeholder-content">
+                                <span class="placeholder-icon">🏡</span>
+                                <span class="placeholder-text">Unser liebevoller Boxerhof</span>
                             </div>
                         </div>
                     </div>
@@ -107,305 +139,349 @@
             </div>
         </section>
 
-        <section id="animals" class="animals">
+        <!-- Current Animals Teaser -->
+        <section class="animals-teaser">
             <div class="container">
-                <h2>Unsere Hunde</h2>
-                <p class="section-subtitle">Lernen Sie die wunderbaren Hunde kennen, die auf ein neues Zuhause warten</p>
-                <!-- Filters will be inserted here dynamically -->
-                <div class="animals-grid" id="animals-grid">
-                    <!-- Static content as fallback - will be replaced by dynamic content if available -->
-                    <div class="animal-card">
-                        <div class="animal-icon">🐕</div>
-                        <h3>Boxer</h3>
-                        <p>Unsere geliebten Boxer sind das Herz des Hofes. Diese treuen Begleiter kommen oft aus schwierigen Verhältnissen und brauchen besondere Zuwendung.</p>
-                        <div class="animal-share">
-                            <button class="share-btn" data-animal="Boxer" data-description="Unsere geliebten Boxer sind das Herz des Hofes">
-                                📤 Teilen
-                            </button>
-                        </div>
-                    </div>
-                    <div class="animal-card">
-                        <div class="animal-icon">🦮</div>
-                        <h3>Mischlingshunde</h3>
-                        <p>Auch Mischlinge finden bei uns Schutz und Pflege. Jeder Hund ist einzigartig und verdient eine zweite Chance auf ein glückliches Leben.</p>
-                        <div class="animal-share">
-                            <button class="share-btn" data-animal="Mischlingshunde" data-description="Mischlinge die eine zweite Chance verdienen">
-                                📤 Teilen
-                            </button>
-                        </div>
-                    </div>
-                    <div class="animal-card">
-                        <div class="animal-icon">🐕‍🦺</div>
-                        <h3>Senior-Hunde</h3>
-                        <p>Ältere Hunde brauchen besondere Aufmerksamkeit und medizinische Versorgung. Wir geben ihnen die Ruhe und Pflege, die sie verdienen.</p>
-                        <div class="animal-share">
-                            <button class="share-btn" data-animal="Senior-Hunde" data-description="Ältere Hunde die besondere Pflege brauchen">
-                                📤 Teilen
-                            </button>
-                        </div>
-                    </div>
-                    <div class="animal-card">
-                        <div class="animal-icon">🐶</div>
-                        <h3>Welpen & Junghunde</h3>
-                        <p>Junge Hunde benötigen viel Aufmerksamkeit, Training und Sozialisation. Wir bereiten sie optimal auf ihr neues Leben vor.</p>
-                        <div class="animal-share">
-                            <button class="share-btn" data-animal="Welpen" data-description="Junge Hunde die eine liebevolle Familie suchen">
-                                📤 Teilen
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section id="gallery" class="gallery">
-            <div class="container">
-                <h2>🖼️ Unser Boxerhof - Impressionen</h2>
-                <p class="section-subtitle">Entdecken Sie unseren Hof, wo jeder Hund liebevoll betreut wird</p>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <div class="gallery-image placeholder-farm" role="img" aria-label="Unser Hof - Der sichere Zufluchtsort für unsere Schützlinge"></div>
-                        <div class="gallery-overlay">
-                            <h3>🏡 Unser Hof</h3>
-                            <p>Der sichere Zufluchtsort für unsere Schützlinge</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-image placeholder-dogs" role="img" aria-label="Unsere Hunde - Boxer und Mischlinge beim Spielen und Erholen"></div>
-                        <div class="gallery-overlay">
-                            <h3>🐕 Unsere Hunde</h3>
-                            <p>Boxer und Mischlinge beim Spielen und Erholen</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-image placeholder-care" role="img" aria-label="Medizinische Versorgung - Professionelle Pflege für jeden unserer Hunde"></div>
-                        <div class="gallery-overlay">
-                            <h3>💊 Medizinische Versorgung</h3>
-                            <p>Professionelle Pflege für jeden unserer Hunde</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-image placeholder-training" role="img" aria-label="Training und Spiel - Sozialisierung und Vorbereitung auf ein neues Zuhause"></div>
-                        <div class="gallery-overlay">
-                            <h3>🎾 Training & Spiel</h3>
-                            <p>Sozialisierung und Vorbereitung auf ein neues Zuhause</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-image placeholder-volunteers" role="img" aria-label="Freiwillige Helfer - Unser Team im Einsatz für die Tiere"></div>
-                        <div class="gallery-overlay">
-                            <h3>🤝 Freiwillige Helfer</h3>
-                            <p>Unser Team im Einsatz für die Tiere</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-image placeholder-family" role="img" aria-label="Neue Familien - Erfolgreiche Vermittlungen machen uns glücklich"></div>
-                        <div class="gallery-overlay">
-                            <h3>❤️ Neue Familien</h3>
-                            <p>Erfolgreiche Vermittlungen machen uns glücklich</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-info">
-                    <div class="info-card">
-                        <h3>🌟 Mutter's Hingabe</h3>
-                        <p>Unsere Leiterin kümmert sich täglich mit unermüdlicher Hingabe um jeden einzelnen Hund. Sie ist die Seele des Hofes und sorgt dafür, dass alle Tiere die Liebe und Pflege bekommen, die sie verdienen.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>🏠 Ein Zuhause auf Zeit</h3>
-                        <p>Der Boxerhof ist mehr als nur eine Auffangstation - er ist ein Ort der Heilung, des Vertrauens und der Hoffnung. Hier erholen sich traumatisierte Tiere und lernen wieder zu vertrauen.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Guestbook Section -->
-        <section id="guestbook" class="guestbook">
-            <div class="container">
-                <h2>📝 Gästebuch</h2>
-                <p class="section-subtitle">Teilen Sie Ihre Erfahrungen und Gedanken mit uns</p>
+                <h2>Unsere aktuellen Schützlinge</h2>
+                <p>Lernen Sie die wunderbaren Hunde kennen, die gerade bei uns leben</p>
                 
-                <!-- Guestbook Form -->
-                <div class="guestbook-form-container">
-                    <h3>Gästebucheintrag verfassen</h3>
-                    <form id="guestbookForm" class="guestbook-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="guestName">Name *</label>
-                                <input type="text" id="guestName" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="guestEmail">E-Mail (optional)</label>
-                                <input type="email" id="guestEmail" name="email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="guestMessage">Nachricht *</label>
-                            <textarea id="guestMessage" name="message" rows="4" required placeholder="Teilen Sie Ihre Gedanken, Erfahrungen oder Grüße mit uns..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="guestImage">Bild (optional)</label>
-                            <input type="file" id="guestImage" name="image" accept="image/*">
-                            <small>Maximal 5MB. Erlaubte Formate: JPG, PNG, GIF</small>
-                        </div>
-                        <div class="form-group checkbox-group">
-                            <label>
-                                <input type="checkbox" id="guestConsent" name="consent" required>
-                                <span class="checkmark"></span>
-                                Ich stimme zu, dass mein Eintrag nach Prüfung veröffentlicht werden darf und bin mit der <a href="#privacy" class="privacy-link">Datenschutzerklärung</a> einverstanden.
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Eintrag absenden</button>
-                        <p class="form-note">
-                            <small>📝 Ihr Eintrag wird vor der Veröffentlichung geprüft und freigeschaltet.</small>
-                        </p>
-                    </form>
-                </div>
-
-                <!-- Guestbook Entries -->
-                <div class="guestbook-entries">
-                    <h3>Gästebucheinträge</h3>
-                    <div id="guestbookList" class="guestbook-list">
-                        <!-- Entries will be loaded here -->
+                <div class="animals-preview" id="animals-preview">
+                    <!-- Will be populated by JavaScript -->
+                    <div class="animal-card-small">
+                        <div class="animal-image">🐕</div>
+                        <h3>Bella</h3>
+                        <p>Liebevolle Labrador-Mix Hündin sucht neues Zuhause</p>
                     </div>
-                    <div class="guestbook-pagination">
-                        <button id="loadMoreEntries" class="btn btn-secondary">Weitere Einträge laden</button>
+                    <div class="animal-card-small">
+                        <div class="animal-image">🦮</div>
+                        <h3>Max</h3>
+                        <p>Verspielter Boxer-Rüde, ideal für aktive Familien</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Events Section -->
-        <section id="events" class="events">
-            <div class="container">
-                <h2>📅 Veranstaltungen</h2>
-                <p class="section-subtitle">Besuchen Sie unsere Events und lernen Sie uns kennen</p>
-                
-                <!-- Event Filter Tabs -->
-                <div class="event-filters">
-                    <button class="filter-btn active" data-filter="upcoming">Kommende Events</button>
-                    <button class="filter-btn" data-filter="past">Vergangene Events</button>
+                    <div class="animal-card-small">
+                        <div class="animal-image">🐕‍🦺</div>
+                        <h3>Luna</h3>
+                        <p>Ruhige Senior-Hündin für gemütliche Spaziergänge</p>
+                    </div>
                 </div>
                 
-                <!-- Events List -->
-                <div id="eventsList" class="events-list">
-                    <!-- Events will be loaded here -->
+                <div class="teaser-cta">
+                    <a href="animals.html" class="btn btn-primary">Alle Hunde ansehen</a>
                 </div>
-                
-                <!-- No Events Message -->
-                <div id="noEventsMessage" class="no-events" style="display: none;">
-                    <div class="no-events-content">
-                        <div class="no-events-icon">📅</div>
-                        <h3>Keine Veranstaltungen geplant</h3>
-                        <p>Aktuell sind keine Veranstaltungen geplant. Schauen Sie bald wieder vorbei oder abonnieren Sie unseren Newsletter, um über neue Events informiert zu werden.</p>
-                        <a href="#newsletter" class="btn btn-primary">Newsletter abonnieren</a>
+            </div>
+        </section>
+
+        <!-- Services Overview -->
+        <section class="services">
+            <div class="container">
+                <h2>Unsere Leistungen</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🏠</div>
+                        <h3>Notfallbetreuung</h3>
+                        <p>Kurzfristige Unterbringung von Hunden in Notlagen oder bei familiären Problemen.</p>
+                        <a href="contact.html" class="service-link">Mehr erfahren</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🧳</div>
+                        <h3>Hundepension</h3>
+                        <p>Liebevolle Betreuung Ihres Vierbeiners während Ihres Urlaubs oder geschäftlicher Termine.</p>
+                        <a href="pension.html" class="service-link">Mehr erfahren</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💝</div>
+                        <h3>Vermittlung</h3>
+                        <p>Wir finden für Hunde in Not das perfekte neue Zuhause bei liebevollen Familien.</p>
+                        <a href="adoption.html" class="service-link">Mehr erfahren</a>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🏥</div>
+                        <h3>Gesundheitsvorsorge</h3>
+                        <p>Medizinische Betreuung und Rehabilitation für Hunde aus schlechten Verhältnissen.</p>
+                        <a href="about.html" class="service-link">Mehr erfahren</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="help" class="help">
+        <!-- Quick Contact -->
+        <section class="quick-contact">
             <div class="container">
-                <h2>Wie Sie Hunden helfen können</h2>
-                <div class="help-grid">
-                    <div class="help-item">
-                        <h3>🎯 Spenden</h3>
-                        <p>Ihre Spende hilft uns, Futter, medizinische Versorgung und sichere Unterkünfte für unsere Hunde zu finanzieren.</p>
-                    </div>
-                    <div class="help-item">
-                        <h3>🤲 Freiwilligenarbeit</h3>
-                        <p>Helfen Sie uns bei der täglichen Pflege und Betreuung unserer Hunde. Jede helfende Hand ist willkommen.</p>
-                    </div>
-                    <div class="help-item">
-                        <h3>🏠 Adoption</h3>
-                        <p>Geben Sie einem unserer Hunde ein liebevolles Zuhause. Wir unterstützen Sie bei der Auswahl des passenden Vierbeiners.</p>
-                    </div>
-                    <div class="help-item">
-                        <h3>📢 Bewusstsein schaffen</h3>
-                        <p>Erzählen Sie anderen von unserer Arbeit und dem Leid von Hunden in schlechten Verhältnissen.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <div class="container">
-                <h2>Kontakt</h2>
                 <div class="contact-grid">
                     <div class="contact-info">
-                        <h3>Besuchen Sie uns</h3>
-                        <p>Wir freuen uns immer über Besucher, die unsere Hunde kennenlernen möchten. Bitte vereinbaren Sie vorab einen Termin, damit wir uns optimal um Sie und unsere Schützlinge kümmern können.</p>
+                        <h2>Kontaktieren Sie uns</h2>
+                        <p>Haben Sie Fragen oder möchten Sie uns besuchen? Wir freuen uns auf Sie!</p>
+                        
                         <div class="contact-details">
                             <div class="contact-item">
-                                <strong>📧 E-Mail:</strong>
-                                <a href="mailto:info@boxerhof.de">info@boxerhof.de</a>
+                                <div class="contact-icon">📧</div>
+                                <div class="contact-text">
+                                    <strong>E-Mail</strong>
+                                    <a href="mailto:info@boxerhof-badoeynhausen.de">info@boxerhof-badoeynhausen.de</a>
+                                </div>
                             </div>
                             <div class="contact-item">
-                                <strong>📞 Telefon:</strong>
-                                <a href="tel:+49123456789">+49 (0) 123 456 789</a>
+                                <div class="contact-icon">📞</div>
+                                <div class="contact-text">
+                                    <strong>Telefon</strong>
+                                    <a href="tel:+4957319234567">+49 (0) 5731 923 4567</a>
+                                </div>
                             </div>
                             <div class="contact-item">
-                                <strong>📍 Adresse:</strong>
-                                <span>Boxerhof 1, 12345 Tierlieben</span>
+                                <div class="contact-icon">📍</div>
+                                <div class="contact-text">
+                                    <strong>Adresse</strong>
+                                    <span>Boxerhof 1, 32547 Bad Oeynhausen</span>
+                                </div>
                             </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">🕒</div>
+                                <div class="contact-text">
+                                    <strong>Besuchszeiten</strong>
+                                    <span>Mo-Fr: 9:00-17:00, Sa: 9:00-15:00<br>
+                                    Termine nach Vereinbarung</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-cta">
+                        <h3>Besuchen Sie uns</h3>
+                        <p>Vereinbaren Sie einen Termin und lernen Sie unsere Hunde persönlich kennen.</p>
+                        <a href="contact.html" class="btn btn-primary">Termin vereinbaren</a>
+                        <a href="support.html" class="btn btn-outline">Jetzt spenden</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Über uns</h2>
+                    <p class="section-subtitle">Wer wir sind und was uns antreibt</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h3>Der Boxerhof in Bad Oeynhausen</h3>
+                        <p>Unser Boxerhof ist ein Teil der Boxer Nothilfe e.V. und bietet Hunden in Not ein liebevolles, temporäres Zuhause. In idyllischer Lage in Bad Oeynhausen haben wir uns darauf spezialisiert, Hunden aus schwierigen Verhältnissen zu helfen.</p>
+                        
+                        <h4>Unsere Mission</h4>
+                        <ul>
+                            <li>🏡 Temporäre Unterbringung für Notfälle</li>
+                            <li>🐕 Liebevolle Betreuung von Pensionsgästen</li>
+                            <li>💝 Vermittlung in das perfekte neue Zuhause</li>
+                            <li>❤️ Rehabilitation und Aufpäppelung</li>
+                        </ul>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">150+</span>
+                            <span class="stat-label">Gerettete Hunde</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Jahre Erfahrung</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Betreuung</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animals Section -->
+        <section id="animals" class="animals-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Unsere Hunde zur Vermittlung</h2>
+                    <p class="section-subtitle">Lernen Sie unsere liebevollen Hunde kennen, die ein neues Zuhause suchen</p>
+                </div>
+                
+                <div class="animals-filter">
+                    <button class="filter-btn active" data-filter="all">Alle</button>
+                    <button class="filter-btn" data-filter="small">Klein</button>
+                    <button class="filter-btn" data-filter="medium">Mittel</button>
+                    <button class="filter-btn" data-filter="large">Groß</button>
+                </div>
+                
+                <div class="animals-grid" id="animals-container">
+                    <!-- Dynamic content will be loaded here -->
+                    <div class="animal-card">
+                        <div class="animal-image">
+                            <img src="https://via.placeholder.com/300x200?text=Bald+neue+Hunde" alt="Neue Hunde bald verfügbar">
+                        </div>
+                        <div class="animal-info">
+                            <h3>Neue Hunde bald verfügbar</h3>
+                            <p>Wir arbeiten ständig daran, Hunden in Not zu helfen. Schauen Sie bald wieder vorbei oder kontaktieren Sie uns direkt.</p>
+                            <a href="#contact" class="btn btn-primary btn-small">Kontakt</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pension Section -->
+        <section id="pension" class="pension-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Pension für Ihren Hund</h2>
+                    <p class="section-subtitle">Liebevolle Betreuung während Ihres Urlaubs oder Ihrer Abwesenheit</p>
+                </div>
+                <div class="pension-content">
+                    <div class="pension-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">🏡</div>
+                            <h3>Gemütliche Unterbringung</h3>
+                            <p>Ihr Hund wird in familienähnlicher Atmosphäre betreut und fühlt sich wie zu Hause.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">🌳</div>
+                            <h3>Große Außenanlagen</h3>
+                            <p>Weitläufige, eingezäunte Bereiche zum Spielen, Toben und Entspannen in der Natur.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">❤️</div>
+                            <h3>Individuelle Betreuung</h3>
+                            <p>Jeder Hund erhält die Aufmerksamkeit und Pflege, die er gewohnt ist und braucht.</p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">📞</div>
+                            <h3>Regelmäßige Updates</h3>
+                            <p>Sie erhalten regelmäßig Nachrichten und Fotos von Ihrem vierbeinigen Liebling.</p>
+                        </div>
+                    </div>
+                    <div class="pension-info">
+                        <h3>Pensionspreise</h3>
+                        <ul>
+                            <li>Tagesbetreuung: 25€ pro Tag</li>
+                            <li>Mehrtägige Aufenthalte: 20€ pro Tag</li>
+                            <li>Wochenpreis: 120€ (7 Tage)</li>
+                            <li>Inklusive: Futter, Pflege, Aufmerksamkeit</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">Jetzt anfragen</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Adoption Section -->
+        <section id="adoption" class="adoption-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Adoption und Vermittlung</h2>
+                    <p class="section-subtitle">So finden Sie Ihren perfekten vierbeinigen Begleiter</p>
+                </div>
+                <div class="adoption-process">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3>Kennenlernen</h3>
+                        <p>Besuchen Sie uns und lernen Sie unsere Hunde kennen. Wir beraten Sie gerne bei der Auswahl.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3>Vorabchecks</h3>
+                        <p>Wir besprechen gemeinsam die Bedürfnisse des Hundes und Ihre Lebenssituation.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3>Probezeit</h3>
+                        <p>Eine kurze Probezeit hilft allen Beteiligten, sicherzustellen, dass es passt.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3>Glückliches Zuhause</h3>
+                        <p>Bei erfolgreicher Vermittlung steht einem glücklichen Leben nichts mehr im Weg!</p>
+                    </div>
+                </div>
+                <div class="adoption-requirements">
+                    <h3>Voraussetzungen für eine Adoption</h3>
+                    <div class="requirements-grid">
+                        <div class="requirement-item">
+                            <h4>🏠 Geeignetes Zuhause</h4>
+                            <p>Sicherer Wohnraum mit ausreichend Platz für den Hund</p>
+                        </div>
+                        <div class="requirement-item">
+                            <h4>⏰ Zeit und Geduld</h4>
+                            <p>Ausreichend Zeit für Eingewöhnung, Training und tägliche Betreuung</p>
+                        </div>
+                        <div class="requirement-item">
+                            <h4>💰 Finanzielle Sicherheit</h4>
+                            <p>Möglichkeit, alle Kosten für Futter, Tierarzt und Pflege zu tragen</p>
+                        </div>
+                        <div class="requirement-item">
+                            <h4>❤️ Liebe und Verantwortung</h4>
+                            <p>Bereitschaft, dem Hund ein liebevolles Zuhause fürs Leben zu geben</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Kontakt</h2>
+                    <p class="section-subtitle">Nehmen Sie gerne Kontakt mit uns auf</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h3>📍 Adresse</h3>
+                            <p>Boxerhof 1<br>32547 Bad Oeynhausen<br>Deutschland</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>📞 Telefon</h3>
+                            <p>+49 (0) 5731 923 4567</p>
+                            <p class="contact-note">Täglich 8:00 - 18:00 Uhr</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>📧 E-Mail</h3>
+                            <p>info@boxerhof-badoeynhausen.de</p>
+                            <p class="contact-note">Wir antworten innerhalb von 24h</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>🕐 Besuchszeiten</h3>
+                            <p>Montag - Freitag: 9:00 - 17:00 Uhr<br>
+                            Samstag: 10:00 - 16:00 Uhr<br>
+                            Sonntag: 11:00 - 15:00 Uhr</p>
+                            <p class="contact-note">Bitte vereinbaren Sie einen Termin</p>
                         </div>
                     </div>
                     <div class="contact-form">
                         <h3>Nachricht senden</h3>
-                        <form>
+                        <form class="contact-form-content">
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name">Name *</label>
                                 <input type="text" id="name" name="name" required>
                             </div>
                             <div class="form-group">
-                                <label for="email">E-Mail</label>
+                                <label for="email">E-Mail *</label>
                                 <input type="email" id="email" name="email" required>
                             </div>
                             <div class="form-group">
-                                <label for="message">Nachricht</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <label for="phone">Telefon</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Betreff *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Bitte wählen</option>
+                                    <option value="adoption">Interesse an Adoption</option>
+                                    <option value="pension">Pension anfragen</option>
+                                    <option value="visit">Besuch vereinbaren</option>
+                                    <option value="support">Unterstützung anbieten</option>
+                                    <option value="other">Sonstiges</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Nachricht *</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="Erzählen Sie uns, wie wir Ihnen helfen können..."></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Nachricht senden</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section id="newsletter" class="newsletter">
-            <div class="container">
-                <div class="newsletter-content">
-                    <div class="newsletter-text">
-                        <h2>📧 Bleiben Sie auf dem Laufenden</h2>
-                        <p>Erhalten Sie regelmäßige Updates über neue Hunde, Events und wichtige Neuigkeiten von der Boxer Nothilfe e.V.</p>
-                        <ul class="newsletter-benefits">
-                            <li>✓ Informationen über neue Hunde zur Vermittlung</li>
-                            <li>✓ Erfolgsgeschichten unserer vermittelten Hunde</li>
-                            <li>✓ Eventankündigungen und Hoffeste</li>
-                            <li>✓ Tipps zur Hundehaltung und -pflege</li>
-                        </ul>
-                    </div>
-                    <div class="newsletter-form">
-                        <h3>Newsletter abonnieren</h3>
-                        <form id="newsletterForm">
-                            <div class="form-group">
-                                <label for="newsletter-email">E-Mail-Adresse</label>
-                                <input type="email" id="newsletter-email" name="email" placeholder="ihre@email.de" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="newsletter-name">Name (optional)</label>
-                                <input type="text" id="newsletter-name" name="name" placeholder="Ihr Name">
-                            </div>
-                            <div class="form-group checkbox-group">
-                                <label>
-                                    <input type="checkbox" id="newsletter-consent" name="consent" required>
-                                    <span class="checkmark"></span>
-                                    Ich stimme zu, den Newsletter zu erhalten und bin mit der <a href="#privacy" class="privacy-link">Datenschutzerklärung</a> einverstanden.
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Newsletter abonnieren</button>
                         </form>
                     </div>
                 </div>
@@ -417,172 +493,52 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>🐕 Boxer Nothilfe e.V.</h3>
-                    <p>Ein sicherer Hafen für Hunde in Not</p>
+                    <h3>🏡 Boxerhof Bad Oeynhausen</h3>
+                    <p>Ein liebevolles Zuhause für Hunde in Not</p>
+                    <p class="footer-motto">Mit Herz und Hingabe für jedes Tier</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Schnelllinks</h4>
+                    <h4>Navigation</h4>
                     <ul>
-                        <li><a href="#about">Über uns</a></li>
-                        <li><a href="#animals">Unsere Hunde</a></li>
-                        <li><a href="#gallery">Galerie</a></li>
-                        <li><a href="#guestbook">Gästebuch</a></li>
-                        <li><a href="#events">Veranstaltungen</a></li>
-                        <li><a href="#help">Hilfe</a></li>
-                        <li><a href="#contact">Kontakt</a></li>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="animals.html">Unsere Hunde</a></li>
+                        <li><a href="pension.html">Pension</a></li>
+                        <li><a href="adoption.html">Vermittlung</a></li>
+                        <li><a href="gallery.html">Galerie</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Kontakt</h4>
-                    <p>📧 info@boxerhof.de</p>
-                    <p>📞 +49 (0) 123 456 789</p>
+                    <p>📧 info@boxerhof-badoeynhausen.de</p>
+                    <p>📞 +49 (0) 5731 923 4567</p>
+                    <p>📍 Boxerhof 1, 32547 Bad Oeynhausen</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Folgen Sie uns</h4>
+                    <h4>Unterstützen</h4>
+                    <p>Helfen Sie uns dabei, mehr Hunden zu helfen:</p>
+                    <a href="support.html" class="btn btn-small btn-outline">Spenden</a>
                     <div class="social-links">
-                        <a href="https://facebook.com/boxerhof" target="_blank" rel="noopener" class="social-link" data-platform="facebook">
-                            <span class="social-icon">📘</span>
-                            Facebook
+                        <a href="https://facebook.com/boxerhof" target="_blank" rel="noopener">
+                            📘 Facebook
                         </a>
-                        <a href="https://instagram.com/boxerhof" target="_blank" rel="noopener" class="social-link" data-platform="instagram">
-                            <span class="social-icon">📷</span>
-                            Instagram
-                        </a>
-                        <a href="https://youtube.com/@boxerhof" target="_blank" rel="noopener" class="social-link" data-platform="youtube">
-                            <span class="social-icon">📺</span>
-                            YouTube
-                        </a>
-                        <a href="mailto:info@boxerhof.de" class="social-link" data-platform="email">
-                            <span class="social-icon">✉️</span>
-                            E-Mail
+                        <a href="mailto:info@boxerhof-badoeynhausen.de">
+                            ✉️ E-Mail
                         </a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Boxer Nothilfe e.V. Alle Rechte vorbehalten. Mit Liebe für Hunde gemacht. 🐾</p>
+                <p>&copy; 2024 Boxerhof Bad Oeynhausen. Teil der Boxer Nothilfe e.V. Mit Liebe für Hunde gemacht. 🐾</p>
                 <div class="footer-legal">
-                    <a href="#impressum" class="legal-link">Impressum</a>
-                    <a href="#datenschutz" class="legal-link">Datenschutz</a>
-                    <a href="#cookies" class="legal-link">Cookie-Einstellungen</a>
+                    <a href="impressum.html">Impressum</a>
+                    <a href="datenschutz.html">Datenschutz</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Legal Sections (Hidden by default, shown in modals) -->
-    <div id="impressumModal" class="legal-modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="legal-content">
-                <h2>Impressum</h2>
-                <h3>Angaben gemäß § 5 TMG</h3>
-                <p>
-                    <strong>Boxer Nothilfe e.V.</strong><br>
-                    Boxerhof 1<br>
-                    12345 Tierlieben<br>
-                    Deutschland
-                </p>
-                
-                <h3>Vertreten durch</h3>
-                <p>1. Vorsitzende: [Name]<br>
-                2. Vorsitzende: [Name]</p>
-                
-                <h3>Kontakt</h3>
-                <p>
-                    Telefon: +49 (0) 123 456 789<br>
-                    E-Mail: info@boxerhof.de
-                </p>
-                
-                <h3>Registereintrag</h3>
-                <p>
-                    Eintragung im Vereinsregister<br>
-                    Registergericht: [Gericht]<br>
-                    Registernummer: VR [Nummer]
-                </p>
-                
-                <h3>Umsatzsteuer-ID</h3>
-                <p>
-                    Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
-                    DE [Nummer]
-                </p>
-                
-                <h3>EU-Streitschlichtung</h3>
-                <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
-                <a href="https://ec.europa.eu/consumers/odr/" target="_blank">https://ec.europa.eu/consumers/odr/</a><br>
-                Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
-                
-                <h3>Verbraucher­streit­beilegung/Universal­schlichtungs­stelle</h3>
-                <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="datenschutzModal" class="legal-modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="legal-content">
-                <h2>Datenschutzerklärung</h2>
-                
-                <h3>1. Datenschutz auf einen Blick</h3>
-                <h4>Allgemeine Hinweise</h4>
-                <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
-                
-                <h4>Datenerfassung auf dieser Website</h4>
-                <p><strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong></p>
-                <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
-                
-                <p><strong>Wie erfassen wir Ihre Daten?</strong></p>
-                <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben.</p>
-                
-                <h3>2. Hosting</h3>
-                <p>Wir hosten die Inhalte unserer Website bei folgenden Anbietern:</p>
-                <p><strong>GitHub Pages</strong></p>
-                <p>Diese Website wird auf Servern von GitHub Inc. gehostet. Die Server befinden sich in den USA. GitHub kann beim Aufruf dieser Website verschiedene Daten erfassen.</p>
-                
-                <h3>3. Allgemeine Hinweise und Pflicht­informationen</h3>
-                <h4>Datenschutz</h4>
-                <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
-                
-                <h3>4. Datenerfassung auf dieser Website</h3>
-                <h4>Cookies</h4>
-                <p>Unsere Internetseiten verwenden teilweise so genannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen.</p>
-                
-                <h4>Server-Log-Dateien</h4>
-                <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt.</p>
-                
-                <h4>Kontaktformular</h4>
-                <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.</p>
-                
-                <h4>Gästebuch</h4>
-                <p>Wenn Sie einen Eintrag in unser Gästebuch vornehmen, speichern wir Ihren Namen, Ihre E-Mail-Adresse (falls angegeben), Ihre Nachricht und das Datum des Eintrags. Diese Daten werden nur nach Ihrer Einwilligung und nach Freischaltung durch unsere Administratoren veröffentlicht.</p>
-                
-                <h3>5. Ihre Rechte</h3>
-                <p>Sie haben jederzeit das Recht unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung, Sperrung oder Löschung dieser Daten zu verlangen.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cookie Consent Banner -->
-    <div id="cookieConsent" class="cookie-banner" style="display: none;">
-        <div class="cookie-content">
-            <div class="cookie-text">
-                <h4>🍪 Cookie-Hinweis</h4>
-                <p>Diese Website verwendet Cookies, um Ihnen die bestmögliche Nutzererfahrung zu bieten. Durch die weitere Nutzung der Website stimmen Sie der Verwendung von Cookies zu.</p>
-            </div>
-            <div class="cookie-buttons">
-                <button id="acceptCookies" class="btn btn-primary">Akzeptieren</button>
-                <button id="configureCookies" class="btn btn-secondary">Einstellungen</button>
-                <a href="#datenschutz" class="cookie-link">Mehr erfahren</a>
-            </div>
-        </div>
-    </div>
-
+    <script src="boxerhof-slideshow.js"></script>
     <script src="script.js"></script>
-    <script src="performance-enhancements.js"></script>
-    <script src="seo-accessibility.js"></script>
-    <script src="image-optimization.js"></script>
-    <script src="animal-filter-system.js"></script>
-    <script src="pwa-enhancement.js"></script>
 </body>
 </html>
