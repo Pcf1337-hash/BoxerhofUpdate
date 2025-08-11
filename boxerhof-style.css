@@ -513,13 +513,13 @@
 }
 
 .contact-text a {
-    color: var(--boxerhof-cream);
+    color: white;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .contact-text a:hover {
-    color: white;
+    color: var(--boxerhof-cream);
     text-decoration: underline;
 }
 
