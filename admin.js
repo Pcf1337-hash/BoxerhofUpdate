@@ -769,3 +769,449 @@ window.deleteAnimal = deleteAnimal;
 window.closeAnimalModal = closeAnimalModal;
 window.deleteImage = deleteImage;
 window.viewWebsite = viewWebsite;
+
+// Guestbook Management
+const GuestbookAdmin = {
+    entries: [],
+    currentFilter: 'all',
+
+    init: function() {
+        this.loadEntries();
+        this.setupEventListeners();
+        this.updateStats();
+        this.renderEntries();
+    },
+
+    setupEventListeners: function() {
+        // Filter buttons
+        document.querySelectorAll('#guestbook .filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('#guestbook .filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                this.currentFilter = e.target.dataset.status;
+                this.renderEntries();
+            });
+        });
+
+        // Search
+        const searchInput = document.getElementById('guestbookSearch');
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                this.renderEntries();
+            });
+        }
+    },
+
+    loadEntries: function() {
+        const stored = localStorage.getItem('boxerhof_guestbook_entries');
+        this.entries = stored ? JSON.parse(stored) : [];
+    },
+
+    saveEntries: function() {
+        localStorage.setItem('boxerhof_guestbook_entries', JSON.stringify(this.entries));
+    },
+
+    updateStats: function() {
+        const pending = this.entries.filter(e => e.status === 'pending').length;
+        const approved = this.entries.filter(e => e.status === 'approved').length;
+        const rejected = this.entries.filter(e => e.status === 'rejected').length;
+
+        document.getElementById('pendingEntries').textContent = pending;
+        document.getElementById('approvedEntries').textContent = approved;
+        document.getElementById('rejectedEntries').textContent = rejected;
+    },
+
+    renderEntries: function() {
+        const container = document.getElementById('guestbookEntries');
+        if (!container) return;
+
+        let filteredEntries = this.entries;
+        
+        // Apply status filter
+        if (this.currentFilter !== 'all') {
+            filteredEntries = filteredEntries.filter(entry => entry.status === this.currentFilter);
+        }
+
+        // Apply search filter
+        const searchTerm = document.getElementById('guestbookSearch')?.value.toLowerCase();
+        if (searchTerm) {
+            filteredEntries = filteredEntries.filter(entry => 
+                entry.name.toLowerCase().includes(searchTerm) ||
+                entry.message.toLowerCase().includes(searchTerm) ||
+                (entry.email && entry.email.toLowerCase().includes(searchTerm))
+            );
+        }
+
+        // Sort by timestamp (newest first)
+        filteredEntries.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+        if (filteredEntries.length === 0) {
+            container.innerHTML = '<p class="no-entries">Keine Einträge gefunden.</p>';
+            return;
+        }
+
+        container.innerHTML = filteredEntries.map(entry => this.renderEntryCard(entry)).join('');
+    },
+
+    renderEntryCard: function(entry) {
+        return `
+            <div class="guestbook-entry-admin ${entry.status}">
+                <div class="entry-header">
+                    <div class="entry-author">${entry.name}</div>
+                    <div class="entry-status ${entry.status}">${this.getStatusText(entry.status)}</div>
+                </div>
+                <div class="entry-meta">
+                    <span>📅 ${new Date(entry.timestamp).toLocaleDateString('de-DE')}</span>
+                    ${entry.email ? `<span>📧 ${entry.email}</span>` : ''}
+                </div>
+                <div class="entry-message">${entry.message}</div>
+                ${entry.image ? `<img src="${entry.image}" alt="Bild von ${entry.name}" class="entry-image">` : ''}
+                <div class="entry-actions">
+                    ${entry.status === 'pending' ? `
+                        <button class="entry-action-btn approve" onclick="GuestbookAdmin.approveEntry(${entry.id})">✅ Freischalten</button>
+                        <button class="entry-action-btn reject" onclick="GuestbookAdmin.rejectEntry(${entry.id})">❌ Ablehnen</button>
+                    ` : ''}
+                    ${entry.status === 'approved' ? `
+                        <button class="entry-action-btn reject" onclick="GuestbookAdmin.rejectEntry(${entry.id})">❌ Verbergen</button>
+                    ` : ''}
+                    ${entry.status === 'rejected' ? `
+                        <button class="entry-action-btn approve" onclick="GuestbookAdmin.approveEntry(${entry.id})">✅ Freischalten</button>
+                    ` : ''}
+                    <button class="entry-action-btn delete" onclick="GuestbookAdmin.deleteEntry(${entry.id})">🗑️ Löschen</button>
+                </div>
+            </div>
+        `;
+    },
+
+    getStatusText: function(status) {
+        const statusTexts = {
+            pending: 'Warteschlange',
+            approved: 'Veröffentlicht',
+            rejected: 'Abgelehnt'
+        };
+        return statusTexts[status] || status;
+    },
+
+    approveEntry: function(entryId) {
+        const entry = this.entries.find(e => e.id === entryId);
+        if (entry) {
+            entry.status = 'approved';
+            this.saveEntries();
+            this.updateStats();
+            this.renderEntries();
+            showMessage('Eintrag wurde freigeschaltet', 'success');
+        }
+    },
+
+    rejectEntry: function(entryId) {
+        const entry = this.entries.find(e => e.id === entryId);
+        if (entry) {
+            entry.status = 'rejected';
+            this.saveEntries();
+            this.updateStats();
+            this.renderEntries();
+            showMessage('Eintrag wurde abgelehnt', 'info');
+        }
+    },
+
+    deleteEntry: function(entryId) {
+        if (confirm('Sind Sie sicher, dass Sie diesen Eintrag dauerhaft löschen möchten?')) {
+            this.entries = this.entries.filter(e => e.id !== entryId);
+            this.saveEntries();
+            this.updateStats();
+            this.renderEntries();
+            showMessage('Eintrag wurde gelöscht', 'success');
+        }
+    }
+};
+
+// Events Management
+const EventsAdmin = {
+    events: [],
+    currentFilter: 'all',
+
+    init: function() {
+        this.loadEvents();
+        this.setupEventListeners();
+        this.updateStats();
+        this.renderEvents();
+    },
+
+    setupEventListeners: function() {
+        // Add event button
+        const addEventBtn = document.getElementById('addEventBtn');
+        if (addEventBtn) {
+            addEventBtn.addEventListener('click', () => this.openEventModal());
+        }
+
+        // Filter buttons
+        document.querySelectorAll('#events .filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('#events .filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                this.currentFilter = e.target.dataset.filter;
+                this.renderEvents();
+            });
+        });
+
+        // Search
+        const searchInput = document.getElementById('eventsSearch');
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                this.renderEvents();
+            });
+        }
+
+        // Event form
+        const eventForm = document.getElementById('eventForm');
+        if (eventForm) {
+            eventForm.addEventListener('submit', (e) => this.handleEventSave(e));
+        }
+
+        // Modal close
+        const modal = document.getElementById('eventModal');
+        if (modal) {
+            modal.querySelector('.close').addEventListener('click', () => this.closeEventModal());
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) this.closeEventModal();
+            });
+        }
+    },
+
+    loadEvents: function() {
+        const stored = localStorage.getItem('boxerhof_events');
+        this.events = stored ? JSON.parse(stored) : [];
+    },
+
+    saveEvents: function() {
+        localStorage.setItem('boxerhof_events', JSON.stringify(this.events));
+    },
+
+    updateStats: function() {
+        const now = new Date();
+        const upcoming = this.events.filter(e => e.status === 'published' && new Date(e.date) >= now).length;
+        const past = this.events.filter(e => e.status === 'published' && new Date(e.date) < now).length;
+
+        document.getElementById('upcomingEventsCount').textContent = upcoming;
+        document.getElementById('pastEventsCount').textContent = past;
+    },
+
+    renderEvents: function() {
+        const container = document.getElementById('eventsList');
+        if (!container) return;
+
+        let filteredEvents = this.events;
+        
+        // Apply filter
+        if (this.currentFilter !== 'all') {
+            const now = new Date();
+            switch (this.currentFilter) {
+                case 'upcoming':
+                    filteredEvents = filteredEvents.filter(e => e.status === 'published' && new Date(e.date) >= now);
+                    break;
+                case 'past':
+                    filteredEvents = filteredEvents.filter(e => e.status === 'published' && new Date(e.date) < now);
+                    break;
+                case 'draft':
+                    filteredEvents = filteredEvents.filter(e => e.status === 'draft');
+                    break;
+            }
+        }
+
+        // Apply search filter
+        const searchTerm = document.getElementById('eventsSearch')?.value.toLowerCase();
+        if (searchTerm) {
+            filteredEvents = filteredEvents.filter(event => 
+                event.title.toLowerCase().includes(searchTerm) ||
+                event.description.toLowerCase().includes(searchTerm) ||
+                (event.location && event.location.toLowerCase().includes(searchTerm))
+            );
+        }
+
+        // Sort by date
+        filteredEvents.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (filteredEvents.length === 0) {
+            container.innerHTML = '<p class="no-events">Keine Veranstaltungen gefunden.</p>';
+            return;
+        }
+
+        container.innerHTML = filteredEvents.map(event => this.renderEventCard(event)).join('');
+    },
+
+    renderEventCard: function(event) {
+        const isUpcoming = new Date(event.date) >= new Date();
+        
+        return `
+            <div class="event-admin-card">
+                <div class="event-admin-header">
+                    <div>
+                        <div class="event-admin-title">${event.title}</div>
+                        <div class="event-admin-status ${event.status}">${this.getStatusText(event.status)}</div>
+                    </div>
+                </div>
+                <div class="event-admin-meta">
+                    <div class="event-meta-item">📅 ${this.formatDate(event.date, event.time)}</div>
+                    ${event.location ? `<div class="event-meta-item">📍 ${event.location}</div>` : ''}
+                    ${event.capacity ? `<div class="event-meta-item">👥 ${event.capacity} Plätze</div>` : ''}
+                    ${event.price ? `<div class="event-meta-item">💰 ${event.price.toFixed(2)} €</div>` : ''}
+                </div>
+                <div class="event-admin-description">${event.description}</div>
+                <div class="event-admin-actions">
+                    <button class="event-action-btn edit" onclick="EventsAdmin.editEvent(${event.id})">✏️ Bearbeiten</button>
+                    <button class="event-action-btn duplicate" onclick="EventsAdmin.duplicateEvent(${event.id})">📋 Duplizieren</button>
+                    <button class="event-action-btn delete" onclick="EventsAdmin.deleteEvent(${event.id})">🗑️ Löschen</button>
+                </div>
+            </div>
+        `;
+    },
+
+    getStatusText: function(status) {
+        const statusTexts = {
+            published: 'Veröffentlicht',
+            draft: 'Entwurf',
+            cancelled: 'Abgesagt'
+        };
+        return statusTexts[status] || status;
+    },
+
+    formatDate: function(date, time) {
+        const eventDate = new Date(date);
+        const formattedDate = eventDate.toLocaleDateString('de-DE');
+        return time ? `${formattedDate}, ${time}` : formattedDate;
+    },
+
+    openEventModal: function(eventId = null) {
+        const modal = document.getElementById('eventModal');
+        const form = document.getElementById('eventForm');
+        const title = document.getElementById('eventModalTitle');
+        
+        if (eventId) {
+            const event = this.events.find(e => e.id === eventId);
+            if (event) {
+                title.textContent = 'Veranstaltung bearbeiten';
+                this.fillEventForm(event);
+            }
+        } else {
+            title.textContent = 'Neue Veranstaltung erstellen';
+            form.reset();
+            document.getElementById('eventId').value = '';
+        }
+        
+        modal.style.display = 'block';
+    },
+
+    closeEventModal: function() {
+        document.getElementById('eventModal').style.display = 'none';
+    },
+
+    fillEventForm: function(event) {
+        document.getElementById('eventId').value = event.id;
+        document.getElementById('eventTitle').value = event.title;
+        document.getElementById('eventDescription').value = event.description;
+        document.getElementById('eventDate').value = event.date;
+        document.getElementById('eventTime').value = event.time || '';
+        document.getElementById('eventEndDate').value = event.endDate || '';
+        document.getElementById('eventEndTime').value = event.endTime || '';
+        document.getElementById('eventLocation').value = event.location || '';
+        document.getElementById('eventCapacity').value = event.capacity || '';
+        document.getElementById('eventPrice').value = event.price || '';
+        document.getElementById('eventRegistrationRequired').checked = event.registrationRequired || false;
+        document.getElementById('eventRegistrationDeadline').value = event.registrationDeadline || '';
+        document.getElementById('eventContactInfo').value = event.contactInfo || '';
+        document.getElementById('eventStatus').value = event.status;
+        document.getElementById('eventImage').value = event.image || '';
+    },
+
+    handleEventSave: function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const eventId = formData.get('id');
+        
+        const eventData = {
+            title: formData.get('title'),
+            description: formData.get('description'),
+            date: formData.get('date'),
+            time: formData.get('time'),
+            endDate: formData.get('endDate'),
+            endTime: formData.get('endTime'),
+            location: formData.get('location'),
+            capacity: formData.get('capacity') ? parseInt(formData.get('capacity')) : null,
+            price: formData.get('price') ? parseFloat(formData.get('price')) : 0,
+            registrationRequired: formData.get('registrationRequired') === 'on',
+            registrationDeadline: formData.get('registrationDeadline'),
+            contactInfo: formData.get('contactInfo'),
+            status: formData.get('status'),
+            image: formData.get('image')
+        };
+
+        if (eventId) {
+            // Update existing event
+            const eventIndex = this.events.findIndex(e => e.id == eventId);
+            this.events[eventIndex] = { ...this.events[eventIndex], ...eventData };
+            showMessage('Veranstaltung wurde aktualisiert', 'success');
+        } else {
+            // Create new event
+            eventData.id = Date.now();
+            this.events.push(eventData);
+            showMessage('Neue Veranstaltung wurde erstellt', 'success');
+        }
+
+        this.saveEvents();
+        this.updateStats();
+        this.renderEvents();
+        this.closeEventModal();
+    },
+
+    editEvent: function(eventId) {
+        this.openEventModal(eventId);
+    },
+
+    duplicateEvent: function(eventId) {
+        const event = this.events.find(e => e.id === eventId);
+        if (event) {
+            const duplicatedEvent = {
+                ...event,
+                id: Date.now(),
+                title: event.title + ' (Kopie)',
+                status: 'draft'
+            };
+            this.events.push(duplicatedEvent);
+            this.saveEvents();
+            this.updateStats();
+            this.renderEvents();
+            showMessage('Veranstaltung wurde dupliziert', 'success');
+        }
+    },
+
+    deleteEvent: function(eventId) {
+        if (confirm('Sind Sie sicher, dass Sie diese Veranstaltung löschen möchten?')) {
+            this.events = this.events.filter(e => e.id !== eventId);
+            this.saveEvents();
+            this.updateStats();
+            this.renderEvents();
+            showMessage('Veranstaltung wurde gelöscht', 'success');
+        }
+    }
+};
+
+// Update the switchTab function to handle new tabs
+const originalSwitchTab = switchTab;
+switchTab = function(tabName) {
+    originalSwitchTab(tabName);
+    
+    // Initialize new modules when their tabs are opened
+    if (tabName === 'guestbook' && !GuestbookAdmin.initialized) {
+        GuestbookAdmin.init();
+        GuestbookAdmin.initialized = true;
+    } else if (tabName === 'events' && !EventsAdmin.initialized) {
+        EventsAdmin.init();
+        EventsAdmin.initialized = true;
+    }
+};
+
+// Update global exports
+window.GuestbookAdmin = GuestbookAdmin;
+window.EventsAdmin = EventsAdmin;
+window.closeEventModal = EventsAdmin.closeEventModal.bind(EventsAdmin);

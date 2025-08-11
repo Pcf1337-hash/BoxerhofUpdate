@@ -22,6 +22,8 @@
                     <li><a href="#about">Über uns</a></li>
                     <li><a href="#animals">Unsere Hunde</a></li>
                     <li><a href="#gallery">Galerie</a></li>
+                    <li><a href="#guestbook">Gästebuch</a></li>
+                    <li><a href="#events">Veranstaltungen</a></li>
                     <li><a href="#help">Hilfe</a></li>
                     <li><a href="#contact">Kontakt</a></li>
                     <li><a href="admin.html" class="admin-link">🔧 Admin</a></li>
@@ -200,6 +202,91 @@
             </div>
         </section>
 
+        <!-- Guestbook Section -->
+        <section id="guestbook" class="guestbook">
+            <div class="container">
+                <h2>📝 Gästebuch</h2>
+                <p class="section-subtitle">Teilen Sie Ihre Erfahrungen und Gedanken mit uns</p>
+                
+                <!-- Guestbook Form -->
+                <div class="guestbook-form-container">
+                    <h3>Gästebucheintrag verfassen</h3>
+                    <form id="guestbookForm" class="guestbook-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guestName">Name *</label>
+                                <input type="text" id="guestName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guestEmail">E-Mail (optional)</label>
+                                <input type="email" id="guestEmail" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="guestMessage">Nachricht *</label>
+                            <textarea id="guestMessage" name="message" rows="4" required placeholder="Teilen Sie Ihre Gedanken, Erfahrungen oder Grüße mit uns..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="guestImage">Bild (optional)</label>
+                            <input type="file" id="guestImage" name="image" accept="image/*">
+                            <small>Maximal 5MB. Erlaubte Formate: JPG, PNG, GIF</small>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="guestConsent" name="consent" required>
+                                <span class="checkmark"></span>
+                                Ich stimme zu, dass mein Eintrag nach Prüfung veröffentlicht werden darf und bin mit der <a href="#privacy" class="privacy-link">Datenschutzerklärung</a> einverstanden.
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Eintrag absenden</button>
+                        <p class="form-note">
+                            <small>📝 Ihr Eintrag wird vor der Veröffentlichung geprüft und freigeschaltet.</small>
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Guestbook Entries -->
+                <div class="guestbook-entries">
+                    <h3>Gästebucheinträge</h3>
+                    <div id="guestbookList" class="guestbook-list">
+                        <!-- Entries will be loaded here -->
+                    </div>
+                    <div class="guestbook-pagination">
+                        <button id="loadMoreEntries" class="btn btn-secondary">Weitere Einträge laden</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="events">
+            <div class="container">
+                <h2>📅 Veranstaltungen</h2>
+                <p class="section-subtitle">Besuchen Sie unsere Events und lernen Sie uns kennen</p>
+                
+                <!-- Event Filter Tabs -->
+                <div class="event-filters">
+                    <button class="filter-btn active" data-filter="upcoming">Kommende Events</button>
+                    <button class="filter-btn" data-filter="past">Vergangene Events</button>
+                </div>
+                
+                <!-- Events List -->
+                <div id="eventsList" class="events-list">
+                    <!-- Events will be loaded here -->
+                </div>
+                
+                <!-- No Events Message -->
+                <div id="noEventsMessage" class="no-events" style="display: none;">
+                    <div class="no-events-content">
+                        <div class="no-events-icon">📅</div>
+                        <h3>Keine Veranstaltungen geplant</h3>
+                        <p>Aktuell sind keine Veranstaltungen geplant. Schauen Sie bald wieder vorbei oder abonnieren Sie unseren Newsletter, um über neue Events informiert zu werden.</p>
+                        <a href="#newsletter" class="btn btn-primary">Newsletter abonnieren</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="help" class="help">
             <div class="container">
                 <h2>Wie Sie Hunden helfen können</h2>
@@ -321,6 +408,8 @@
                         <li><a href="#about">Über uns</a></li>
                         <li><a href="#animals">Unsere Hunde</a></li>
                         <li><a href="#gallery">Galerie</a></li>
+                        <li><a href="#guestbook">Gästebuch</a></li>
+                        <li><a href="#events">Veranstaltungen</a></li>
                         <li><a href="#help">Hilfe</a></li>
                         <li><a href="#contact">Kontakt</a></li>
                     </ul>
@@ -354,9 +443,122 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 Boxer Nothilfe e.V. Alle Rechte vorbehalten. Mit Liebe für Hunde gemacht. 🐾</p>
+                <div class="footer-legal">
+                    <a href="#impressum" class="legal-link">Impressum</a>
+                    <a href="#datenschutz" class="legal-link">Datenschutz</a>
+                    <a href="#cookies" class="legal-link">Cookie-Einstellungen</a>
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- Legal Sections (Hidden by default, shown in modals) -->
+    <div id="impressumModal" class="legal-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="legal-content">
+                <h2>Impressum</h2>
+                <h3>Angaben gemäß § 5 TMG</h3>
+                <p>
+                    <strong>Boxer Nothilfe e.V.</strong><br>
+                    Boxerhof 1<br>
+                    12345 Tierlieben<br>
+                    Deutschland
+                </p>
+                
+                <h3>Vertreten durch</h3>
+                <p>1. Vorsitzende: [Name]<br>
+                2. Vorsitzende: [Name]</p>
+                
+                <h3>Kontakt</h3>
+                <p>
+                    Telefon: +49 (0) 123 456 789<br>
+                    E-Mail: info@boxerhof.de
+                </p>
+                
+                <h3>Registereintrag</h3>
+                <p>
+                    Eintragung im Vereinsregister<br>
+                    Registergericht: [Gericht]<br>
+                    Registernummer: VR [Nummer]
+                </p>
+                
+                <h3>Umsatzsteuer-ID</h3>
+                <p>
+                    Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+                    DE [Nummer]
+                </p>
+                
+                <h3>EU-Streitschlichtung</h3>
+                <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
+                <a href="https://ec.europa.eu/consumers/odr/" target="_blank">https://ec.europa.eu/consumers/odr/</a><br>
+                Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+                
+                <h3>Verbraucher­streit­beilegung/Universal­schlichtungs­stelle</h3>
+                <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="datenschutzModal" class="legal-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="legal-content">
+                <h2>Datenschutzerklärung</h2>
+                
+                <h3>1. Datenschutz auf einen Blick</h3>
+                <h4>Allgemeine Hinweise</h4>
+                <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
+                
+                <h4>Datenerfassung auf dieser Website</h4>
+                <p><strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong></p>
+                <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+                
+                <p><strong>Wie erfassen wir Ihre Daten?</strong></p>
+                <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben.</p>
+                
+                <h3>2. Hosting</h3>
+                <p>Wir hosten die Inhalte unserer Website bei folgenden Anbietern:</p>
+                <p><strong>GitHub Pages</strong></p>
+                <p>Diese Website wird auf Servern von GitHub Inc. gehostet. Die Server befinden sich in den USA. GitHub kann beim Aufruf dieser Website verschiedene Daten erfassen.</p>
+                
+                <h3>3. Allgemeine Hinweise und Pflicht­informationen</h3>
+                <h4>Datenschutz</h4>
+                <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+                
+                <h3>4. Datenerfassung auf dieser Website</h3>
+                <h4>Cookies</h4>
+                <p>Unsere Internetseiten verwenden teilweise so genannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen.</p>
+                
+                <h4>Server-Log-Dateien</h4>
+                <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt.</p>
+                
+                <h4>Kontaktformular</h4>
+                <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.</p>
+                
+                <h4>Gästebuch</h4>
+                <p>Wenn Sie einen Eintrag in unser Gästebuch vornehmen, speichern wir Ihren Namen, Ihre E-Mail-Adresse (falls angegeben), Ihre Nachricht und das Datum des Eintrags. Diese Daten werden nur nach Ihrer Einwilligung und nach Freischaltung durch unsere Administratoren veröffentlicht.</p>
+                
+                <h3>5. Ihre Rechte</h3>
+                <p>Sie haben jederzeit das Recht unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung, Sperrung oder Löschung dieser Daten zu verlangen.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsent" class="cookie-banner" style="display: none;">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <h4>🍪 Cookie-Hinweis</h4>
+                <p>Diese Website verwendet Cookies, um Ihnen die bestmögliche Nutzererfahrung zu bieten. Durch die weitere Nutzung der Website stimmen Sie der Verwendung von Cookies zu.</p>
+            </div>
+            <div class="cookie-buttons">
+                <button id="acceptCookies" class="btn btn-primary">Akzeptieren</button>
+                <button id="configureCookies" class="btn btn-secondary">Einstellungen</button>
+                <a href="#datenschutz" class="cookie-link">Mehr erfahren</a>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

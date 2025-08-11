@@ -582,3 +582,418 @@ function fallbackCopyToClipboard(text) {
 
 // Initialize social sharing when DOM is ready
 document.addEventListener('DOMContentLoaded', setupSocialSharing);
+
+// Guestbook functionality
+const GuestbookManager = {
+    entries: [],
+    currentPage: 0,
+    entriesPerPage: 5,
+
+    init: function() {
+        this.loadEntries();
+        this.setupEventListeners();
+        this.renderEntries();
+    },
+
+    setupEventListeners: function() {
+        const guestbookForm = document.getElementById('guestbookForm');
+        if (guestbookForm) {
+            guestbookForm.addEventListener('submit', this.handleSubmit.bind(this));
+        }
+
+        const loadMoreBtn = document.getElementById('loadMoreEntries');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', this.loadMoreEntries.bind(this));
+        }
+    },
+
+    loadEntries: function() {
+        const stored = localStorage.getItem('boxerhof_guestbook_entries');
+        this.entries = stored ? JSON.parse(stored) : [];
+        
+        // Add some demo entries if none exist
+        if (this.entries.length === 0) {
+            this.entries = [
+                {
+                    id: 1,
+                    name: "Familie Müller",
+                    email: "mueller@example.com",
+                    message: "Vielen Dank für die wunderbare Arbeit! Unser Rex hat sich perfekt eingelebt und ist der perfekte Familienhund geworden.",
+                    timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+                    status: "approved",
+                    image: null
+                },
+                {
+                    id: 2,
+                    name: "Anna Schmidt",
+                    email: "",
+                    message: "Die Betreuung auf dem Boxerhof ist einfach herzerwärmend. Man merkt sofort, wie viel Liebe in die Arbeit gesteckt wird.",
+                    timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                    status: "approved",
+                    image: null
+                }
+            ];
+            this.saveEntries();
+        }
+    },
+
+    saveEntries: function() {
+        localStorage.setItem('boxerhof_guestbook_entries', JSON.stringify(this.entries));
+    },
+
+    handleSubmit: function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const entry = {
+            id: Date.now(),
+            name: formData.get('name'),
+            email: formData.get('email') || '',
+            message: formData.get('message'),
+            timestamp: new Date().toISOString(),
+            status: 'pending',
+            image: null
+        };
+
+        // Handle image upload
+        const imageFile = formData.get('image');
+        if (imageFile && imageFile.size > 0) {
+            if (imageFile.size > 5 * 1024 * 1024) {
+                showNotification('Das Bild ist zu groß (max. 5MB)', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                entry.image = e.target.result;
+                this.addEntry(entry);
+            };
+            reader.readAsDataURL(imageFile);
+        } else {
+            this.addEntry(entry);
+        }
+    },
+
+    addEntry: function(entry) {
+        this.entries.unshift(entry);
+        this.saveEntries();
+        
+        showNotification('Vielen Dank für Ihren Eintrag! Er wird nach Prüfung freigeschaltet.', 'success');
+        document.getElementById('guestbookForm').reset();
+        
+        // Update admin notification if in admin
+        if (window.AdminPanel) {
+            AdminPanel.updateGuestbookStats();
+        }
+    },
+
+    renderEntries: function() {
+        const container = document.getElementById('guestbookList');
+        if (!container) return;
+
+        const approvedEntries = this.entries.filter(entry => entry.status === 'approved');
+        const entriesToShow = approvedEntries.slice(0, (this.currentPage + 1) * this.entriesPerPage);
+
+        if (entriesToShow.length === 0) {
+            container.innerHTML = `
+                <div class="no-entries">
+                    <p>Noch keine Gästebucheinträge vorhanden. Seien Sie der Erste!</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = entriesToShow.map(entry => `
+            <div class="guestbook-entry">
+                <div class="guestbook-entry-header">
+                    <div class="guestbook-entry-author">${entry.name}</div>
+                    <div class="guestbook-entry-date">${this.formatDate(entry.timestamp)}</div>
+                </div>
+                <div class="guestbook-entry-message">${entry.message}</div>
+                ${entry.image ? `<img src="${entry.image}" alt="Bild von ${entry.name}" class="guestbook-entry-image">` : ''}
+            </div>
+        `).join('');
+
+        // Show/hide load more button
+        const loadMoreBtn = document.getElementById('loadMoreEntries');
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = entriesToShow.length < approvedEntries.length ? 'block' : 'none';
+        }
+    },
+
+    loadMoreEntries: function() {
+        this.currentPage++;
+        this.renderEntries();
+    },
+
+    formatDate: function(timestamp) {
+        return new Date(timestamp).toLocaleDateString('de-DE', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }
+};
+
+// Events functionality
+const EventsManager = {
+    events: [],
+    currentFilter: 'upcoming',
+
+    init: function() {
+        this.loadEvents();
+        this.setupEventListeners();
+        this.renderEvents();
+    },
+
+    setupEventListeners: function() {
+        const filterBtns = document.querySelectorAll('.event-filters .filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                this.currentFilter = e.target.dataset.filter;
+                this.renderEvents();
+            });
+        });
+    },
+
+    loadEvents: function() {
+        const stored = localStorage.getItem('boxerhof_events');
+        this.events = stored ? JSON.parse(stored) : [];
+        
+        // Add demo events if none exist
+        if (this.events.length === 0) {
+            const now = new Date();
+            const futureDate1 = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+            const futureDate2 = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+            const pastDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+            this.events = [
+                {
+                    id: 1,
+                    title: "Tag der offenen Tür",
+                    description: "Besuchen Sie uns und lernen Sie unsere Hunde kennen. Wir freuen uns auf Ihren Besuch und stehen für alle Fragen zur Verfügung.",
+                    date: futureDate1.toISOString().split('T')[0],
+                    time: "10:00",
+                    endDate: futureDate1.toISOString().split('T')[0],
+                    endTime: "16:00",
+                    location: "Boxerhof, Hauptstraße 123",
+                    capacity: 50,
+                    price: 0,
+                    registrationRequired: false,
+                    contactInfo: "info@boxerhof.de",
+                    status: "published",
+                    image: null
+                },
+                {
+                    id: 2,
+                    title: "Hundetraining Workshop",
+                    description: "Lernen Sie grundlegende Trainingsmethoden und verbessern Sie die Beziehung zu Ihrem Hund.",
+                    date: futureDate2.toISOString().split('T')[0],
+                    time: "14:00",
+                    endDate: futureDate2.toISOString().split('T')[0],
+                    endTime: "17:00",
+                    location: "Trainingsplatz Boxerhof",
+                    capacity: 15,
+                    price: 25.00,
+                    registrationRequired: true,
+                    registrationDeadline: new Date(futureDate2.getTime() - 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+                    contactInfo: "training@boxerhof.de",
+                    status: "published",
+                    image: null
+                },
+                {
+                    id: 3,
+                    title: "Spendenlauf für Tiere",
+                    description: "Gemeinsamer Lauf für den guten Zweck. Alle Teilnehmer erhalten eine Medaille und tragen zur Tierrettung bei.",
+                    date: pastDate.toISOString().split('T')[0],
+                    time: "09:00",
+                    location: "Stadtpark",
+                    capacity: 100,
+                    price: 10.00,
+                    registrationRequired: true,
+                    status: "published",
+                    image: null
+                }
+            ];
+            this.saveEvents();
+        }
+    },
+
+    saveEvents: function() {
+        localStorage.setItem('boxerhof_events', JSON.stringify(this.events));
+    },
+
+    renderEvents: function() {
+        const container = document.getElementById('eventsList');
+        const noEventsMessage = document.getElementById('noEventsMessage');
+        
+        if (!container) return;
+
+        let filteredEvents = this.events.filter(event => event.status === 'published');
+        
+        if (this.currentFilter === 'upcoming') {
+            filteredEvents = filteredEvents.filter(event => new Date(event.date) >= new Date());
+        } else if (this.currentFilter === 'past') {
+            filteredEvents = filteredEvents.filter(event => new Date(event.date) < new Date());
+        }
+
+        if (filteredEvents.length === 0) {
+            container.style.display = 'none';
+            if (noEventsMessage) noEventsMessage.style.display = 'block';
+            return;
+        }
+
+        container.style.display = 'grid';
+        if (noEventsMessage) noEventsMessage.style.display = 'none';
+
+        container.innerHTML = filteredEvents.map(event => this.renderEventCard(event)).join('');
+    },
+
+    renderEventCard: function(event) {
+        const eventDate = new Date(event.date);
+        const isUpcoming = eventDate >= new Date();
+        
+        return `
+            <div class="event-card">
+                <div class="event-image">
+                    ${event.image ? `<img src="${event.image}" alt="${event.title}">` : '📅'}
+                </div>
+                <div class="event-content">
+                    <div class="event-date">${this.formatEventDate(event.date, event.time)}</div>
+                    <div class="event-title">${event.title}</div>
+                    <div class="event-description">${event.description}</div>
+                    <div class="event-details">
+                        ${event.location ? `<div class="event-detail">📍 ${event.location}</div>` : ''}
+                        ${event.capacity ? `<div class="event-detail">👥 Max. ${event.capacity} Teilnehmer</div>` : ''}
+                        ${event.price > 0 ? `<div class="event-detail">💰 ${event.price.toFixed(2)} €</div>` : '<div class="event-detail">💰 Kostenlos</div>'}
+                        ${event.registrationRequired ? `<div class="event-detail">📝 Anmeldung erforderlich</div>` : ''}
+                    </div>
+                    <div class="event-actions">
+                        ${isUpcoming && event.registrationRequired ? `
+                            <a href="mailto:${event.contactInfo}?subject=Anmeldung: ${event.title}" class="event-action-btn primary">
+                                Anmelden
+                            </a>
+                        ` : ''}
+                        <a href="mailto:${event.contactInfo}?subject=Frage zu: ${event.title}" class="event-action-btn">
+                            Mehr Infos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+
+    formatEventDate: function(date, time) {
+        const eventDate = new Date(date);
+        const formattedDate = eventDate.toLocaleDateString('de-DE', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        if (time) {
+            return `${formattedDate}, ${time} Uhr`;
+        }
+        return formattedDate;
+    }
+};
+
+// Legal modals functionality
+const LegalModals = {
+    init: function() {
+        this.setupEventListeners();
+        this.checkCookieConsent();
+    },
+
+    setupEventListeners: function() {
+        // Legal links
+        document.querySelectorAll('.legal-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = e.target.getAttribute('href').substring(1);
+                this.openModal(target);
+            });
+        });
+
+        // Privacy links in forms
+        document.querySelectorAll('.privacy-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.openModal('datenschutz');
+            });
+        });
+
+        // Close modal buttons
+        document.querySelectorAll('.legal-modal .close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', (e) => {
+                e.target.closest('.legal-modal').style.display = 'none';
+            });
+        });
+
+        // Click outside to close
+        document.querySelectorAll('.legal-modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // Cookie consent buttons
+        const acceptCookies = document.getElementById('acceptCookies');
+        const configureCookies = document.getElementById('configureCookies');
+        
+        if (acceptCookies) {
+            acceptCookies.addEventListener('click', () => {
+                this.acceptCookies();
+            });
+        }
+        
+        if (configureCookies) {
+            configureCookies.addEventListener('click', () => {
+                this.openModal('datenschutz');
+            });
+        }
+    },
+
+    openModal: function(modalId) {
+        const modal = document.getElementById(modalId + 'Modal');
+        if (modal) {
+            modal.style.display = 'block';
+        }
+    },
+
+    checkCookieConsent: function() {
+        const consent = localStorage.getItem('cookie_consent');
+        const banner = document.getElementById('cookieConsent');
+        
+        if (!consent && banner) {
+            // Show cookie banner after 2 seconds
+            setTimeout(() => {
+                banner.style.display = 'block';
+            }, 2000);
+        }
+    },
+
+    acceptCookies: function() {
+        localStorage.setItem('cookie_consent', 'accepted');
+        localStorage.setItem('cookie_consent_date', new Date().toISOString());
+        
+        const banner = document.getElementById('cookieConsent');
+        if (banner) {
+            banner.style.display = 'none';
+        }
+        
+        showNotification('Cookie-Einstellungen gespeichert', 'success');
+    }
+};
+
+// Initialize all new functionality when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    GuestbookManager.init();
+    EventsManager.init();
+    LegalModals.init();
+});
