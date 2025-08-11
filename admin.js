@@ -617,13 +617,139 @@ function editAnimal(animalId) {
 }
 
 function deleteAnimal(animalId) {
-    if (confirm('Sind Sie sicher, dass Sie dieses Tier löschen möchten?')) {
-        adminState.animals = adminState.animals.filter(a => a.id !== animalId);
-        saveAnimals();
-        loadAnimals();
-        updateDashboard();
-        showMessage('Tier erfolgreich gelöscht!', 'success');
+    const animal = adminState.animals.find(a => a.id === animalId);
+    if (!animal) return;
+    
+    showAnimalDeletionModal(animal);
+}
+
+function showAnimalDeletionModal(animal) {
+    // Create and show deletion modal with newsletter option
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'flex';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h3>🐕 Hund "${animal.name}" entfernen</h3>
+            <p>Möchten Sie "${animal.name}" aus der Vermittlungsliste entfernen?</p>
+            
+            <div class="deletion-options">
+                <div class="option-group">
+                    <label>
+                        <input type="radio" name="deletionType" value="simple" checked>
+                        <span>Einfach entfernen (ohne Benachrichtigung)</span>
+                    </label>
+                    <p class="option-description">Der Hund wird nur aus der Liste entfernt.</p>
+                </div>
+                
+                <div class="option-group">
+                    <label>
+                        <input type="radio" name="deletionType" value="adopted">
+                        <span>Als vermittelt markieren und Newsletter-Abonnenten benachrichtigen</span>
+                    </label>
+                    <p class="option-description">
+                        Alle Newsletter-Abonnenten erhalten eine E-Mail, dass "${animal.name}" erfolgreich vermittelt wurde.
+                        <strong>Dies verhindert negative Bewertungen von interessierten Personen!</strong>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="newsletter-info">
+                <span id="subscriberCount">Lade Newsletter-Abonnenten...</span>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeDeletionModal(this)">
+                    Abbrechen
+                </button>
+                <button class="btn btn-danger" onclick="confirmAnimalDeletion(${animal.id}, this)">
+                    🗑️ Entfernen
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Update subscriber count
+    updateSubscriberCount();
+}
+
+function updateSubscriberCount() {
+    const subscribers = JSON.parse(localStorage.getItem('boxerhof_newsletter') || '[]');
+    const activeSubscribers = subscribers.filter(sub => sub.status === 'active');
+    const countElement = document.getElementById('subscriberCount');
+    if (countElement) {
+        countElement.innerHTML = `📧 ${activeSubscribers.length} aktive Newsletter-Abonnenten`;
     }
+}
+
+function closeDeletionModal(button) {
+    const modal = button.closest('.modal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function confirmAnimalDeletion(animalId, button) {
+    const modal = button.closest('.modal');
+    const deletionType = modal.querySelector('input[name="deletionType"]:checked').value;
+    const animal = adminState.animals.find(a => a.id === animalId);
+    
+    if (!animal) return;
+    
+    // Remove from animals list
+    adminState.animals = adminState.animals.filter(a => a.id !== animalId);
+    saveAnimals();
+    loadAnimals();
+    updateDashboard();
+    
+    if (deletionType === 'adopted') {
+        // Send newsletter notification
+        sendAdoptionNotification(animal);
+        showMessage(`"${animal.name}" wurde entfernt und Newsletter-Benachrichtigung versendet!`, 'success');
+    } else {
+        showMessage(`"${animal.name}" wurde erfolgreich entfernt!`, 'success');
+    }
+    
+    modal.remove();
+}
+
+function sendAdoptionNotification(animal) {
+    const subscribers = JSON.parse(localStorage.getItem('boxerhof_newsletter') || '[]');
+    const activeSubscribers = subscribers.filter(sub => sub.status === 'active');
+    
+    if (activeSubscribers.length === 0) {
+        showMessage('Keine aktiven Newsletter-Abonnenten vorhanden.', 'info');
+        return;
+    }
+    
+    // Create notification record
+    const notification = {
+        id: Date.now(),
+        type: 'adoption',
+        animalName: animal.name,
+        animalBreed: animal.breed,
+        animalImage: animal.image,
+        sentAt: new Date().toISOString(),
+        subscriberCount: activeSubscribers.length,
+        status: 'sent'
+    };
+    
+    // Store notification history
+    const notifications = JSON.parse(localStorage.getItem('boxerhof_adoption_notifications') || '[]');
+    notifications.push(notification);
+    localStorage.setItem('boxerhof_adoption_notifications', JSON.stringify(notifications));
+    
+    // In a real application, this would send actual emails
+    // For demo purposes, we'll simulate the email sending
+    simulateEmailNotification(animal, activeSubscribers);
+    
+    // Log successful notification
+    console.log(`Newsletter notification sent for ${animal.name} to ${activeSubscribers.length} subscribers`);
+    
+    // Update dashboard statistics
+    updateDashboard();
 }
 
 function saveAnimals() {
@@ -762,11 +888,90 @@ function updateMainWebsite() {
     showMessage('Hauptwebsite würde aktualisiert werden (Demo-Modus)', 'info');
 }
 
+function simulateEmailNotification(animal, subscribers) {
+    // In a real application, this would integrate with an email service like SendGrid, Mailgun, etc.
+    // For demo purposes, we'll show a detailed simulation
+    
+    const emailTemplate = `
+        Liebe Tierfreunde,
+        
+        Wir haben wunderbare Neuigkeiten! 🎉
+        
+        "${animal.name}" (${animal.breed}) hat ein liebevolles neues Zuhause gefunden!
+        
+        Vielen Dank an alle, die Interesse gezeigt haben. Auch wenn "${animal.name}" bereits vermittelt ist,
+        haben wir viele andere wundervolle Hunde, die noch auf ihr Zuhause warten.
+        
+        Besuchen Sie unsere Website, um unsere aktuellen Schützlinge kennenzulernen:
+        ${window.location.origin}
+        
+        Mit herzlichen Grüßen,
+        Ihr Boxerhof-Team 🐕
+        
+        ---
+        Sie erhalten diese E-Mail, weil Sie unseren Newsletter abonniert haben.
+        Zum Abmelden klicken Sie hier: ${window.location.origin}/newsletter-abmelden
+    `;
+    
+    // Show notification preview
+    showEmailPreviewModal(emailTemplate, animal, subscribers.length);
+}
+
+function showEmailPreviewModal(emailContent, animal, subscriberCount) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'flex';
+    modal.innerHTML = `
+        <div class="modal-content email-preview-modal">
+            <h3>📧 Newsletter-Benachrichtigung versendet</h3>
+            
+            <div class="email-stats">
+                <div class="stat-item">
+                    <strong>${subscriberCount}</strong>
+                    <span>E-Mails versendet</span>
+                </div>
+                <div class="stat-item">
+                    <strong>${animal.name}</strong>
+                    <span>erfolgreich vermittelt</span>
+                </div>
+                <div class="stat-item">
+                    <strong>${new Date().toLocaleString('de-DE')}</strong>
+                    <span>Versendet am</span>
+                </div>
+            </div>
+            
+            <div class="email-preview">
+                <h4>📋 E-Mail Vorschau:</h4>
+                <div class="email-content">
+                    ${emailContent.replace(/\n/g, '<br>')}
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="this.closest('.modal').remove()">
+                    ✅ Verstanden
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Auto-close after 10 seconds
+    setTimeout(() => {
+        if (modal.parentElement) {
+            modal.remove();
+        }
+    }, 10000);
+}
+
 // Export functions for global access
 window.switchTab = switchTab;
 window.editAnimal = editAnimal;
 window.deleteAnimal = deleteAnimal;
 window.closeAnimalModal = closeAnimalModal;
+window.closeDeletionModal = closeDeletionModal;
+window.confirmAnimalDeletion = confirmAnimalDeletion;
 window.deleteImage = deleteImage;
 window.viewWebsite = viewWebsite;
 

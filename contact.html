@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kontakt zum Boxerhof Bad Oeynhausen - Nehmen Sie gerne Kontakt mit uns auf für Fragen zu Adoption, Pension oder Besuchen.">
+    <title>Kontakt - Boxerhof Bad Oeynhausen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="boxerhof-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e67e22">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Boxerhof">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>🏡 Boxerhof Bad Oeynhausen</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">Über uns</a></li>
+                    <li><a href="animals.html">Unsere Hunde</a></li>
+                    <li><a href="gallery.html">Galerie</a></li>
+                    <li><a href="pension.html">Pension</a></li>
+                    <li><a href="adoption.html">Vermittlung</a></li>
+                    <li><a href="contact.html" class="active">Kontakt</a></li>
+                    <li><a href="support.html">Unterstützen</a></li>
+                    <li><a href="admin.html" class="admin-link">🔧 Admin</a></li>
+                </ul>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero hero-small">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Kontakt</h1>
+                    <p class="hero-subtitle">Nehmen Sie gerne Kontakt mit uns auf</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Information -->
+        <section class="contact-info-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-methods">
+                        <h2>So erreichen Sie uns</h2>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h3>Telefon</h3>
+                                <p><a href="tel:+4957319234567">+49 (0) 5731 923 4567</a></p>
+                                <p class="contact-note">Täglich 8:00 - 18:00 Uhr erreichbar</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <h3>E-Mail</h3>
+                                <p><a href="mailto:info@boxerhof-badoeynhausen.de">info@boxerhof-badoeynhausen.de</a></p>
+                                <p class="contact-note">Wir antworten innerhalb von 24 Stunden</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h3>Adresse</h3>
+                                <p>Boxerhof 1<br>
+                                32547 Bad Oeynhausen<br>
+                                Deutschland</p>
+                                <a href="#" class="route-link" onclick="openMaps()">🗺️ Route planen</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">🕐</div>
+                            <div class="contact-details">
+                                <h3>Besuchszeiten</h3>
+                                <div class="opening-hours">
+                                    <div class="hours-row">
+                                        <span>Montag - Freitag:</span>
+                                        <span>9:00 - 17:00 Uhr</span>
+                                    </div>
+                                    <div class="hours-row">
+                                        <span>Samstag:</span>
+                                        <span>10:00 - 16:00 Uhr</span>
+                                    </div>
+                                    <div class="hours-row">
+                                        <span>Sonntag:</span>
+                                        <span>11:00 - 15:00 Uhr</span>
+                                    </div>
+                                </div>
+                                <p class="contact-note">⚠️ Bitte vereinbaren Sie vorab einen Termin</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="contact-form-section">
+                        <h2>Nachricht senden</h2>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Name *</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">E-Mail *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">Telefon</label>
+                                    <input type="tel" id="phone" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Betreff *</label>
+                                    <select id="subject" name="subject" required>
+                                        <option value="">Bitte wählen</option>
+                                        <option value="adoption">Interesse an Adoption</option>
+                                        <option value="pension">Pension anfragen</option>
+                                        <option value="visit">Besuch vereinbaren</option>
+                                        <option value="volunteer">Freiwillige Hilfe anbieten</option>
+                                        <option value="donation">Spende/Unterstützung</option>
+                                        <option value="other">Sonstiges</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Ihre Nachricht *</label>
+                                <textarea id="message" name="message" rows="6" required 
+                                         placeholder="Erzählen Sie uns, wie wir Ihnen helfen können..."></textarea>
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="privacy" name="privacy" required>
+                                    <span>Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzbestimmungen</a> gelesen und akzeptiere diese. *</span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                📧 Nachricht senden
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Contact -->
+        <section class="emergency-section">
+            <div class="container">
+                <div class="emergency-card">
+                    <div class="emergency-icon">🚨</div>
+                    <div class="emergency-content">
+                        <h3>Notfälle</h3>
+                        <p>Bei Notfällen außerhalb unserer Öffnungszeiten:</p>
+                        <div class="emergency-contacts">
+                            <div class="emergency-contact">
+                                <strong>Tierärztlicher Notdienst:</strong>
+                                <a href="tel:+4957319876543">+49 (0) 5731 987 6543</a>
+                            </div>
+                            <div class="emergency-contact">
+                                <strong>Mobile Notfallnummer:</strong>
+                                <a href="tel:+491731234567">+49 (0) 173 123 4567</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="contact-faq">
+            <div class="container">
+                <h2>Häufig gestellte Fragen</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>Kann ich ohne Termin vorbeikommen?</h3>
+                        <p>Wir empfehlen dringend, vorab einen Termin zu vereinbaren. So können wir uns ausreichend Zeit für Sie nehmen und sicherstellen, dass jemand da ist.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Wie schnell bekommen Sie meine E-Mail?</h3>
+                        <p>E-Mails werden mehrmals täglich abgerufen. In der Regel antworten wir innerhalb von 24 Stunden, oft sogar schneller.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Können Sie auch am Wochenende erreicht werden?</h3>
+                        <p>Ja, an Samstagen und Sonntagen sind wir während der Besuchszeiten erreichbar. Für Notfälle gibt es die mobile Notfallnummer.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Sprechen Sie auch andere Sprachen?</h3>
+                        <p>Unser Team spricht Deutsch und Englisch. Bei anderen Sprachen bemühen wir uns, eine Lösung zu finden oder einen Dolmetscher zu organisieren.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Map Placeholder -->
+        <section class="map-section">
+            <div class="container">
+                <h2>So finden Sie uns</h2>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <div class="map-content">
+                            <div class="map-icon">🗺️</div>
+                            <h3>Boxerhof Bad Oeynhausen</h3>
+                            <p>Boxerhof 1, 32547 Bad Oeynhausen</p>
+                            <div class="map-buttons">
+                                <button onclick="openMaps()" class="btn btn-primary">
+                                    📍 In Karten-App öffnen
+                                </button>
+                                <button onclick="getDirections()" class="btn btn-secondary">
+                                    🧭 Route planen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="directions-info">
+                    <h3>Anfahrt</h3>
+                    <div class="directions-grid">
+                        <div class="direction-item">
+                            <div class="direction-icon">🚗</div>
+                            <div class="direction-text">
+                                <h4>Mit dem Auto</h4>
+                                <p>A2 Ausfahrt Bad Oeynhausen, dann der Beschilderung folgen. Kostenlose Parkplätze vor Ort verfügbar.</p>
+                            </div>
+                        </div>
+                        <div class="direction-item">
+                            <div class="direction-icon">🚌</div>
+                            <div class="direction-text">
+                                <h4>Mit öffentlichen Verkehrsmitteln</h4>
+                                <p>Buslinie 123 bis Haltestelle "Boxerhof", dann 5 Minuten Fußweg. Fahrpläne unter www.vph.de</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏡 Boxerhof Bad Oeynhausen</h3>
+                    <p>Ein liebevolles Zuhause für Hunde in Not</p>
+                    <p class="footer-motto">Mit Herz und Hingabe für jedes Tier</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="animals.html">Unsere Hunde</a></li>
+                        <li><a href="pension.html">Pension</a></li>
+                        <li><a href="adoption.html">Vermittlung</a></li>
+                        <li><a href="gallery.html">Galerie</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>📧 info@boxerhof-badoeynhausen.de</p>
+                    <p>📞 +49 (0) 5731 923 4567</p>
+                    <p>📍 Boxerhof 1, 32547 Bad Oeynhausen</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Unterstützen</h4>
+                    <p>Helfen Sie uns dabei, mehr Hunden zu helfen:</p>
+                    <a href="support.html" class="btn btn-small btn-outline">Spenden</a>
+                    <div class="social-links">
+                        <a href="https://facebook.com/boxerhof" target="_blank" rel="noopener">
+                            📘 Facebook
+                        </a>
+                        <a href="mailto:info@boxerhof-badoeynhausen.de">
+                            ✉️ E-Mail
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Boxerhof Bad Oeynhausen. Teil der Boxer Nothilfe e.V. Mit Liebe für Hunde gemacht. 🐾</p>
+                <div class="footer-legal">
+                    <a href="impressum.html">Impressum</a>
+                    <a href="datenschutz.html">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Handle contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            if (!data.name || !data.email || !data.subject || !data.message || !data.privacy) {
+                alert('Bitte füllen Sie alle Pflichtfelder aus und akzeptieren Sie die Datenschutzbestimmungen.');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Wird gesendet...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Vielen Dank für Ihre Nachricht! Wir werden uns schnellstmöglich bei Ihnen melden.');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Handle URL parameters for pre-filling form
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const service = urlParams.get('service');
+            const interest = urlParams.get('interest');
+            
+            if (service) {
+                const subjectSelect = document.getElementById('subject');
+                switch(service) {
+                    case 'pension':
+                        subjectSelect.value = 'pension';
+                        break;
+                    case 'adoption':
+                        subjectSelect.value = 'adoption';
+                        break;
+                    case 'visit':
+                        subjectSelect.value = 'visit';
+                        break;
+                    default:
+                        subjectSelect.value = 'other';
+                }
+            }
+            
+            if (interest) {
+                const messageField = document.getElementById('message');
+                messageField.value = `Hallo,\n\nich interessiere mich für den Hund "${decodeURIComponent(interest)}" und würde gerne mehr erfahren.\n\nMit freundlichen Grüßen`;
+                document.getElementById('subject').value = 'adoption';
+            }
+        });
+
+        function openMaps() {
+            const address = "Boxerhof 1, 32547 Bad Oeynhausen, Deutschland";
+            const encodedAddress = encodeURIComponent(address);
+            
+            // Try to detect mobile device
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Try to open in native maps app
+                window.open(`maps://maps.apple.com/?q=${encodedAddress}`, '_blank');
+                setTimeout(() => {
+                    // Fallback to Google Maps
+                    window.open(`https://maps.google.com/?q=${encodedAddress}`, '_blank');
+                }, 500);
+            } else {
+                // Open in Google Maps for desktop
+                window.open(`https://maps.google.com/?q=${encodedAddress}`, '_blank');
+            }
+        }
+
+        function getDirections() {
+            const address = "Boxerhof 1, 32547 Bad Oeynhausen, Deutschland";
+            const encodedAddress = encodeURIComponent(address);
+            window.open(`https://maps.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+        }
+    </script>
+</body>
+</html>
