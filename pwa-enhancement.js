@@ -726,6 +726,7 @@ const pwaStyles = `
         display: flex;
         gap: 8px;
         margin-top: 16px;
+        flex-wrap: wrap;
     }
     
     @keyframes slideInRight {
@@ -749,6 +750,18 @@ const pwaStyles = `
             right: 10px;
             left: 10px;
             max-width: none;
+        }
+        
+        .prompt-actions {
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .prompt-actions .btn {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .connection-status {
