@@ -1,0 +1,682 @@
+/* Support Page Styles */
+
+/* Support Hero */
+.support-hero {
+    padding: 6rem 0 4rem;
+    background: linear-gradient(135deg, var(--boxerhof-primary), var(--boxerhof-primary-dark));
+    color: white;
+    text-align: center;
+}
+
+.support-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.support-hero .hero-subtitle {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
+.support-hero .hero-description {
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+/* Quick Donation */
+.quick-donation {
+    padding: 4rem 0;
+    background: white;
+}
+
+.quick-donation h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--boxerhof-primary);
+    margin-bottom: 3rem;
+}
+
+.donation-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.donation-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.donation-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.paypal-card {
+    border-color: #0070ba;
+}
+
+.paypal-card:hover {
+    border-color: #005ea6;
+}
+
+.bank-card {
+    border-color: var(--boxerhof-secondary);
+}
+
+.bank-card:hover {
+    border-color: #219a52;
+}
+
+.betterplace-card {
+    border-color: var(--boxerhof-accent);
+}
+
+.betterplace-card:hover {
+    border-color: #e67e22;
+}
+
+.donation-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.donation-card h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.donation-card p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+}
+
+.modal .close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal .close:hover {
+    color: var(--boxerhof-primary);
+}
+
+.modal h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+/* Bank Details */
+.bank-details {
+    margin-bottom: 1.5rem;
+}
+
+.bank-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--boxerhof-cream);
+}
+
+.bank-item:last-child {
+    border-bottom: none;
+}
+
+.bank-item strong {
+    color: var(--boxerhof-primary);
+    min-width: 120px;
+}
+
+.bank-item span {
+    flex: 1;
+    margin-left: 1rem;
+    font-family: monospace;
+    font-weight: 500;
+}
+
+.copy-btn {
+    background: var(--boxerhof-accent);
+    color: white;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-left: 0.5rem;
+}
+
+.copy-btn:hover {
+    background: var(--boxerhof-primary);
+}
+
+.bank-note {
+    background: var(--boxerhof-cream);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Support Options */
+.support-options {
+    padding: 4rem 0;
+    background: var(--background-light);
+}
+
+.support-options h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--boxerhof-primary);
+    margin-bottom: 3rem;
+}
+
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.support-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    border-top: 4px solid var(--boxerhof-primary);
+}
+
+.support-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.support-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    text-align: center;
+}
+
+.support-card h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.support-card > p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.support-list {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.support-list li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.support-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--boxerhof-secondary);
+    font-weight: bold;
+}
+
+.support-card .btn {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Social Share */
+.social-share {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.social-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.facebook {
+    background: #1877f2;
+    color: white;
+}
+
+.facebook:hover {
+    background: #166fe5;
+}
+
+.twitter {
+    background: #1da1f2;
+    color: white;
+}
+
+.twitter:hover {
+    background: #0d8bd9;
+}
+
+.email {
+    background: var(--boxerhof-primary);
+    color: white;
+}
+
+.email:hover {
+    background: var(--boxerhof-primary-dark);
+}
+
+/* Donation Impact */
+.donation-impact {
+    padding: 4rem 0;
+    background: white;
+}
+
+.donation-impact h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--boxerhof-primary);
+    margin-bottom: 1.5rem;
+}
+
+.impact-intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.impact-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--boxerhof-cream);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--boxerhof-primary);
+}
+
+.impact-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.impact-content h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.impact-content p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.impact-cost {
+    color: var(--boxerhof-accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.impact-examples {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.impact-examples h3 {
+    text-align: center;
+    color: var(--boxerhof-primary);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.example-card {
+    background: var(--boxerhof-primary);
+    color: white;
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.example-card:hover {
+    transform: translateY(-5px);
+}
+
+.example-card strong {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.example-card p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Success Stories */
+.success-stories {
+    padding: 4rem 0;
+    background: var(--background-light);
+}
+
+.success-stories h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--boxerhof-primary);
+    margin-bottom: 1.5rem;
+}
+
+.stories-intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+}
+
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
+}
+
+.story-card {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.story-card:hover {
+    transform: translateY(-5px);
+}
+
+.story-image {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.story-card h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.story-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.story-outcome {
+    background: var(--boxerhof-secondary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* Annual Stats */
+.annual-stats {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.annual-stats h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+}
+
+.stat-item {
+    background: white;
+    padding: 2rem 1rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--boxerhof-primary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Support Contact */
+.support-contact {
+    padding: 4rem 0;
+    background: white;
+}
+
+.support-contact h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--boxerhof-primary);
+    margin-bottom: 1rem;
+}
+
+.support-contact > .container > p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+}
+
+.contact-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-option {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.contact-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.contact-option h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.contact-option p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.contact-option a {
+    color: var(--boxerhof-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-option a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .support-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .support-hero .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .donation-methods,
+    .support-grid,
+    .stories-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .impact-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .examples-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .contact-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        margin: 1rem;
+    }
+    
+    .bank-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .bank-item span {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .support-hero {
+        padding: 4rem 0 2rem;
+    }
+    
+    .examples-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .social-share {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .donation-card,
+    .support-card {
+        padding: 2rem 1.5rem;
+    }
+}

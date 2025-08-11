@@ -1,0 +1,686 @@
+/* Boxerhof Specific Styles */
+
+:root {
+    /* Boxerhof Color Palette - Warm and Welcoming */
+    --boxerhof-primary: #d35400;
+    --boxerhof-primary-light: #e67e22;
+    --boxerhof-primary-dark: #a0401a;
+    --boxerhof-secondary: #27ae60;
+    --boxerhof-accent: #f39c12;
+    --boxerhof-warm: #e8a87c;
+    --boxerhof-cream: #f7f1e8;
+    --boxerhof-brown: #8b4513;
+    
+    /* Nature-inspired colors */
+    --boxerhof-grass: #7cb342;
+    --boxerhof-sky: #64b5f6;
+    --boxerhof-earth: #a1887f;
+    
+    /* Typography */
+    --boxerhof-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Spacing */
+    --boxerhof-section-padding: 4rem 0;
+    --boxerhof-container-padding: 0 2rem;
+}
+
+/* Hero Slideshow */
+.hero-boxerhof {
+    position: relative;
+    height: 80vh;
+    min-height: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Fallback backgrounds for when images aren't available */
+.slide[data-bg="boxerhof-1"] {
+    background: linear-gradient(135deg, 
+        rgba(211, 84, 0, 0.8), 
+        rgba(230, 126, 34, 0.8)
+    ), 
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f7f1e8" width="1200" height="800"/><text x="600" y="400" font-family="Arial" font-size="120" text-anchor="middle" fill="%23d35400">🏡</text></svg>');
+}
+
+.slide[data-bg="boxerhof-2"] {
+    background: linear-gradient(135deg, 
+        rgba(39, 174, 96, 0.8), 
+        rgba(124, 179, 66, 0.8)
+    ), 
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23e8f5e8" width="1200" height="800"/><text x="600" y="400" font-family="Arial" font-size="120" text-anchor="middle" fill="%2327ae60">🌳</text></svg>');
+}
+
+.slide[data-bg="boxerhof-3"] {
+    background: linear-gradient(135deg, 
+        rgba(243, 156, 18, 0.8), 
+        rgba(232, 168, 124, 0.8)
+    ), 
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23fef7e8" width="1200" height="800"/><text x="600" y="400" font-family="Arial" font-size="120" text-anchor="middle" fill="%23f39c12">🐕</text></svg>');
+}
+
+.slide-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
+}
+
+.slide-content h1,
+.slide-content h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--boxerhof-cream);
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+    color: var(--boxerhof-cream);
+}
+
+/* Slideshow Controls */
+.slideshow-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.prev-slide,
+.next-slide {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prev-slide:hover,
+.next-slide:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: white;
+    transform: scale(1.1);
+}
+
+/* Slide Indicators */
+.slide-indicators {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    gap: 1rem;
+}
+
+.indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: white;
+    border-color: white;
+    transform: scale(1.2);
+}
+
+/* Hero CTA */
+.hero-cta {
+    position: absolute;
+    bottom: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Mission Section */
+.mission {
+    padding: var(--boxerhof-section-padding);
+    background: linear-gradient(135deg, var(--boxerhof-cream), #ffffff);
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--boxerhof-container-padding);
+}
+
+.mission-text h2 {
+    font-size: 2.5rem;
+    color: var(--boxerhof-primary);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.mission-lead {
+    font-size: 1.3rem;
+    color: var(--boxerhof-primary-dark);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.mission-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+
+.mission-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--boxerhof-primary);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.feature h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.feature p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.mission-image {
+    position: relative;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 400px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.placeholder-content {
+    text-align: center;
+    color: white;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.placeholder-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Animals Teaser */
+.animals-teaser {
+    padding: var(--boxerhof-section-padding);
+    background: white;
+}
+
+.animals-teaser h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--boxerhof-primary);
+    margin-bottom: 1rem;
+}
+
+.animals-teaser p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.animals-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
+    padding: var(--boxerhof-container-padding);
+}
+
+.animal-card-small {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border: 2px solid var(--boxerhof-cream);
+    transition: all 0.3s ease;
+}
+
+.animal-card-small:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--boxerhof-primary-light);
+}
+
+.animal-image {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.animal-card-small h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.animal-card-small p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+.teaser-cta {
+    text-align: center;
+}
+
+/* Services Section */
+.services {
+    padding: var(--boxerhof-section-padding);
+    background: linear-gradient(135deg, #f8f9fa, var(--boxerhof-cream));
+}
+
+.services h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--boxerhof-primary);
+    margin-bottom: 3rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--boxerhof-container-padding);
+}
+
+.service-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    border-top: 4px solid var(--boxerhof-primary);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.service-card h3 {
+    color: var(--boxerhof-primary);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.service-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.service-link {
+    color: var(--boxerhof-primary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--boxerhof-primary);
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.service-link:hover {
+    background: var(--boxerhof-primary);
+    color: white;
+}
+
+/* Quick Contact */
+.quick-contact {
+    padding: var(--boxerhof-section-padding);
+    background: var(--boxerhof-primary);
+    color: white;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--boxerhof-container-padding);
+    align-items: center;
+}
+
+.contact-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.contact-info > p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.contact-details {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+.contact-text strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.contact-text a {
+    color: var(--boxerhof-cream);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-text a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.contact-cta {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(10px);
+}
+
+.contact-cta h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.contact-cta p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.contact-cta .btn {
+    margin: 0.5rem;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.btn-primary {
+    background: var(--boxerhof-primary);
+    color: white;
+    border-color: var(--boxerhof-primary);
+}
+
+.btn-primary:hover {
+    background: var(--boxerhof-primary-dark);
+    border-color: var(--boxerhof-primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--boxerhof-secondary);
+    color: white;
+    border-color: var(--boxerhof-secondary);
+}
+
+.btn-secondary:hover {
+    background: #219a52;
+    border-color: #219a52;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+    border-color: white;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: var(--boxerhof-primary);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+/* Navigation Updates */
+.nav-logo h1 {
+    color: var(--boxerhof-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-menu a.active {
+    color: var(--boxerhof-primary);
+    background: var(--boxerhof-cream);
+    border-radius: var(--radius-sm);
+}
+
+/* Footer Updates */
+.footer {
+    background: var(--boxerhof-primary-dark);
+    color: white;
+}
+
+.footer-motto {
+    font-style: italic;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+}
+
+.footer a {
+    color: var(--boxerhof-cream);
+}
+
+.footer a:hover {
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-boxerhof {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    .slide-content h1,
+    .slide-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .mission-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .animals-preview {
+        grid-template-columns: 1fr;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .slideshow-controls {
+        padding: 0 1rem;
+    }
+    
+    .prev-slide,
+    .next-slide {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
